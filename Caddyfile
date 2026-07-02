@@ -1,0 +1,39 @@
+# FJP-CONF static site — Railway deployment
+#
+# Serves the Flow Judgment Protocol conformance page at the canonical path
+# /conformance/v0.1, matching the URL asserted throughout the repo.
+#
+# Railway injects the listening port via $PORT — we bind to it (never a
+# hardcoded port). TLS/HTTPS for the custom domain fjp.flowinfo.co is
+# terminated by Railway's edge, so this server speaks plain HTTP on $PORT.
+
+{
+	# Railway terminates TLS at its edge; disable Caddy's own auto-HTTPS.
+	auto_https off
+	admin off
+}
+
+:{$PORT} {
+	root * /srv
+	encode gzip
+
+	# Exact-match redirects only. Named matchers with `path` match the exact
+	# path (not a prefix), so requests to /conformance/v0.1/ are NEVER caught
+	# by these and fall through to file_server.
+	@root path /
+	redir @root /conformance/v0.1/ 302
+
+	@conformance_bare path /conformance /conformance/
+	redir @conformance_bare /conformance/v0.1/ 302
+
+	# Canonical page: /conformance/v0.1/ -> /srv/conformance/v0.1/index.html
+	file_server
+
+	# Lightweight hardening (static page, no scripts, no forms).
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy no-referrer
+		-Server
+	}
+}

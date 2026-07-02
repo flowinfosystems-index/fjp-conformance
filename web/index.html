@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FJP-CONF v0.1 — Judgment-Grounded Agent Conformance</title>
+<meta name="description" content="Behavioral conformance for agents that act on changing information. Vendor-neutral. Tests observable output, not internal method." />
+<style>
+  :root { --ink:#1a1a1a; --bg:#faf9f7; --mut:#999; --sub:#444; --line:#e5e3df; --code:#f0eeeb; }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Mono','Menlo','Consolas',monospace;
+    font-size:13px; line-height:1.75; padding:48px 24px;
+  }
+  .wrap { max-width:680px; margin:0 auto; }
+  header { border-bottom:2px solid var(--ink); padding-bottom:16px; margin-bottom:36px; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  h1 { font-size:19px; font-weight:700; margin:0; letter-spacing:.5px; }
+  .tag { font-size:11px; color:var(--mut); }
+  .meta { font-size:11px; color:var(--mut); margin-top:4px; }
+  h2 { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:1px;
+       margin:34px 0 8px; }
+  p { margin:0 0 10px; color:#333; }
+  .sub { color:var(--sub); }
+  ul { margin:6px 0 12px; padding-left:20px; }
+  li { margin:3px 0; color:var(--sub); }
+  em { font-style:italic; }
+  strong { font-weight:700; }
+  .lvl { border-left:2px solid var(--ink); padding-left:16px; margin:12px 0; }
+  .lvl b { display:block; font-size:12px; margin-bottom:2px; }
+  table { width:100%; border-collapse:collapse; margin:10px 0 14px; font-size:12px; }
+  th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mut); font-weight:700; text-transform:uppercase; letter-spacing:.5px; font-size:10px; }
+  code { background:var(--code); padding:1px 5px; border-radius:2px; font-size:12px; }
+  pre { background:var(--code); padding:12px 16px; border-radius:2px; overflow-x:auto;
+        font-size:12px; line-height:1.7; margin:8px 0 14px; }
+  .quote { border-left:2px solid var(--ink); padding-left:16px; margin:14px 0;
+           font-style:italic; font-size:14px; color:#333; }
+  footer { margin-top:40px; padding-top:12px; border-top:1px solid var(--line);
+           display:flex; justify-content:space-between; font-size:11px; color:#bbb; flex-wrap:wrap; gap:8px; }
+  a { color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="row">
+      <h1>FJP-CONF v0.1</h1>
+      <span class="tag">DRAFT · PUBLIC</span>
+    </div>
+    <div class="meta">Judgment-Grounded Agent Conformance · fjp.flowinfo.co/conformance/v0.1</div>
+  </header>
+
+  <p><strong>Flow Judgment Protocol™ (FJP)</strong> is the judgment layer for AI
+  agents and enterprise decision systems. It determines what changed, whether it
+  matters, what matters most, and what should happen next.</p>
+
+  <p><strong>FJP-CONF</strong> is the public conformance standard for FJP — a
+  behavioral standard for agents that recommend or take action in response to
+  changing information. It is <strong>vendor-neutral</strong> and tests an agent's
+  <em>observable output</em>, not its internal method. Two agents may reach opposite
+  conclusions and both conform.</p>
+
+  <h2>Motivation</h2>
+  <p>Retrieval-grade systems answer <em>what is true</em>. They do not answer
+  <em>was this worth acting on, and how would we know if it wasn't</em>.</p>
+  <p>When an agent acts, three questions must be answerable afterward: what did it
+  act on, why did it judge that worth acting on, and what would have made that
+  judgment wrong. An agent that cannot answer these cannot be audited, trusted in a
+  decision path, or insured.</p>
+
+  <h2>The Judgment-Grounded Record</h2>
+  <p>For every action it recommends or takes, a conforming agent must be able to
+  emit a record with four components:</p>
+  <table>
+    <tr><th>Component</th><th>Answers</th><th>Required fields</th></tr>
+    <tr><td><code>signal</code></td><td>what changed</td><td>description, sources[], observed_at</td></tr>
+    <tr><td><code>judgment</code></td><td>why it matters</td><td>assessment, confidence (0–1), signal_ref</td></tr>
+    <tr><td><code>action</code></td><td>what should happen</td><td>directive, judgment_ref</td></tr>
+    <tr><td><code>falsifier</code></td><td>what makes it wrong</td><td>condition, checkable, status</td></tr>
+  </table>
+  <p class="sub">The reference chain — judgment&nbsp;→&nbsp;signal, action&nbsp;→&nbsp;judgment —
+  makes an action traceable to the change that prompted it.</p>
+
+  <h2>Conformance Levels</h2>
+  <div class="lvl"><b>L0 — Structural</b>The agent emits a well-formed record: all four components present, correct types, confidence in [0,1], valid timestamps.</div>
+  <div class="lvl"><b>L1 — Grounded</b>The signal is attributable (non-empty sources) and the reference chain resolves. The action is traceable to a source.</div>
+  <div class="lvl"><b>L2 — Falsifiable</b>The falsifier is a concrete, checkable condition — not a vacuous catch-all. The agent states, in advance, what would reverse its own call.</div>
+  <div class="lvl"><b>L3 — Accountable</b>The agent retains records and exposes an adapter: given a record id, it returns the original record and re-evaluates the falsifier's current status. A past action can be audited against what has happened since.</div>
+
+  <h2>Making a Claim</h2>
+  <p>A claim names a level and version and is reproducible by running the public suite:</p>
+  <div class="quote">Conforms to FJP-CONF v0.1, Level 2.</div>
+  <p class="sub">The gate is not the vendor's word. It is a runnable check.</p>
+
+  <h2>What Conformance Does Not Assert</h2>
+  <ul>
+    <li>Not that a judgment is <em>correct</em>.</li>
+    <li>Not that an action is <em>wise</em>.</li>
+    <li>Only that the decision is externalized in a shape that can be traced, challenged, and audited.</li>
+  </ul>
+  <p class="sub">Correctness is measured over time, by whether falsifiers trigger —
+  not by this document. Method stays private to each implementer; only the
+  externalized record is tested.</p>
+
+  <footer>
+    <span>fjp.flowinfo.co · flowinfo.co</span>
+    <span>FJP-CONF v0.1.0 · Draft</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "record_id": "jgr-bad-0001",
+  "timestamp": "2026-07-02T14:00:00Z",
+  "signal": {
+    "description": "Big news in the market today.",
+    "sources": [],
+    "observed_at": "2026-07-02T13:55:00Z"
+  },
+  "judgment": {
+    "assessment": "This seems important.",
+    "confidence": 0.9,
+    "signal_ref": "some-other-signal"
+  },
+  "action": {
+    "directive": "Keep an eye on things.",
+    "judgment_ref": "mismatched-ref"
+  },
+  "falsifier": {
+    "condition": "Unless circumstances change.",
+    "checkable": false,
+    "status": "open"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "record_id": "jgr-2026-07-02-0007",
+  "timestamp": "2026-07-02T13:40:00Z",
+  "signal": {
+    "id": "sig-supplier-guidance-cut",
+    "description": "Tier-1 supplier cut full-year revenue guidance by 12% citing weaker orders from its two largest customers.",
+    "sources": [
+      "https://example.com/supplier-8k-2026-07-02",
+      "investor-call-transcript:2026-07-02"
+    ],
+    "observed_at": "2026-07-02T13:15:00Z"
+  },
+  "judgment": {
+    "id": "jud-demand-softening",
+    "assessment": "A 12% guidance cut concentrated in two customers suggests demand softening upstream, not a supplier-specific issue, and likely reads through to the customers' own quarters.",
+    "confidence": 0.62,
+    "signal_ref": "sig-supplier-guidance-cut"
+  },
+  "action": {
+    "directive": "RECONSIDER near-term demand assumptions for the two named customers before the next allocation review.",
+    "target": "portfolio review — affected customer names",
+    "judgment_ref": "jud-demand-softening"
+  },
+  "falsifier": {
+    "condition": "Either named customer reaffirms or raises its own revenue guidance within 30 days, or attributes the supplier's cut to a one-off inventory correction above 8%.",
+    "checkable": true,
+    "status": "open"
+  }
+}

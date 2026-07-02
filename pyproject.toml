@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fjp-conformance"
+version = "0.1.0"
+description = "FJP-CONF v0.1 — behavioral conformance suite for Judgment-Grounded Agents."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+dependencies = []  # stdlib only, by design
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+fjp-conform = "conformance.runner:main"
+
+[tool.setuptools]
+packages = ["conformance"]
