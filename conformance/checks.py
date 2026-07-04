@@ -176,7 +176,7 @@ def check_l3(adapter, record_id: str) -> List[Result]:
 
     # The retrieved record must itself still be structurally valid.
     l0_ok = all(res.passed for res in check_l0(rec)) if isinstance(rec, dict) else False
-    add("L3.get_record.valid_pgr", l0_ok,
+    add("L3.get_record.valid_jgr", l0_ok,
         "retrieved record must still be a valid (L0) JGR")
 
     try:

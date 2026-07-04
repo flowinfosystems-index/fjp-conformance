@@ -49,7 +49,7 @@ four components:
 
 ## Quickstart
 
-Requires Python 3.9+. No third-party dependencies.
+Requires Python 3.11+. No third-party dependencies.
 
 ```bash
 # validate a record at Level 2

@@ -68,6 +68,25 @@ def test_vacuity_heuristic():
     assert not _is_vacuous("if the customer reaffirms guidance within 30 days")
 
 
+def test_vacuity_event_falsifiers_are_concrete():
+    # Discrete, externally observable events are checkable falsifiers even
+    # without a number or comparator — must not false-positive as vacuous.
+    for cond in (
+        "if the CEO resigns",
+        "if the deal is cancelled",
+        "if the FDA rejects the application",
+        "if the acquisition closes",
+        "if regulators approve the merger",
+        "if the company withdraws its offer",
+    ):
+        assert not _is_vacuous(cond), cond
+
+
+def test_vacuity_blocklist_beats_markers():
+    # A blocklisted catch-all stays vacuous even with a digit or marker.
+    assert _is_vacuous("unless circumstances change by 2027")
+
+
 def test_l3_adapter():
     rec = _load("passing_agent.json")
     store = {rec["record_id"]: rec}

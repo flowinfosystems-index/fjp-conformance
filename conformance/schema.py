@@ -25,12 +25,21 @@ VACUITY_BLOCKLIST = (
 )
 
 # Tokens that signal a concrete, checkable falsifier condition.
+# Two families: (a) threshold/quantity/date comparators, (b) discrete,
+# externally observable events. Stems are intentional ("cancel" catches
+# cancels/cancelled/cancellation) — matching is case-insensitive substring.
 CONCRETENESS_MARKERS = (
+    # comparators / quantities / bounds
     "exceeds", "falls", "drops", "rises", "above", "below", "reaches",
     "within", "by ", "before", "after", "greater than", "less than",
     "more than", "fewer than", "at least", "at most", "declines", "increases",
-    "announces", "files", "confirms", "denies", "misses", "beats", "%",
-    "$", "per ", "no later than", "if not", "unless",
+    "%", "$", "per ", "no later than", "if not", "unless",
+    # discrete observable events
+    "announces", "files", "confirms", "denies", "misses", "beats",
+    "resign", "cancel", "reject", "approv", "closes", "terminat",
+    "withdraw", "delay", "acquir", "launch", "recall", "default",
+    "downgrade", "upgrade", "steps down", "departs", "reaffirm", "raises",
+    "cuts", "suspend", "rules", "votes", "signs", "expires", "settle",
 )
 
 

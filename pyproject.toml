@@ -7,7 +7,7 @@ name = "fjp-conformance"
 version = "0.1.0"
 description = "FJP-CONF v0.1 — behavioral conformance suite for Judgment-Grounded Agents."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
 dependencies = []  # stdlib only, by design
 

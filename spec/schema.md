@@ -50,7 +50,7 @@ At L0, `sources` MAY be empty. At L1+, it MUST contain at least one entry.
 
 ### Chaining (L1+)
 
-An JGR is single-record: it contains exactly one `signal`, one `judgment`, one
+A JGR is single-record: it contains exactly one `signal`, one `judgment`, one
 `action`. Chaining is validated by identity, not by pointer resolution across a
 store:
 
