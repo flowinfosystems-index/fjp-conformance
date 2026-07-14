@@ -2,14 +2,10 @@
 #
 # Serves:
 #   /                    → FJP landing page
+#   /success             → post-purchase thank you page
 #   /conformance/v0.1/   → conformance spec page
-#
-# Railway injects the listening port via $PORT — we bind to it (never a
-# hardcoded port). TLS/HTTPS for the custom domain fjp.flowinfo.co is
-# terminated by Railway's edge, so this server speaks plain HTTP on $PORT.
 
 {
-	# Railway terminates TLS at its edge; disable Caddy's own auto-HTTPS.
 	auto_https off
 	admin off
 }
@@ -21,10 +17,12 @@
 	@conformance_bare path /conformance /conformance/
 	redir @conformance_bare /conformance/v0.1/ 302
 
-	# Canonical page: /conformance/v0.1/ -> /srv/conformance/v0.1/index.html
+	# /success serves the thank you page (try_files rewrites to the file)
+	@success path /success /success/
+	rewrite @success /success.html
+
 	file_server
 
-	# Lightweight hardening (static page, no scripts, no forms).
 	header {
 		X-Content-Type-Options nosniff
 		X-Frame-Options DENY
