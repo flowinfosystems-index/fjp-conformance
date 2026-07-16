@@ -39,7 +39,6 @@
     padding: 60px 24px 80px;
   }
 
-  /* Header */
   .header {
     margin-bottom: 56px;
   }
@@ -64,10 +63,9 @@
     color: var(--text-muted);
     font-size: 16px;
     line-height: 1.6;
-    max-width: 560px;
+    max-width: 580px;
   }
 
-  /* Steps */
   .step {
     margin-bottom: 48px;
   }
@@ -96,7 +94,6 @@
     margin-bottom: 12px;
   }
 
-  /* CLI block */
   .cli {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -112,11 +109,7 @@
   }
   .cli .prompt { color: var(--text-dim); }
   .cli .cmd { color: var(--text); }
-  .cli .comment { color: #555; font-style: italic; }
-  .cli .string { color: #f59e0b; }
-  .cli .key { color: var(--accent); }
 
-  /* Record structure */
   .record {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -140,7 +133,6 @@
     color: var(--text-muted);
   }
 
-  /* Inline code */
   code {
     font-family: var(--mono);
     font-size: 13px;
@@ -151,7 +143,6 @@
     color: var(--accent);
   }
 
-  /* Links */
   a {
     color: var(--accent);
     text-decoration: none;
@@ -173,7 +164,6 @@
     color: var(--text-dim);
   }
 
-  /* Tools table */
   .tools {
     margin: 12px 0;
   }
@@ -187,7 +177,6 @@
   .tool-name { color: #f59e0b; }
   .tool-desc { color: var(--text-muted); }
 
-  /* Note callout */
   .note {
     background: var(--accent-dim);
     border: 1px solid rgba(34,197,94,0.25);
@@ -202,7 +191,48 @@
     color: var(--accent);
   }
 
-  /* CTA */
+  /* Two-path cards */
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0 24px;
+  }
+  @media (max-width: 600px) {
+    .paths { grid-template-columns: 1fr; }
+  }
+  .path-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+  }
+  .path-card.highlight {
+    border-color: var(--accent);
+  }
+  .path-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .path-label.free { color: var(--accent); }
+  .path-label.paid { color: #f59e0b; }
+  .path-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .path-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
   .cta-row {
     display: flex;
     gap: 12px;
@@ -230,7 +260,6 @@
     border: 1px solid var(--border-accent);
   }
 
-  /* Footer */
   .footer {
     margin-top: 56px;
     padding-top: 20px;
@@ -250,8 +279,33 @@
   <!-- Header -->
   <div class="header">
     <div class="header-mark">FJP Quickstart</div>
-    <h1>Three steps to auditable judgment.</h1>
-    <p>Install the conformance suite, get an API key, make your first call. You'll have a working judgment integration in under five minutes.</p>
+    <h1>Two things. One standard, one service.</h1>
+    <p>FJP has two parts. Understanding what each one does — and why the second one exists — takes thirty seconds.</p>
+  </div>
+
+  <!-- Two paths -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num"></span>
+      <span class="step-title">What you're working with</span>
+    </div>
+
+    <div class="paths">
+      <div class="path-card">
+        <div class="path-label free">FJP-CONF · Free</div>
+        <h3>The standard</h3>
+        <p>An open-source conformance suite that validates your agent's output. Your agent does its own judgment — CONF checks that the output is a well-formed Judgment-Grounded Record with signal, judgment, action, and falsifier. It tests the shape, not the quality.</p>
+      </div>
+      <div class="path-card highlight">
+        <div class="path-label paid">FJP Resolver · Paid</div>
+        <h3>The judgment</h3>
+        <p>A live judgment API. Signal in, Judgment-Grounded Record out. The resolver doesn't start at zero — it runs on top of Flow's judgment layer, which is in daily production use by a private cohort of founders, executives, and investors managing multiple billions in assets. Your first call benefits from that calibration.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Why pay for judgment your agent could do itself?</strong> Any LLM can return the right JSON shape. The difference is accuracy. The resolver carries accumulated outcome data from Flow's live system. A nightly learning loop scores which past judgments were right and wrong and recalibrates — across all users, not just yours. Your agent benefits from signal patterns it never sees. This isn't a static prompt. It's a meta-judgment loop that's already running.
+    </div>
   </div>
 
   <!-- Step 1 -->
@@ -260,11 +314,11 @@
       <span class="step-num">01</span>
       <span class="step-title">Install the conformance suite</span>
     </div>
-    <p>FJP-CONF is free, open-source (Apache 2.0), and stdlib-only Python. No dependencies.</p>
+    <p>FJP-CONF is free, Apache 2.0, stdlib-only Python. No dependencies.</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">pip install fjp-conformance</span></div>
     <p>Validate a record against any conformance level:</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">fjp-conform record.json --level 2</span></div>
-    <p>This checks that your agent's output is a well-formed Judgment-Grounded Record with signal, judgment, action, and falsifier — and that the falsifier is concrete and checkable (L2).</p>
+    <p>Four levels (L0–L3) — from structural validity to full accountability with re-evaluation. Use CONF whether you build your own judgment or call the resolver.</p>
     <ul class="link-list">
       <li><a href="https://pypi.org/project/fjp-conformance/">PyPI package</a></li>
       <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub repo</a></li>
@@ -297,7 +351,7 @@
       <span class="step-num">03</span>
       <span class="step-title">Make your first call</span>
     </div>
-    <p>The resolver exposes three tools. Each returns a Judgment-Grounded Record — L2 conformant out of the box.</p>
+    <p>Three tools. Each returns a Judgment-Grounded Record — L2 conformant out of the box.</p>
     <div class="tools">
       <div class="tool"><span class="tool-name">judge</span><span class="tool-desc">Is this signal important? Returns importance, reasoning, action, falsifier.</span></div>
       <div class="tool"><span class="tool-name">weigh</span><span class="tool-desc">Which signal matters more? Returns ranked comparison with justification.</span></div>
@@ -310,7 +364,7 @@
   <span class="cmd">-H "Content-Type: application/json" \</span>
   <span class="cmd">-d '{"context": "NVIDIA announced a new inference chip at 10x the throughput of H100 at half the power draw"}'</span></div>
 
-    <p>The response carries a full Judgment-Grounded Record:</p>
+    <p>The response:</p>
     <div class="record">
       <div class="record-field"><span class="record-key">signal</span><span class="record-val">what changed, with sources and timestamp</span></div>
       <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, with confidence score (0–1)</span></div>
@@ -318,27 +372,23 @@
       <div class="record-field"><span class="record-key">falsifier</span><span class="record-val">what would make this wrong, checkable</span></div>
       <div class="record-field"><span class="record-key">request_id</span><span class="record-val">unique ID for outcome reporting</span></div>
     </div>
+  </div>
 
-    <p>Every response includes a <code>request_id</code>. Use it to report outcomes — this feeds the learning loop. Outcome reporting is free and doesn't cost credits.</p>
+  <!-- Step 4 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">04</span>
+      <span class="step-title">Report outcomes</span>
+    </div>
+    <p>Every response includes a <code>request_id</code>. When you find out whether the judgment was right, report it. This is free — no credits consumed.</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \</span>
   <span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span>
   <span class="cmd">-H "Content-Type: application/json" \</span>
   <span class="cmd">-d '{"request_id": "req_...", "outcome": "confirmed", "notes": "chip announced at GTC, specs matched"}'</span></div>
+    <p>Your outcomes feed the meta-judgment loop. The loop runs nightly across all users — scoring accuracy, recalibrating, and feeding results into the next day's judgment. Your agent gets sharper without you touching it.</p>
   </div>
 
-  <!-- What happens next -->
-  <div class="step">
-    <div class="step-header">
-      <span class="step-num">04</span>
-      <span class="step-title">Judgment improves every night</span>
-    </div>
-    <p>When you report outcomes, a nightly learning loop scores accuracy and recalibrates. Tomorrow's judgment is sharper than today's. You don't need to do anything — it happens automatically.</p>
-    <div class="note">
-      <strong>The learning loop is the product.</strong> An FJP call isn't a static LLM prompt. It's a judgment that compounds. The more outcomes reported across the system, the better every call gets.
-    </div>
-  </div>
-
-  <!-- MCP integration -->
+  <!-- MCP -->
   <div class="step">
     <div class="step-header">
       <span class="step-num">05</span>
@@ -348,7 +398,7 @@
     <p>Point your MCP client at the resolver endpoint and authenticate with your <code>fjp_live_</code> key.</p>
   </div>
 
-  <!-- Links -->
+  <!-- Reference -->
   <div class="step">
     <div class="step-header">
       <span class="step-num"></span>
@@ -365,8 +415,8 @@
   </div>
 
   <div class="footer">
-    <span>Flow Information Systems · <a href="https://flowinfo.co">flowinfo.co</a></span>
-    <span>Apache 2.0 (conformance) · Proprietary (resolver)</span>
+    <span>Flow Information Systems &middot; <a href="https://flowinfo.co">flowinfo.co</a></span>
+    <span>Apache 2.0 (conformance) &middot; Proprietary (resolver)</span>
   </div>
 
 </div>
