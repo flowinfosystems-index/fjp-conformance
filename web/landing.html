@@ -564,6 +564,56 @@
   .cta-primary { background: var(--accent); color: #0c0c0c; }
   .cta-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-accent); }
 
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-arrow {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: transform 0.15s;
+  }
+  .faq-q.open .faq-arrow {
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    display: none;
+    padding: 0 0 16px;
+  }
+  .faq-a.open {
+    display: block;
+  }
+  .faq-a p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .faq-a a { color: var(--accent); }
+
   /* Footer */
   .footer {
     margin-top: 56px;
@@ -878,6 +928,114 @@
     <a href="https://fjp.flowinfo.co/conformance/v0.1" class="cta cta-secondary">Read the spec</a>
   </div>
 
+  <!-- =============================== -->
+  <!-- SECTION 10: FAQ                  -->
+  <!-- =============================== -->
+  <div class="section" style="margin-top: 48px;">
+    <div class="section-label">Frequently asked questions</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What happens when my credits run out?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Hard stop. The API returns a 402 with a refill link. No degraded mode, no surprise charges, no grace period. You top up when you're ready.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Do unused credits expire?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>No. Credits remain on your account until used.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Can I use FJP-CONF without the resolver?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Yes. CONF is free, open-source, and fully independent. Build your own judgment layer and validate its output against the spec. The resolver is a separate paid service for teams that want calibrated judgment on demand.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What does the resolver see from my calls?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>The resolver processes the context you send, generates a judgment, and records the call for the nightly learning loop. It sees your input and the output it produced. It does not see your internal systems, your users, or anything beyond what you include in the API call.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Does my data train the system?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>The nightly learning loop uses outcome data — whether judgments were right or wrong — to recalibrate accuracy. It does not use your input context as training data. The loop improves judgment quality across the system; it does not redistribute your proprietary information to other customers.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What model powers the resolver?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>The resolver is not a thin wrapper around a single model. It's a judgment layer with its own calibration, output discipline, and learning loop. The underlying model infrastructure may change; the judgment quality and record format stay consistent. You're paying for calibrated judgment, not model access.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>What's the latency?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Typical judge and weigh calls return in 2–5 seconds. Match calls depend on the number of contexts evaluated. These are judgment calls, not lookups — the latency reflects real reasoning, not infrastructure lag.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Is there an SLA?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Not at current scale. The resolver runs on dedicated infrastructure and has been reliable in daily production use. Formal SLAs are available for enterprise volume agreements — <a href="mailto:hello@flowinfo.co?subject=FJP%20SLA">reach out</a> to discuss.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Can I self-host the resolver?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>No. The resolver's value is the meta-judgment loop — accuracy that compounds nightly across all users. A self-hosted instance would be isolated from that loop and start at zero calibration. CONF is open-source if you want to build and validate your own judgment layer.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Is the MCP endpoint SSE or Streamable HTTP?</span>
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Streamable HTTP (stateless). POST JSON-RPC messages to <code>https://resolve.flowinfo.co/mcp</code> with your API key as a bearer token. Standard MCP lifecycle: initialize, tools/list, tools/call. No SSE stream, no session state.</p>
+      </div>
+    </div>
+
+  </div>
+
   <div class="footer">
     <span>Flow Information Systems &middot; <a href="https://flowinfo.co">flowinfo.co</a></span>
     <span>Apache 2.0 (conformance) &middot; Proprietary (resolver)</span>
@@ -886,6 +1044,13 @@
 </div>
 
 <script>
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open');
+  answer.classList.toggle('open');
+}
+
 async function buyCredits(tier) {
   var errEl = document.getElementById('buy-error');
   var emailEl = document.getElementById('buyer-email');
