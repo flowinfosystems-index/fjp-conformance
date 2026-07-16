@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quickstart — Flow Judgment Protocol</title>
+<meta name="description" content="Get started with FJP in three steps. Install the conformance suite, get an API key, make your first judgment call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --border: #222;
+    --border-accent: #333;
+    --text: #d4d4d4;
+    --text-muted: #999;
+    --text-dim: #888;
+    --accent: #22c55e;
+    --accent-dim: rgba(34,197,94,0.12);
+    --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 56px;
+  }
+  .header-mark {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: var(--sans);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .header p {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* Steps */
+  .step {
+    margin-bottom: 48px;
+  }
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .step p {
+    margin-bottom: 12px;
+  }
+
+  /* CLI block */
+  .cli {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 2;
+  }
+  .cli .prompt { color: var(--text-dim); }
+  .cli .cmd { color: var(--text); }
+  .cli .comment { color: #555; font-style: italic; }
+  .cli .string { color: #f59e0b; }
+  .cli .key { color: var(--accent); }
+
+  /* Record structure */
+  .record {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+  .record-field {
+    display: flex;
+    gap: 12px;
+  }
+  .record-key {
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 110px;
+  }
+  .record-val {
+    color: var(--text-muted);
+  }
+
+  /* Inline code */
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  /* Links */
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .link-list {
+    list-style: none;
+    margin: 8px 0;
+  }
+  .link-list li {
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  .link-list li::before {
+    content: "→ ";
+    color: var(--text-dim);
+  }
+
+  /* Tools table */
+  .tools {
+    margin: 12px 0;
+  }
+  .tool {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+  }
+  .tool-name { color: #f59e0b; }
+  .tool-desc { color: var(--text-muted); }
+
+  /* Note callout */
+  .note {
+    background: var(--accent-dim);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .note strong {
+    color: var(--accent);
+  }
+
+  /* CTA */
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .cta {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .cta:hover { text-decoration: none; opacity: 0.85; }
+  .cta-primary {
+    background: var(--accent);
+    color: #0c0c0c;
+  }
+  .cta-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-accent);
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-mark">FJP Quickstart</div>
+    <h1>Three steps to auditable judgment.</h1>
+    <p>Install the conformance suite, get an API key, make your first call. You'll have a working judgment integration in under five minutes.</p>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">01</span>
+      <span class="step-title">Install the conformance suite</span>
+    </div>
+    <p>FJP-CONF is free, open-source (Apache 2.0), and stdlib-only Python. No dependencies.</p>
+    <div class="cli"><span class="prompt">$</span> <span class="cmd">pip install fjp-conformance</span></div>
+    <p>Validate a record against any conformance level:</p>
+    <div class="cli"><span class="prompt">$</span> <span class="cmd">fjp-conform record.json --level 2</span></div>
+    <p>This checks that your agent's output is a well-formed Judgment-Grounded Record with signal, judgment, action, and falsifier — and that the falsifier is concrete and checkable (L2).</p>
+    <ul class="link-list">
+      <li><a href="https://pypi.org/project/fjp-conformance/">PyPI package</a></li>
+      <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub repo</a></li>
+      <li><a href="/conformance/v0.1">Spec v0.1</a></li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">02</span>
+      <span class="step-title">Get your API key</span>
+    </div>
+    <p>Choose a credit tier. Your <code>fjp_live_</code> key arrives by email in seconds.</p>
+    <div class="tools">
+      <div class="tool"><span class="tool-name">Starter</span><span class="tool-desc">$500 — 1,000 credits</span></div>
+      <div class="tool"><span class="tool-name">Scale</span><span class="tool-desc">$2,500 — 6,250 credits</span></div>
+      <div class="tool"><span class="tool-name">Enterprise</span><span class="tool-desc">$10,000 — 25,000 credits</span></div>
+    </div>
+    <p>One credit per call. Outcome reporting is free. Top up any time.</p>
+    <div class="cta-row">
+      <a href="/" class="cta cta-primary">Get FJP access</a>
+      <a href="mailto:hello@flowinfo.co?subject=FJP%20high%20volume" class="cta cta-secondary">High volume?</a>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">03</span>
+      <span class="step-title">Make your first call</span>
+    </div>
+    <p>The resolver exposes three tools. Each returns a Judgment-Grounded Record — L2 conformant out of the box.</p>
+    <div class="tools">
+      <div class="tool"><span class="tool-name">judge</span><span class="tool-desc">Is this signal important? Returns importance, reasoning, action, falsifier.</span></div>
+      <div class="tool"><span class="tool-name">weigh</span><span class="tool-desc">Which signal matters more? Returns ranked comparison with justification.</span></div>
+      <div class="tool"><span class="tool-name">match</span><span class="tool-desc">Does this fit a pattern? Returns relevance score with reasoning.</span></div>
+    </div>
+
+    <p style="margin-top: 20px;">Call <code>judge</code> with a signal:</p>
+    <div class="cli"><span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \</span>
+  <span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span>
+  <span class="cmd">-H "Content-Type: application/json" \</span>
+  <span class="cmd">-d '{"context": "NVIDIA announced a new inference chip at 10x the throughput of H100 at half the power draw"}'</span></div>
+
+    <p>The response carries a full Judgment-Grounded Record:</p>
+    <div class="record">
+      <div class="record-field"><span class="record-key">signal</span><span class="record-val">what changed, with sources and timestamp</span></div>
+      <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, with confidence score (0–1)</span></div>
+      <div class="record-field"><span class="record-key">action</span><span class="record-val">what should happen, referencing the judgment</span></div>
+      <div class="record-field"><span class="record-key">falsifier</span><span class="record-val">what would make this wrong, checkable</span></div>
+      <div class="record-field"><span class="record-key">request_id</span><span class="record-val">unique ID for outcome reporting</span></div>
+    </div>
+
+    <p>Every response includes a <code>request_id</code>. Use it to report outcomes — this feeds the learning loop. Outcome reporting is free and doesn't cost credits.</p>
+    <div class="cli"><span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \</span>
+  <span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span>
+  <span class="cmd">-H "Content-Type: application/json" \</span>
+  <span class="cmd">-d '{"request_id": "req_...", "outcome": "confirmed", "notes": "chip announced at GTC, specs matched"}'</span></div>
+  </div>
+
+  <!-- What happens next -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">04</span>
+      <span class="step-title">Judgment improves every night</span>
+    </div>
+    <p>When you report outcomes, a nightly learning loop scores accuracy and recalibrates. Tomorrow's judgment is sharper than today's. You don't need to do anything — it happens automatically.</p>
+    <div class="note">
+      <strong>The learning loop is the product.</strong> An FJP call isn't a static LLM prompt. It's a judgment that compounds. The more outcomes reported across the system, the better every call gets.
+    </div>
+  </div>
+
+  <!-- MCP integration -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">05</span>
+      <span class="step-title">Agent integration via MCP</span>
+    </div>
+    <p>FJP is MCP-native. If your agent framework supports the Model Context Protocol, the three tools (<code>judge</code>, <code>weigh</code>, <code>match</code>) drop in as tool definitions. Your agent calls them the same way it calls any other tool — no custom integration code.</p>
+    <p>Point your MCP client at the resolver endpoint and authenticate with your <code>fjp_live_</code> key.</p>
+  </div>
+
+  <!-- Links -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num"></span>
+      <span class="step-title">Reference</span>
+    </div>
+    <ul class="link-list">
+      <li><a href="/">FJP landing page</a></li>
+      <li><a href="/conformance/v0.1">Conformance spec v0.1</a></li>
+      <li><a href="https://pypi.org/project/fjp-conformance/">PyPI — fjp-conformance</a></li>
+      <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub — fjp-conformance</a></li>
+      <li><a href="https://steveharmon.com/fjp-essay.html">The FJP essay</a></li>
+      <li><a href="mailto:hello@flowinfo.co">hello@flowinfo.co</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <span>Flow Information Systems · <a href="https://flowinfo.co">flowinfo.co</a></span>
+    <span>Apache 2.0 (conformance) · Proprietary (resolver)</span>
+  </div>
+
+</div>
+</body>
+</html>

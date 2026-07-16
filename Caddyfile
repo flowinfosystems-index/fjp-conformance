@@ -4,6 +4,7 @@
 #   /                    → FJP landing page
 #   /success             → post-purchase thank you page
 #   /conformance/v0.1/   → conformance spec page
+#   /quickstart          → developer quickstart page
 
 {
 	auto_https off
@@ -20,6 +21,9 @@
 	# /success serves the thank you page (try_files rewrites to the file)
 	@success path /success /success/
 	rewrite @success /success.html
+
+	@quickstart path /quickstart /quickstart/
+	rewrite @quickstart /quickstart.html
 
 	file_server
 
