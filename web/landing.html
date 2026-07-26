@@ -135,6 +135,16 @@
     line-height: 1.6;
     max-width: 600px;
   }
+  .plain-since {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .plain-since strong { color: var(--text); font-weight: 500; }
 
   /* Sections */
   .section {
@@ -753,6 +763,7 @@
       </div>
     </div>
     <p class="plain-close">Two parts: an open standard anyone can check their own system against, free to use, and a paid service that does the work. The rest of this page is the detail.</p>
+    <p class="plain-since">The judgment layer behind Flow's resolver has run inside our application for <strong>almost a year</strong>, serving a private cohort of founders, executives, and investors managing multiple billions in assets and leading companies that have defined technology from the web to AI.</p>
   </div>
 
   <!-- =============================== -->
@@ -787,7 +798,7 @@
 
     <div class="why-pay">
       <div class="why-pay-title">Judgment you can't bootstrap</div>
-      <p>The resolver runs on top of Flow's judgment layer — the same system in daily production use by a private cohort of founders, executives, and investors managing multiple billions in assets and leading companies that have defined technology from the web to AI.</p>
+      <p>The resolver runs on top of that same judgment layer, the one already serving the cohort described above.</p>
       <p><strong>Your first API call benefits from that calibration.</strong> A judgment layer you build yourself starts with no data, no outcomes, no track record. It's guessing. The resolver is already sharp on day one.</p>
       <p>And it gets sharper. A nightly meta-judgment loop scores which past judgments were right and wrong and recalibrates — <strong>across all users, not just yours.</strong> Your agent benefits from signal patterns and outcomes it never sees. Every customer's outcomes make every other customer's judgment better.</p>
       <p>This isn't a static prompt behind an API. It's a live system with a learning loop that's already running.</p>
