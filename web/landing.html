@@ -79,6 +79,63 @@
     max-width: 580px;
   }
 
+  /* Plain-language band */
+  .plain {
+    margin-bottom: 56px;
+    padding: 28px 28px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 6px;
+  }
+  .plain-intro {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+  .plain-intro strong { color: #fff; font-weight: 600; }
+  .plain-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plain-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .plain-q {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .plain-arrow {
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .plain-tool {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--bg);
+    border: 1px solid var(--border-accent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .plain-close {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
   /* Sections */
   .section {
     margin-bottom: 48px;
@@ -671,6 +728,31 @@
     </div>
     <h1>Every agent acts. Almost none can explain why.</h1>
     <p>FJP is two things: an open standard for auditable agent decisions, and a paid resolver that returns calibrated judgment on demand.</p>
+  </div>
+
+  <!-- =============================== -->
+  <!-- SECTION 0: In plain terms        -->
+  <!-- =============================== -->
+  <div class="plain">
+    <p class="plain-intro">Every system can find information. Very few can tell you what actually <strong>matters</strong>. Today every app and every agent makes that call on its own, and they don't agree. FJP gives them one place to ask, and one consistent answer back.</p>
+    <div class="plain-rows">
+      <div class="plain-row">
+        <span class="plain-q">Does this matter?</span>
+        <span class="plain-arrow">&rarr;</span>
+        <span class="plain-tool">judge</span>
+      </div>
+      <div class="plain-row">
+        <span class="plain-q">How much, compared to everything else?</span>
+        <span class="plain-arrow">&rarr;</span>
+        <span class="plain-tool">weigh</span>
+      </div>
+      <div class="plain-row">
+        <span class="plain-q">Which option fits best?</span>
+        <span class="plain-arrow">&rarr;</span>
+        <span class="plain-tool">match</span>
+      </div>
+    </div>
+    <p class="plain-close">Two parts: an open standard anyone can check their own system against, free to use, and a paid service that does the work. The rest of this page is the detail.</p>
   </div>
 
   <!-- =============================== -->
