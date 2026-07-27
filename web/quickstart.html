@@ -299,12 +299,12 @@
       <div class="path-card highlight">
         <div class="path-label paid">FJP Resolver · Paid</div>
         <h3>The judgment</h3>
-        <p>A live judgment API. Signal in, Judgment-Grounded Record out. The resolver doesn't start at zero — it runs on top of Flow's judgment layer, which is in daily production use by a private cohort of founders, executives, and investors managing multiple billions in assets. Your first call benefits from that calibration.</p>
+        <p>A live judgment API. Signal in, Judgment-Grounded Record out. The Flow Resolver produces records through Flow's proprietary judgment system. Its implementation, models, scoring methods, calibration processes, orchestration, and underlying data are not part of FJP-CONF.</p>
       </div>
     </div>
 
     <div class="note">
-      <strong>Why pay for judgment your agent could do itself?</strong> Any LLM can return the right JSON shape. The difference is accuracy. The resolver carries accumulated outcome data from Flow's live system. A nightly learning loop scores which past judgments were right and wrong and recalibrates — across all users, not just yours. Your agent benefits from signal patterns it never sees. This isn't a static prompt. It's a meta-judgment loop that's already running.
+      <strong>Why pay for judgment your agent could do itself?</strong> Any LLM can return the required JSON shape. The Flow Resolver provides disciplined judgment through a proprietary system. FJP-CONF tests only the resulting record; it does not inspect or prescribe how the judgment was produced.
     </div>
   </div>
 
@@ -380,12 +380,12 @@
       <span class="step-num">04</span>
       <span class="step-title">Report outcomes</span>
     </div>
-    <p>Every response includes a <code>request_id</code>. When you find out whether the judgment was right, report it. This is free — no credits consumed.</p>
+    <p>Every response includes a <code>request_id</code>. When the relevant outcome becomes observable, report it. This is free — no credits consumed.</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \</span>
   <span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span>
   <span class="cmd">-H "Content-Type: application/json" \</span>
   <span class="cmd">-d '{"request_id": "req_...", "outcome": "confirmed", "notes": "chip announced at GTC, specs matched"}'</span></div>
-    <p>A nightly meta-judgment loop runs across all users — scoring accuracy, recalibrating, and improving the next day's judgment. Your agent gets sharper every night without you touching it. Reporting outcomes accelerates this for your use case.</p>
+    <p>Reported outcomes can be associated with the original record for later review and re-evaluation. Flow's internal evaluation and calibration methods remain proprietary.</p>
   </div>
 
   <!-- MCP -->

@@ -193,12 +193,12 @@ auth:     Authorization: Bearer fjp_live_...</span></div>
   <!-- Step 4: Outcomes -->
   <div class="section">
     <div class="section-label">Report outcomes (free)</div>
-    <p>Each response includes a <code>request_id</code>. When you find out whether the judgment was right, report it — no credits consumed:</p>
+    <p>Each response includes a <code>request_id</code>. When the relevant outcome becomes observable, report it — no credits consumed:</p>
     <div class="cli"><span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \
   -H "Authorization: Bearer fjp_live_..." \
   -H "Content-Type: application/json" \
   -d '{"request_id": "req_...", "outcome": "confirmed"}'</span></div>
-    <p>A nightly meta-judgment loop runs across all users — scoring accuracy and recalibrating. Your agent gets sharper every night.</p>
+    <p>Reported outcomes can be associated with the original record for later review and re-evaluation. Flow's internal evaluation and calibration methods remain proprietary.</p>
   </div>
 
   <div class="footer-links">

@@ -794,14 +794,13 @@
 
     <p>Any LLM can return the right JSON shape. Any developer can pass CONF. The shape isn't the hard part.</p>
 
-    <p>The hard part is judgment that's actually right. And the resolver doesn't start at zero.</p>
+    <p>The hard part is producing disciplined judgment, not merely returning the correct JSON structure.</p>
 
     <div class="why-pay">
-      <div class="why-pay-title">Judgment you can't bootstrap</div>
-      <p>The resolver runs on top of that same judgment layer, the one already serving the cohort described above.</p>
-      <p><strong>Your first API call benefits from that calibration.</strong> A judgment layer you build yourself starts with no data, no outcomes, no track record. It's guessing. The resolver is already sharp on day one.</p>
-      <p>And it gets sharper. A nightly meta-judgment loop scores which past judgments were right and wrong and recalibrates — <strong>across all users, not just yours.</strong> Your agent benefits from signal patterns and outcomes it never sees. Every customer's outcomes make every other customer's judgment better.</p>
-      <p>This isn't a static prompt behind an API. It's a live system with a learning loop that's already running.</p>
+      <div class="why-pay-title">Judgment infrastructure</div>
+      <p>The Flow Resolver produces Judgment-Grounded Records through Flow's proprietary judgment system.</p>
+      <p><strong>The implementation, models, scoring methods, calibration processes, orchestration, and underlying data remain proprietary.</strong></p>
+      <p>FJP-CONF tests only the resulting record. It does not inspect or prescribe how the judgment was produced.</p>
     </div>
   </div>
 
@@ -1099,7 +1098,7 @@
         <span class="faq-arrow">+</span>
       </button>
       <div class="faq-a">
-        <p>The resolver processes the context you send, generates a judgment, and records the call for the nightly learning loop. It sees your input and the output it produced. It does not see your internal systems, your users, or anything beyond what you include in the API call.</p>
+        <p>The resolver processes the context you submit and returns a Judgment-Grounded Record. It sees your input and the output it produces. It does not see your internal systems, your users, or anything beyond what you include in the API call.</p>
       </div>
     </div>
 
@@ -1119,7 +1118,7 @@
         <span class="faq-arrow">+</span>
       </button>
       <div class="faq-a">
-        <p>The resolver is not a thin wrapper around a single model. It's a judgment layer with its own calibration, output discipline, and learning loop. The underlying model infrastructure may change; the judgment quality and record format stay consistent. You're paying for calibrated judgment, not model access.</p>
+        <p>The resolver is not defined by a single model. Its implementation may use different models, methods, and orchestration over time, all of which remain proprietary. The public contract is the Judgment-Grounded Record returned by the service.</p>
       </div>
     </div>
 
@@ -1149,7 +1148,7 @@
         <span class="faq-arrow">+</span>
       </button>
       <div class="faq-a">
-        <p>No. The resolver's value is the meta-judgment loop — accuracy that compounds nightly across all users. A self-hosted instance would be isolated from that loop and start at zero calibration. CONF is open-source if you want to build and validate your own judgment layer.</p>
+        <p>No. The Flow Resolver is offered as a managed service, and its implementation remains proprietary. FJP-CONF is open-source if you want to build your own judgment system and validate its output against the public standard.</p>
       </div>
     </div>
 

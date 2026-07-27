@@ -53,9 +53,10 @@
     <div class="meta">Judgment-Grounded Agent Conformance · fjp.flowinfo.co/conformance/v0.1</div>
   </header>
 
-  <p><strong>Flow Judgment Protocol™ (FJP)</strong> is the judgment layer for AI
-  agents and enterprise decision systems. It determines what changed, whether it
-  matters, what matters most, and what should happen next.</p>
+  <p><strong>Flow Judgment Protocol™ (FJP)</strong> defines a standard process
+  for externalizing the judgment that connects observed change to recommended or
+  executed action. It does not prescribe how an implementation detects change,
+  evaluates importance, forms judgments, or selects actions.</p>
 
   <p><strong>FJP-CONF</strong> is the public conformance standard for FJP — a
   behavioral standard for agents that recommend or take action in response to
@@ -101,9 +102,12 @@
     <li>Not that an action is <em>wise</em>.</li>
     <li>Only that the decision is externalized in a shape that can be traced, challenged, and audited.</li>
   </ul>
-  <p class="sub">Correctness is measured over time, by whether falsifiers trigger —
-  not by this document. Method stays private to each implementer; only the
-  externalized record is tested.</p>
+  <p class="sub">FJP-CONF does not determine whether a judgment is correct.
+  It determines whether the judgment has been externalized in a traceable,
+  challengeable, and re-evaluable form. A triggered falsifier indicates that
+  the judgment should be reconsidered; a falsifier that has not triggered does
+  not independently establish that the judgment was correct. Method stays
+  private to each implementer; only the externalized record is tested.</p>
 
   <footer>
     <span>fjp.flowinfo.co · flowinfo.co</span>

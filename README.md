@@ -1,8 +1,9 @@
 # FJP-CONF — Flow Judgment Protocol Conformance
 
-**Flow Judgment Protocol™ (FJP)** is the judgment layer for AI agents and
-enterprise decision systems. It determines what changed, whether it matters, what
-matters most, and what should happen next.
+**Flow Judgment Protocol™ (FJP)** defines a standard process for externalizing
+the judgment that connects observed change to recommended or executed action. It
+does not prescribe how an implementation detects change, evaluates importance,
+forms judgments, or selects actions.
 
 **FJP-CONF** is the public, vendor-neutral conformance standard for FJP. It defines
 what it means for an agent to make **accountable** decisions — decisions that can
