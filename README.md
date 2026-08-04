@@ -1,16 +1,15 @@
 # FJP-CONF — Flow Judgment Protocol Conformance
 
-**Flow Judgment Protocol™ (FJP)** defines a standard process for externalizing
-the judgment that connects observed change to recommended or executed action. It
-does not prescribe how an implementation detects change, evaluates importance,
-forms judgments, or selects actions.
+**Flow Judgment Protocol™ (FJP)** is the judgment layer for AI agents and
+enterprise decision systems. It determines what changed, whether it matters, what
+matters most, and what should happen next.
 
 **FJP-CONF** is the public, vendor-neutral conformance standard for FJP. It defines
 what it means for an agent to make **accountable** decisions — decisions that can
 be traced, challenged, and audited — and ships a runnable test suite so any
 developer can verify their own agent.
 
-- **Specification:** [`spec/v0.1.md`](./spec/v0.1.md) · field reference: [`spec/schema.md`](./spec/schema.md)
+- **Specification:** [`spec/v0.1.md`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/spec/v0.1.md) · field reference: [`spec/schema.md`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/spec/schema.md)
 - **Canonical URL:** https://fjp.flowinfo.co/conformance/v0.1
 - **Status:** v0.1.0 — public draft
 
@@ -72,8 +71,8 @@ print(conforms(results))
 ```
 
 Level 3 requires your agent to implement a small adapter
-(`get_record`, `evaluate_falsifier`); see [`conformance/adapter.py`](./conformance/adapter.py)
-and [`examples/passing_agent_l3.py`](./examples/passing_agent_l3.py).
+(`get_record`, `evaluate_falsifier`); see [`conformance/adapter.py`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/conformance/adapter.py)
+and [`examples/passing_agent_l3.py`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/examples/passing_agent_l3.py).
 
 Run the tests:
 
@@ -90,16 +89,16 @@ suite against your agent's output:
 
 Authoritative verification and any official FJP-CONF certification are administered
 by Flow Information Systems. This open suite lets anyone self-check; see
-[`TRADEMARKS.md`](./TRADEMARKS.md) for what you may and may not call your
+[`TRADEMARKS.md`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/TRADEMARKS.md) for what you may and may not call your
 implementation.
 
 ## License and trademarks
 
 Source code is licensed under the Apache License, Version 2.0 — see
-[`LICENSE`](./LICENSE). The code license does **not** grant rights in the
+[`LICENSE`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/LICENSE). The code license does **not** grant rights in the
 trademarks.
 
 **Flow Judgment Protocol™, FJP™, FJP-CONF™, Judgment-Grounded Agent™,** and
 **"DNS resolves location. Flow resolves importance."™** are trademarks of
-**Flow Information Systems** (https://flowinfo.co). See [`NOTICE`](./NOTICE) and
-[`TRADEMARKS.md`](./TRADEMARKS.md).
+**Flow Information Systems** (https://flowinfo.co). See [`NOTICE`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/NOTICE) and
+[`TRADEMARKS.md`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/TRADEMARKS.md).
