@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FJP — Flow Judgment Protocol</title>
+<title>FJP | Flow Judgment Protocol</title>
 <meta name="description" content="An open standard and paid resolver for auditable agent decisions. Signal, judgment, action, falsifier.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -737,7 +737,7 @@
       <div class="header-mark">Flow Judgment Protocol</div>
     </div>
     <h1>Every agent acts. Almost none can explain why.</h1>
-    <p>FJP is two things: an open standard for auditable agent decisions, and a paid resolver that returns calibrated judgment on demand.</p>
+    <p>FJP fixes that. With it, a wrong call gets caught before it costs you, not after. An open standard makes any agent's decisions auditable. A paid resolver returns the judgment itself: what matters, why, what to do, and what would prove it wrong.</p>
   </div>
 
   <!-- =============================== -->
@@ -776,12 +776,12 @@
       <div class="product-card">
         <div class="product-label free">FJP-CONF &middot; Free &middot; Apache 2.0</div>
         <h3>The standard</h3>
-        <p>An open-source conformance suite. It validates that your agent's output is a well-formed Judgment-Grounded Record — signal, judgment, action, falsifier. It tests the shape of the decision, not the quality. Your agent does its own judgment. CONF checks the record.</p>
+        <p>An open-source conformance suite. It validates that your agent's output is a well-formed Judgment-Grounded Record: signal, judgment, action, falsifier. It tests the shape of the decision, not the quality. Your agent does its own judgment. CONF checks the record.</p>
       </div>
       <div class="product-card primary">
         <div class="product-label paid">FJP Resolver &middot; Paid</div>
         <h3>The judgment</h3>
-        <p>A live judgment API. Signal in, Judgment-Grounded Record out. Three tools — <code>judge</code>, <code>weigh</code>, <code>match</code> — each returning calibrated judgment with confidence, reasoning, recommended action, and a falsifier.</p>
+        <p>A live judgment API. Signal in, Judgment-Grounded Record out. Three tools: <code>judge</code>, <code>weigh</code>, and <code>match</code>. Each returns calibrated judgment with confidence, reasoning, recommended action, and a falsifier.</p>
       </div>
     </div>
   </div>
@@ -809,7 +809,7 @@
   <!-- =============================== -->
   <div class="section">
     <div class="section-label">The Judgment-Grounded Record</div>
-    <p>Every FJP response — whether you build your own or call the resolver — carries four components:</p>
+    <p>Every FJP response, whether you build your own or call the resolver, carries four components:</p>
     <div class="record">
       <div class="record-field"><span class="record-key">signal</span><span class="record-val">what changed, with sources</span></div>
       <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, referencing the signal</span></div>
@@ -826,9 +826,9 @@
     <div class="section-label">Three tools</div>
     <p style="margin-bottom: 16px;">Each call returns a complete Judgment-Grounded Record. One credit per call.</p>
     <div class="tools">
-      <div class="tool"><span class="tool-name">judge</span><span class="tool-sep">&mdash;</span><span class="tool-desc">Act on this, wait, or skip? With reasoning and a falsifier.</span></div>
-      <div class="tool"><span class="tool-name">weigh</span><span class="tool-sep">&mdash;</span><span class="tool-desc">Decisive, material, or peripheral? Ranked with justification.</span></div>
-      <div class="tool"><span class="tool-name">match</span><span class="tool-sep">&mdash;</span><span class="tool-desc">Does this fit that? With a relevance score and why.</span></div>
+      <div class="tool"><span class="tool-name">judge</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Act on this, wait, or skip? With reasoning and a falsifier.</span></div>
+      <div class="tool"><span class="tool-name">weigh</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Decisive, material, or peripheral? Ranked with justification.</span></div>
+      <div class="tool"><span class="tool-name">match</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Does this fit that? With a relevance score and why.</span></div>
     </div>
   </div>
 
@@ -1128,7 +1128,7 @@
         <span class="faq-arrow">+</span>
       </button>
       <div class="faq-a">
-        <p>Typical judge and weigh calls return in 2–5 seconds. Match calls depend on the number of contexts evaluated. These are judgment calls, not lookups — the latency reflects real reasoning, not infrastructure lag.</p>
+        <p>Typical judge and weigh calls return in 2 to 5 seconds. Match calls depend on the number of contexts evaluated. These are judgment calls, not lookups. The latency reflects real reasoning, not infrastructure lag.</p>
       </div>
     </div>
 
@@ -1138,7 +1138,7 @@
         <span class="faq-arrow">+</span>
       </button>
       <div class="faq-a">
-        <p>Not at current scale. The resolver runs on dedicated infrastructure and has been reliable in daily production use. Formal SLAs are available for enterprise volume agreements — <a href="mailto:hello@flowinfo.co?subject=FJP%20SLA">reach out</a> to discuss.</p>
+        <p>Not at current scale. The resolver runs on dedicated infrastructure and has been reliable in daily production use. Formal SLAs are available for enterprise volume agreements. <a href="mailto:hello@flowinfo.co?subject=FJP%20SLA">Reach out</a> to discuss.</p>
       </div>
     </div>
 

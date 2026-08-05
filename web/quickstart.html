@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quickstart — Flow Judgment Protocol</title>
+<title>Quickstart | Flow Judgment Protocol</title>
 <meta name="description" content="Get started with FJP in three steps. Install the conformance suite, get an API key, make your first judgment call.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -280,7 +280,7 @@
   <div class="header">
     <div class="header-mark">FJP Quickstart</div>
     <h1>Two things. One standard, one service.</h1>
-    <p>FJP has two parts. Understanding what each one does — and why the second one exists — takes thirty seconds.</p>
+    <p>FJP has two parts. Understanding what each one does, and why the second one exists, takes thirty seconds.</p>
   </div>
 
   <!-- Two paths -->
@@ -294,7 +294,7 @@
       <div class="path-card">
         <div class="path-label free">FJP-CONF · Free</div>
         <h3>The standard</h3>
-        <p>An open-source conformance suite that validates your agent's output. Your agent does its own judgment — CONF checks that the output is a well-formed Judgment-Grounded Record with signal, judgment, action, and falsifier. It tests the shape, not the quality.</p>
+        <p>An open-source conformance suite that validates your agent's output. Your agent does its own judgment. CONF checks that the output is a well-formed Judgment-Grounded Record with signal, judgment, action, and falsifier. It tests the shape, not the quality.</p>
       </div>
       <div class="path-card highlight">
         <div class="path-label paid">FJP Resolver · Paid</div>
@@ -318,7 +318,7 @@
     <div class="cli"><span class="prompt">$</span> <span class="cmd">pip install fjp-conformance</span></div>
     <p>Validate a record against any conformance level:</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">fjp-conform record.json --level 2</span></div>
-    <p>Four levels (L0–L3) — from structural validity to full accountability with re-evaluation. Use CONF whether you build your own judgment or call the resolver.</p>
+    <p>Four levels, L0 through L3, from structural validity to full accountability with re-evaluation. Use CONF whether you build your own judgment or call the resolver.</p>
     <ul class="link-list">
       <li><a href="https://pypi.org/project/fjp-conformance/">PyPI package</a></li>
       <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub repo</a></li>
@@ -334,9 +334,9 @@
     </div>
     <p>Choose a credit tier. Your <code>fjp_live_</code> key arrives by email in seconds.</p>
     <div class="tools">
-      <div class="tool"><span class="tool-name">Starter</span><span class="tool-desc">$500 — 1,000 credits</span></div>
-      <div class="tool"><span class="tool-name">Scale</span><span class="tool-desc">$2,500 — 6,250 credits</span></div>
-      <div class="tool"><span class="tool-name">Enterprise</span><span class="tool-desc">$10,000 — 25,000 credits</span></div>
+      <div class="tool"><span class="tool-name">Starter</span><span class="tool-desc">$500 &middot; 1,000 credits</span></div>
+      <div class="tool"><span class="tool-name">Scale</span><span class="tool-desc">$2,500 &middot; 6,250 credits</span></div>
+      <div class="tool"><span class="tool-name">Enterprise</span><span class="tool-desc">$10,000 &middot; 25,000 credits</span></div>
     </div>
     <p>One credit per call. Outcome reporting is free. Top up any time.</p>
     <div class="cta-row">
@@ -351,7 +351,7 @@
       <span class="step-num">03</span>
       <span class="step-title">Make your first call</span>
     </div>
-    <p>Three tools. Each returns a Judgment-Grounded Record — L2 conformant out of the box.</p>
+    <p>Three tools. Each returns a Judgment-Grounded Record, L2 conformant out of the box.</p>
     <div class="tools">
       <div class="tool"><span class="tool-name">judge</span><span class="tool-desc">Is this signal important? Returns importance, reasoning, action, falsifier.</span></div>
       <div class="tool"><span class="tool-name">weigh</span><span class="tool-desc">Which signal matters more? Returns ranked comparison with justification.</span></div>
@@ -367,7 +367,7 @@
     <p>The response:</p>
     <div class="record">
       <div class="record-field"><span class="record-key">signal</span><span class="record-val">what changed, with sources and timestamp</span></div>
-      <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, with confidence score (0–1)</span></div>
+      <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, with confidence score (0 to 1)</span></div>
       <div class="record-field"><span class="record-key">action</span><span class="record-val">what should happen, referencing the judgment</span></div>
       <div class="record-field"><span class="record-key">falsifier</span><span class="record-val">what would make this wrong, checkable</span></div>
       <div class="record-field"><span class="record-key">request_id</span><span class="record-val">unique ID for outcome reporting</span></div>
@@ -380,7 +380,7 @@
       <span class="step-num">04</span>
       <span class="step-title">Report outcomes</span>
     </div>
-    <p>Every response includes a <code>request_id</code>. When the relevant outcome becomes observable, report it. This is free — no credits consumed.</p>
+    <p>Every response includes a <code>request_id</code>. When the relevant outcome becomes observable, report it. This is free. No credits consumed.</p>
     <div class="cli"><span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \</span>
   <span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span>
   <span class="cmd">-H "Content-Type: application/json" \</span>
@@ -394,7 +394,7 @@
       <span class="step-num">05</span>
       <span class="step-title">Agent integration via MCP</span>
     </div>
-    <p>FJP is MCP-native. If your agent framework supports the Model Context Protocol, the three tools (<code>judge</code>, <code>weigh</code>, <code>match</code>) drop in as tool definitions. Your agent calls them the same way it calls any other tool — no custom integration code.</p>
+    <p>FJP is MCP-native. If your agent framework supports the Model Context Protocol, the three tools (<code>judge</code>, <code>weigh</code>, <code>match</code>) drop in as tool definitions. Your agent calls them the same way it calls any other tool. No custom integration code.</p>
     <p>Point your MCP client at the resolver endpoint and authenticate with your <code>fjp_live_</code> key.</p>
   </div>
 
@@ -407,8 +407,8 @@
     <ul class="link-list">
       <li><a href="/">FJP landing page</a></li>
       <li><a href="/conformance/v0.1">Conformance spec v0.1</a></li>
-      <li><a href="https://pypi.org/project/fjp-conformance/">PyPI — fjp-conformance</a></li>
-      <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub — fjp-conformance</a></li>
+      <li><a href="https://pypi.org/project/fjp-conformance/">PyPI: fjp-conformance</a></li>
+      <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub: fjp-conformance</a></li>
       <li><a href="https://steveharmon.com/fjp-essay.html">The FJP essay</a></li>
       <li><a href="mailto:hello@flowinfo.co">hello@flowinfo.co</a></li>
     </ul>
