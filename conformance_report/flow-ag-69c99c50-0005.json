@@ -1,0 +1,29 @@
+{
+  "record_id": "flow-ag-69c99c50-0005",
+  "timestamp": "2026-03-29T21:40:31Z",
+  "signal": {
+    "id": "sig-espn-ufc-rights-negotiation",
+    "description": "ESPN's $1.6B WWE deal and UFC rights relationship showed both strength and vulnerability, raising the question of whether UFC represents a viable market entry point for competing platforms.",
+    "sources": [
+      "flow:action-graph:send/69c4f638c2e24fb12eac872e",
+      "flow:topic/sports-rights-economics-nfl-wwe"
+    ],
+    "observed_at": "2026-03-29T21:00:00Z"
+  },
+  "judgment": {
+    "id": "jud-espn-ufc-rights-negotiation",
+    "assessment": "TKO's next major UFC rights negotiation creates a potential entry point. ESPN's $1.6B WWE commitment may limit its UFC bidding ceiling, but the relationship lock-in from years of co-promotion gives ESPN structural advantages that price alone may not overcome.",
+    "confidence": 0.55,
+    "signal_ref": "sig-espn-ufc-rights-negotiation"
+  },
+  "action": {
+    "directive": "RECONSIDER the implicit assumption that TKO's next major rights negotiation \u2014 UFC \u2014 is a market you should enter.",
+    "target": "sports rights economics nfl wwe live events",
+    "judgment_ref": "jud-espn-ufc-rights-negotiation"
+  },
+  "falsifier": {
+    "condition": "ESPN secures exclusive UFC rights renewal at less than 20% premium over the current deal within 90 days, confirming relationship lock-in makes competitive bidding uneconomic.",
+    "checkable": true,
+    "status": "open"
+  }
+}

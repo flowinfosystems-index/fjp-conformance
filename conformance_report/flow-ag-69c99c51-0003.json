@@ -1,0 +1,29 @@
+{
+  "record_id": "flow-ag-69c99c51-0003",
+  "timestamp": "2026-03-29T21:40:31Z",
+  "signal": {
+    "id": "sig-netflix-72b-wbd-bid",
+    "description": "Reports surfaced of a Netflix $72B all-cash bid for WBD's studio and streaming assets, suggesting a potential second approach after the Paramount-Skydance deal.",
+    "sources": [
+      "flow:action-graph:send/69bfb042e9cb820d59e51456",
+      "flow:topic/post-consolidation-streaming-landscape"
+    ],
+    "observed_at": "2026-03-29T21:00:00Z"
+  },
+  "judgment": {
+    "id": "jud-netflix-72b-wbd-bid",
+    "assessment": "A $72B all-cash bid would represent the largest streaming M&A transaction in history. If genuine, it restructures the entire post-consolidation competitive landscape \u2014 Disney, Amazon, and Apple must all reassess their content and distribution strategies.",
+    "confidence": 0.45,
+    "signal_ref": "sig-netflix-72b-wbd-bid"
+  },
+  "action": {
+    "directive": "WATCH whether the reported Netflix $72B all-cash bid for WBD's studio and streaming assets reflects a genuine second approach.",
+    "target": "post-consolidation streaming competitive landscape",
+    "judgment_ref": "jud-netflix-72b-wbd-bid"
+  },
+  "falsifier": {
+    "condition": "Netflix publicly denies the bid within 14 days, or no regulatory filing or credible second source confirms the approach within 30 days of the initial report.",
+    "checkable": true,
+    "status": "triggered"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "record_id": "flow-ag-69c99c52-0001",
+  "timestamp": "2026-03-29T21:40:31Z",
+  "signal": {
+    "id": "sig-ai-cost-compression-production",
+    "description": "AI-driven production cost compression is relocating production bottlenecks in ways that may structurally favor Netflix's content operations scale over smaller competitors.",
+    "sources": [
+      "flow:action-graph:send/69bbbbe7655435f4bacb46ec",
+      "flow:topic/ai-driven-production-cost-curves"
+    ],
+    "observed_at": "2026-03-29T21:00:00Z"
+  },
+  "judgment": {
+    "id": "jud-ai-cost-compression-production",
+    "assessment": "AI-driven cost compression is not a future variable \u2014 it is a present force relocating production bottlenecks. Netflix's content operations scale gives it structural advantage as costs shift from labor to compute. Competitors with smaller libraries absorb the same fixed AI integration costs across fewer titles.",
+    "confidence": 0.72,
+    "signal_ref": "sig-ai-cost-compression-production"
+  },
+  "action": {
+    "directive": "REVISIT whether AI-driven cost compression is relocating production bottlenecks in ways that structurally favor Netflix's content operations scale.",
+    "target": "ai-driven production cost curves",
+    "judgment_ref": "jud-ai-cost-compression-production"
+  },
+  "falsifier": {
+    "condition": "AI production cost savings remain below 5% of total production budgets across three consecutive quarters, or a sub-scale streamer demonstrates equivalent per-title AI cost reduction within 12 months.",
+    "checkable": true,
+    "status": "expired"
+  }
+}

@@ -80,6 +80,17 @@ Run the tests:
 python -m pytest -q
 ```
 
+## Reference conformance report
+
+Flow's own Action Graph is the reference implementation. Its Level 3
+conformance report — 5 production Judgment-Grounded™ Records, 105/105 checks
+passed — is in [`conformance_report/REPORT.md`](https://github.com/flowinfosystems-index/fjp-conformance/blob/main/conformance_report/REPORT.md).
+
+```bash
+# reproduce the L3 result
+python conformance_report/flow_adapter.py
+```
+
 ## Claiming conformance
 
 A conformance claim names a level and version and is reproducible by running this

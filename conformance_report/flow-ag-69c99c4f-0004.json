@@ -1,0 +1,29 @@
+{
+  "record_id": "flow-ag-69c99c4f-0004",
+  "timestamp": "2026-03-29T21:40:31Z",
+  "signal": {
+    "id": "sig-wga-bargaining-ai-demands",
+    "description": "The WGA released its approved bargaining agenda with specific AI, healthcare, and pay demands ahead of upcoming negotiations, signaling potential industry-wide impact on content production.",
+    "sources": [
+      "flow:action-graph:send/69c7994024020d5192482c42",
+      "flow:topic/wga-labor-agreements"
+    ],
+    "observed_at": "2026-03-29T21:00:00Z"
+  },
+  "judgment": {
+    "id": "jud-wga-bargaining-ai-demands",
+    "assessment": "The WGA's AI, healthcare, and pay demands are not routine contract asks \u2014 they set the template for how creative labor negotiates with AI-native production. Managing directors need to understand the specific provisions before they shape client-facing positions.",
+    "confidence": 0.78,
+    "signal_ref": "sig-wga-bargaining-ai-demands"
+  },
+  "action": {
+    "directive": "BRIEF your nine managing directors on the specific AI, healthcare, and pay demands in the WGA's approved bargaining agenda before negotiations begin.",
+    "target": "wga labor agreements",
+    "judgment_ref": "jud-wga-bargaining-ai-demands"
+  },
+  "falsifier": {
+    "condition": "The WGA withdraws or substantially modifies its AI-specific demands within 60 days, or studios publicly concede the AI provisions before formal negotiations open.",
+    "checkable": true,
+    "status": "expired"
+  }
+}

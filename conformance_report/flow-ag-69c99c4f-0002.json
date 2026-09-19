@@ -1,0 +1,29 @@
+{
+  "record_id": "flow-ag-69c99c4f-0002",
+  "timestamp": "2026-03-29T21:40:31Z",
+  "signal": {
+    "id": "sig-litelm-trivy-malware-azure",
+    "description": "LiteLLM and Trivy supply-chain malware incidents exposed multi-cloud credential sprawl as a systemic vulnerability, potentially reframing Azure's security-first positioning as a structural competitive advantage.",
+    "sources": [
+      "flow:action-graph:send/69c647e23a9adec2a563f978",
+      "flow:topic/azure-vs-aws-vs-gcp-cloud-market-share"
+    ],
+    "observed_at": "2026-03-29T21:00:00Z"
+  },
+  "judgment": {
+    "id": "jud-litelm-trivy-malware-azure",
+    "assessment": "The LiteLLM/Trivy malware pattern is not an isolated incident \u2014 it exposes a structural vulnerability in multi-cloud credential management. Azure's integrated security stack (Entra ID, Defender for Cloud) positions it to capture security-motivated cloud consolidation spend.",
+    "confidence": 0.65,
+    "signal_ref": "sig-litelm-trivy-malware-azure"
+  },
+  "action": {
+    "directive": "WATCH whether the LiteLLM/Trivy malware pattern reframes multi-cloud credential sprawl as a structural Azure positioning opportunity.",
+    "target": "azure vs aws vs gcp cloud market share competitive dynamics",
+    "judgment_ref": "jud-litelm-trivy-malware-azure"
+  },
+  "falsifier": {
+    "condition": "Azure cloud revenue share declines below 23% for two consecutive quarters despite the security narrative, or AWS launches an equivalent integrated credential management solution within 6 months.",
+    "checkable": true,
+    "status": "expired"
+  }
+}
