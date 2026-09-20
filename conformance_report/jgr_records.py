@@ -152,7 +152,7 @@ def build_records() -> list[dict]:
                 "of the initial report."
             ),
             "checkable": True,
-            "status": "triggered",
+            "status": "expired",
         },
     })
 

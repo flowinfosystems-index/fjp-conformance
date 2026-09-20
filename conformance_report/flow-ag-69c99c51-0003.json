@@ -24,6 +24,6 @@
   "falsifier": {
     "condition": "Netflix publicly denies the bid within 14 days, or no regulatory filing or credible second source confirms the approach within 30 days of the initial report.",
     "checkable": true,
-    "status": "triggered"
+    "status": "expired"
   }
 }
