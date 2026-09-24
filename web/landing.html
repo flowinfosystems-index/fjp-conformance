@@ -748,6 +748,13 @@
   .footer-nav a { color:#999; text-decoration:none; }
   .footer-nav a:hover { color:#fff; }
   #resolver, #faq { scroll-margin-top:80px; }
+
+  /* Why use FJP */
+  .why-list { list-style:none; margin:4px 0 24px; display:flex; flex-direction:column; gap:12px; }
+  .why-list li { display:flex; gap:16px; align-items:baseline; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:16px 20px; font-size:15px; line-height:1.6; color:var(--text-muted); }
+  .why-list strong { color:#fff; font-weight:600; }
+  .why-num { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--accent); flex-shrink:0; }
+  @media (max-width:600px) { .why-list li { padding:14px 16px; gap:12px; font-size:14px; } }
 </style>
 </head>
 <body>
@@ -770,8 +777,22 @@
     <div class="header-top">
       <div class="header-mark">Flow Judgment Protocol</div>
     </div>
-    <h1>Every agent acts. Almost none can explain why.</h1>
-    <p>When an agent gets a call wrong, nobody finds out until the damage is done. Most misses cost an hour of cleanup. The ones that matter can cost millions. FJP fixes that. An open standard makes any agent's decisions auditable. A fifty-cent resolver call returns the judgment itself: what matters, why, what to do, and what would prove it wrong.</p>
+    <h1>Why use FJP?</h1>
+    <ol class="why-list">
+      <li>
+        <span class="why-num">01</span>
+        <div><strong>Catch the costly call before it lands.</strong> Every judgment comes with a falsifier: the specific condition that would prove it wrong. Someone can check it in seconds, before the agent acts, instead of finding out after the damage is done.</div>
+      </li>
+      <li>
+        <span class="why-num">02</span>
+        <div><strong>Answer "why did the agent do that?"</strong> Every decision leaves a record of the signal, the judgment, the action and the falsifier. When a client, board or regulator asks how the agent decided, you have the answer on file.</div>
+      </li>
+      <li>
+        <span class="why-num">03</span>
+        <div><strong>Skip a year of building your own.</strong> Any team can get a model to return the right format. Judgment you can trust takes checking many calls against what actually happened, and Flow&rsquo;s judgment layer has done that on real decisions for almost a year. Building your own means starting from zero, with a team to maintain it. The resolver works the day you get access.</div>
+      </li>
+    </ol>
+    <p>Most wrong calls are cheap. The ones that matter can cost millions, and you rarely know in advance which is which. FJP is an open standard that makes any agent's decisions auditable, plus a paid resolver that returns the judgment itself.</p>
   </div>
 
   <!-- =============================== -->
@@ -858,7 +879,7 @@
   <!-- =============================== -->
   <div class="section">
     <div class="section-label">Three tools</div>
-    <p style="margin-bottom: 16px;">Each call returns a complete Judgment-Grounded Record. One credit per call.</p>
+    <p style="margin-bottom: 16px;">Each call returns a complete Judgment-Grounded Record.</p>
     <div class="tools">
       <div class="tool"><span class="tool-name">judge</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Act on this, wait, or skip? With reasoning and a falsifier.</span></div>
       <div class="tool"><span class="tool-name">weigh</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Decisive, material, or peripheral? Ranked with justification.</span></div>
@@ -871,7 +892,7 @@
   <!-- =============================== -->
   <div class="section">
     <div class="section-label">What's a wrong judgment worth?</div>
-    <p style="margin-bottom: 24px;">Every agent makes judgment calls. The question is whether anyone can tell when those calls are wrong, and what the wrong call costs. FJP costs $0.50 per call. Three illustrative scenarios from the high-stakes end:</p>
+    <p style="margin-bottom: 24px;">Every agent makes judgment calls. The question is whether anyone can tell when those calls are wrong, and what the wrong call costs. Three illustrative scenarios from the high-stakes end:</p>
 
     <div class="case">
       <div class="case-header">
@@ -895,7 +916,7 @@
         </div>
         <div class="case-fjp">
           <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>ESCALATE</code> with high confidence and a falsifier: "unless this sale is part of a pre-announced 10b5-1 plan." The falsifier is checkable in 30 seconds. The PM acts. <strong>Cost of the call: $0.50. Value created: $1.8M in avoided losses.</strong></p>
+          <p>The resolver returns <code>ESCALATE</code> with high confidence and a falsifier: "unless this sale is part of a pre-announced 10b5-1 plan." The falsifier is checkable in 30 seconds. The PM acts. <strong>Value created: $1.8M in avoided losses.</strong></p>
         </div>
       </div>
     </div>
@@ -922,7 +943,7 @@
         </div>
         <div class="case-fjp">
           <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>decisive</code> with the falsifier: "unless the competitor is targeting a different segment or geography." That's verifiable from their press release. <strong>Cost: 200 calls at $0.50 = $100/day to triage all signals. Replaces 4+ hours of manual analyst review ($600+/day).</strong></p>
+          <p>The resolver returns <code>decisive</code> with the falsifier: "unless the competitor is targeting a different segment or geography." That's verifiable from their press release. <strong>All 200 signals triaged before the analysts sit down. Replaces 4+ hours of manual review every day.</strong></p>
         </div>
       </div>
     </div>
@@ -949,13 +970,13 @@
         </div>
         <div class="case-fjp">
           <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>strong</code> relevance with the falsifier: "unless the product is a point solution with no platform extensibility." That's answerable from one technical call. The deal gets surfaced. <strong>Cost of the call: $0.50. Cost of missing it: $15M.</strong></p>
+          <p>The resolver returns <code>strong</code> relevance with the falsifier: "unless the product is a point solution with no platform extensibility." That's answerable from one technical call. The deal gets surfaced. <strong>Cost of missing it: $15M.</strong></p>
         </div>
       </div>
     </div>
 
     <div class="value-summary">
-      <p><strong>The math scales with the stakes:</strong> most wrong calls are cheap, but the ones that matter can run into the millions, and you rarely know in advance which is which. At fifty cents a call, checking every judgment costs less than missing one.</p>
+      <p><strong>The math scales with the stakes:</strong> most wrong calls are cheap, but the ones that matter can run into the millions, and you rarely know in advance which is which. Checking every judgment costs far less than missing the one that matters.</p>
       <p>And without the falsifier, you never find out the judgment was wrong until the damage is done. With it, someone can check before they act.</p>
     </div>
   </div>
@@ -1018,22 +1039,12 @@
   <!-- =============================== -->
   <div class="section" id="resolver">
     <div class="section-label">Get the resolver</div>
-    <p>Enter your email and choose a tier. Your API key arrives by email in seconds.</p>
+    <p>Resolver access is by invitation. Tell us what your agents decide and we&rsquo;ll set you up.</p>
 
     <div class="buy-box">
-      <div class="buy-heading">Get started</div>
-      <p class="buy-instructions">One credit per call. Outcome reporting is free. Top up any time.</p>
-      <input type="email" id="buyer-email" class="email-input" placeholder="email@company.com" />
-      <p class="smoke-note">Just verifying the API works? Run the $1 smoke test. It grants 2 credits (two live calls), and your API key arrives by email the moment payment clears.</p>
-      <button class="smoke-btn" onclick="buyCredits('smoke')"><strong>$1</strong> &middot; 2 credits &middot; smoke test</button>
-      <div class="smoke-divider">or buy credits</div>
-      <div class="tiers">
-        <button class="tier-btn" onclick="buyCredits('starter')"><strong>$500</strong><span>1,000 credits</span></button>
-        <button class="tier-btn" onclick="buyCredits('scale')"><strong>$2,500</strong><span>6,250 credits</span></button>
-      </div>
-      <p class="buy-note">MCP-native. Drops into any agent stack.</p>
-      <a href="mailto:hello@flowinfo.co?subject=FJP%20high%20volume" class="enterprise-link">High volume or enterprise? Let's talk.</a>
-      <p id="buy-error" class="buy-error"></p>
+      <div class="buy-heading">Contact us</div>
+      <p class="buy-instructions">MCP-native. Drops into any agent stack.</p>
+      <a href="mailto:hello@flowinfo.co?subject=FJP%20resolver%20access" class="smoke-btn" style="display:block;text-decoration:none;"><strong>hello@flowinfo.co</strong> &middot; request access</a>
     </div>
   </div>
 
@@ -1095,26 +1106,6 @@
   <!-- =============================== -->
   <div class="section" id="faq" style="margin-top: 48px;">
     <div class="section-label">Frequently asked questions</div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>What happens when my credits run out?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>Hard stop. The API returns a 402 with a refill link. No degraded mode, no surprise charges, no grace period. You top up when you're ready.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Do unused credits expire?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>No. Credits remain on your account until used.</p>
-      </div>
-    </div>
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">
@@ -1221,34 +1212,6 @@ function toggleFaq(btn) {
   answer.classList.toggle('open');
 }
 
-async function buyCredits(tier) {
-  var errEl = document.getElementById('buy-error');
-  var emailEl = document.getElementById('buyer-email');
-  var email = emailEl.value.trim();
-  errEl.textContent = '';
-
-  if (!email || !email.includes('@')) {
-    errEl.textContent = 'Enter your email above.';
-    emailEl.focus();
-    return;
-  }
-
-  try {
-    var res = await fetch('https://resolve.flowinfo.co/api/v1/checkout/session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tier: tier, email: email })
-    });
-    var data = await res.json();
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-    } else {
-      errEl.textContent = 'Unable to start checkout. Try again.';
-    }
-  } catch (e) {
-    errEl.textContent = 'Connection error. Try again.';
-  }
-}
 </script>
 </body>
 </html>
