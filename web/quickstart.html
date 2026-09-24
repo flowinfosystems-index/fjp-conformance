@@ -1,166 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quickstart | FJP Agent Action Control</title>
-<meta name="description" content="Put Flow Judgment Protocol between a production AI agent's proposed action and the system it can change.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg:#0c0c0c; --surface:#141414; --surface2:#101010; --border:#242424;
-    --text:#d4d4d4; --muted:#9a9a9a; --dim:#707070; --white:#fff;
-    --green:#22c55e; --green-dim:rgba(34,197,94,.10); --amber:#f59e0b;
-    --red:#ef4444; --mono:'IBM Plex Mono','Menlo',monospace;
-    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  }
-  html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.7; -webkit-font-smoothing:antialiased; }
-  .fnav { position:sticky; top:0; z-index:100; background:rgba(12,12,12,.96); border-bottom:1px solid var(--border); backdrop-filter:blur(8px); }
-  .fnav-in { max-width:1040px; margin:0 auto; padding:14px 24px; display:flex; justify-content:space-between; align-items:center; gap:18px; }
-  .brand { color:#fff; text-decoration:none; font-weight:650; font-size:17px; letter-spacing:.1px; }
-  .navlinks { display:flex; gap:20px; align-items:center; white-space:nowrap; }
-  .navlinks a { color:var(--muted); text-decoration:none; font-size:14px; }
-  .navlinks a:hover,.navlinks a.on { color:#fff; }
-  .navlinks a.home { color:var(--green); }
-  .container { max-width:840px; margin:0 auto; padding:72px 24px 88px; }
-  .eyebrow { font-family:var(--mono); color:var(--green); font-size:12px; font-weight:600; letter-spacing:1.7px; text-transform:uppercase; margin-bottom:16px; }
-  h1 { color:#fff; font-size:44px; line-height:1.12; letter-spacing:-1.1px; font-weight:650; max-width:800px; }
-  h2 { color:#fff; font-size:24px; line-height:1.3; font-weight:620; margin-bottom:12px; }
-  h3 { color:#fff; font-size:16px; line-height:1.4; font-weight:600; margin-bottom:6px; }
-  p { margin-bottom:12px; }
-  .lede { color:var(--muted); font-size:19px; line-height:1.6; max-width:760px; margin-top:18px; }
-  .hero { margin-bottom:64px; }
-  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
-  .btn { display:inline-block; font-family:var(--mono); font-size:13px; font-weight:600; padding:11px 18px; border-radius:5px; text-decoration:none; }
-  .btn.primary { background:var(--green); color:#071008; }
-  .btn.secondary { border:1px solid #3a3a3a; color:#ddd; }
-  .btn:hover { opacity:.88; text-decoration:none; }
-  .section { padding:42px 0; border-top:1px solid var(--border); }
-  .section-intro { color:var(--muted); max-width:720px; margin-bottom:22px; }
-  .flowline { display:grid; grid-template-columns:1fr auto 1fr auto 1.2fr auto 1fr; gap:10px; align-items:stretch; margin:28px 0 8px; }
-  .flowbox { background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:18px 16px; min-height:116px; }
-  .flowbox strong { color:#fff; display:block; margin-bottom:5px; }
-  .flowbox span { color:var(--muted); font-size:13px; line-height:1.45; }
-  .flowbox.flow { border-color:rgba(34,197,94,.5); background:var(--green-dim); }
-  .arrow { color:var(--dim); align-self:center; font-family:var(--mono); }
-  .triad { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:20px; }
-  .card p { color:var(--muted); font-size:14px; margin:0; }
-  .tag { font-family:var(--mono); color:var(--green); font-size:11px; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:10px; }
-  .code { background:var(--surface2); border:1px solid var(--border); border-radius:7px; padding:18px 20px; font-family:var(--mono); font-size:13px; line-height:1.8; overflow-x:auto; white-space:pre; color:#d8d8d8; margin:16px 0; }
-  code { font-family:var(--mono); color:var(--green); background:var(--surface); border:1px solid var(--border); padding:1px 5px; border-radius:3px; font-size:13px; }
-  .decision-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; }
-  .decision { padding:16px 18px; border-radius:6px; border:1px solid var(--border); background:var(--surface); }
-  .decision b { display:block; font-family:var(--mono); letter-spacing:.7px; font-size:13px; margin-bottom:5px; }
-  .decision p { color:var(--muted); font-size:13px; margin:0; }
-  .decision.proceed b { color:var(--green); } .decision.hold b { color:var(--amber); } .decision.escalate b { color:#fff; }
-  .callout { padding:22px 24px; border:1px solid rgba(34,197,94,.25); background:var(--green-dim); border-radius:7px; margin:20px 0; }
-  .callout strong { color:#fff; }
-  .list { list-style:none; display:grid; gap:10px; margin:18px 0; }
-  .list li { color:var(--muted); padding-left:20px; position:relative; }
-  .list li::before { content:'→'; position:absolute; left:0; color:var(--green); font-family:var(--mono); }
-  .boundary { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0; }
-  .boundary .card ul { list-style:none; margin-top:10px; }
-  .boundary .card li { color:var(--muted); font-size:13px; padding:3px 0; }
-  .boundary .card li::before { content:'• '; color:var(--dim); }
-  .small { color:var(--muted); font-size:13px; }
-  .mono { font-family:var(--mono); }
-  .footer { border-top:1px solid var(--border); margin-top:44px; padding-top:22px; color:var(--dim); font-size:12px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
-  .footer a { color:var(--muted); text-decoration:none; }
-  .footer-links { display:flex; gap:14px; flex-wrap:wrap; }
-  @media (max-width:760px) {
-    .container { padding-top:52px; }
-    h1 { font-size:36px; }
-    .lede { font-size:17px; }
-    .flowline { grid-template-columns:1fr; }
-    .arrow { transform:rotate(90deg); text-align:center; }
-    .triad,.decision-row,.boundary { grid-template-columns:1fr; }
-    .navlinks { overflow-x:auto; gap:14px; }
-    .navlinks a.home { display:none; }
-  }
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quickstart | FJP</title><meta name="description" content="Put Flow Judgment Protocol in front of one consequential agent action, enforce the judgment, and report the outcome to close the resolution loop."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet"><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0b0b;--surface:#131313;--surface2:#101010;--border:#252525;--border2:#343434;--text:#d7d7d7;--muted:#999;--dim:#707070;--white:#fff;--green:#22c55e;--green2:#16a34a;--green-dim:rgba(34,197,94,.10);--amber:#f59e0b;--red:#ef4444;--mono:'IBM Plex Mono','Menlo','Consolas',monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
+.fnav{position:sticky;top:0;z-index:100;background:rgba(11,11,11,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.fnav-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{color:#fff;text-decoration:none;font-weight:650;font-size:17px}.navlinks{display:flex;gap:20px;align-items:center;white-space:nowrap}.navlinks a{color:var(--muted);text-decoration:none;font-size:14px}.navlinks a:hover,.navlinks a.on{color:#fff}.navlinks a.home{color:var(--green)}
+.container{max-width:900px;margin:0 auto;padding:72px 24px 92px}.hero{margin-bottom:64px}.eyebrow{font-family:var(--mono);color:var(--green);font-size:12px;font-weight:600;letter-spacing:1.7px;text-transform:uppercase;margin-bottom:16px}h1{color:#fff;font-size:48px;line-height:1.08;letter-spacing:-1.35px;font-weight:650;max-width:860px}h2{color:#fff;font-size:26px;line-height:1.28;font-weight:620;margin-bottom:12px}h3{color:#fff;font-size:17px;line-height:1.4;font-weight:600;margin-bottom:7px}.lede{color:var(--muted);font-size:20px;line-height:1.55;max-width:800px;margin-top:18px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;padding:11px 18px;border-radius:5px;text-decoration:none}.btn.primary{background:var(--green);color:#071008}.btn.secondary{border:1px solid var(--border2);color:#ddd}.btn:hover{opacity:.88;text-decoration:none}
+.section{padding:46px 0;border-top:1px solid var(--border)}.section-intro{color:var(--muted);font-size:16px;max-width:780px;margin-bottom:22px}.small{color:var(--muted);font-size:13px}.mono{font-family:var(--mono)}.strong{color:#fff;font-weight:600}
+.proof-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 14px}.metric{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px}.metric .n{font-family:var(--mono);font-size:23px;line-height:1.15;color:#fff;font-weight:600;margin-bottom:7px}.metric .l{font-size:13px;color:var(--muted);line-height:1.5}
+.loop{display:grid;grid-template-columns:repeat(7,auto);gap:9px;align-items:center;margin:26px 0;overflow-x:auto;padding-bottom:5px}.loopbox{min-width:122px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:16px 14px}.loopbox b{display:block;color:#fff;font-size:13px;margin-bottom:3px}.loopbox span{display:block;color:var(--muted);font-size:12px;line-height:1.4}.loopbox.hot{border-color:rgba(34,197,94,.5);background:var(--green-dim)}.arrow{font-family:var(--mono);color:var(--dim);text-align:center}.loop-return{font-family:var(--mono);font-size:12px;color:var(--green);margin-top:8px}
+.callout{padding:22px 24px;border:1px solid rgba(34,197,94,.27);background:var(--green-dim);border-radius:8px;margin:20px 0}.callout strong{color:#fff}.quote{font-size:20px;line-height:1.55;color:#fff;margin:8px 0 4px;font-weight:500}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}.case{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}.case-head{padding:20px 22px;border-bottom:1px solid var(--border)}.case-tag{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);margin-bottom:8px}.case-body{padding:22px}.case-body p{color:var(--muted);font-size:14px;margin-bottom:13px}.case-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.fact{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px}.fact b{display:block;color:#fff;font-family:var(--mono);font-size:16px;margin-bottom:2px}.fact span{font-size:11px;color:var(--muted);line-height:1.4;display:block}.case-verdict{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}.case-verdict b{font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:.8px}.case-verdict p{margin-top:5px;margin-bottom:0;color:#ddd}
+.agent-map{display:grid;grid-template-columns:1fr auto 1.1fr auto 1fr;gap:10px;align-items:stretch;margin:20px 0}.agentbox{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:18px}.agentbox.hot{background:var(--green-dim);border-color:rgba(34,197,94,.45)}.agentbox b{display:block;color:#fff;margin-bottom:5px}.agentbox span{color:var(--muted);font-size:13px;line-height:1.5}.postures{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.posture{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:16px}.posture b{font-family:var(--mono);display:block;margin-bottom:5px}.posture p{font-size:13px;color:var(--muted);margin:0}.posture.go b{color:var(--green)}.posture.hold b{color:var(--amber)}.posture.esc b{color:#fff}
+.code{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.8;overflow-x:auto;white-space:pre;color:#d8d8d8;margin:16px 0}code{font-family:var(--mono);color:var(--green);background:var(--surface);border:1px solid var(--border);padding:1px 5px;border-radius:3px;font-size:13px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px}.card p{font-size:14px;color:var(--muted);margin:0}.tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--green);margin-bottom:9px}.clean{list-style:none;display:grid;gap:9px;margin:16px 0}.clean li{color:var(--muted);padding-left:19px;position:relative}.clean li::before{content:'→';position:absolute;left:0;color:var(--green);font-family:var(--mono)}
+.steps{counter-reset:step}.step{padding:34px 0;border-top:1px solid var(--border)}.step-head{display:flex;gap:14px;align-items:baseline;margin-bottom:14px}.step-num{font-family:var(--mono);font-size:12px;color:var(--green);min-width:28px}.step-title{font-size:21px;color:#fff;font-weight:600}.note{background:var(--green-dim);border:1px solid rgba(34,197,94,.25);border-radius:7px;padding:16px 18px;margin:16px 0;color:#ddd;font-size:14px}.note strong{color:#fff}
+.record{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:18px 20px;margin:16px 0;font-family:var(--mono);font-size:12px}.record-row{display:grid;grid-template-columns:115px 1fr;gap:12px;padding:4px 0}.record-key{color:var(--green)}.record-val{color:var(--muted)}
+.footer{border-top:1px solid var(--border);margin-top:48px;padding-top:22px;color:var(--dim);font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.footer a{color:var(--muted);text-decoration:none}.footer-links{display:flex;gap:14px;flex-wrap:wrap}
+.specwrap{max-width:760px;margin:0 auto;padding:52px 24px 80px}.specwrap header{border-bottom:2px solid #ddd;padding-bottom:16px;margin-bottom:34px}.specwrap h1{font-family:var(--mono);font-size:21px;letter-spacing:.2px;color:#111}.specpage{background:#faf9f7;color:#222}.specpage .fnav{background:#faf9f7;border-color:#e3e1dc}.specpage .brand,.specpage .navlinks a.on{color:#111}.specpage .navlinks a{color:#777}.specpage .navlinks a:hover{color:#111}.specpage h2{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#888;margin:30px 0 8px}.specpage p,.specpage li{color:#333}.specpage code{background:#efede9;border-color:#e2dfd8;color:#111}.spec-meta{font-size:11px;color:#888;font-family:var(--mono)}.spec-table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:12px}.spec-table th,.spec-table td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid #e5e2dc}.spec-table th{text-transform:uppercase;letter-spacing:.5px;color:#888;font-size:10px}.lvl{border-left:2px solid #222;padding-left:15px;margin:12px 0;color:#444}.lvl b{display:block;color:#222}.spec-callout{background:#f1efe9;border:1px solid #e1ddd4;border-radius:4px;padding:16px;margin:16px 0;font-size:13px}.specpage .footer{border-color:#e5e2dc;color:#aaa}.specpage .footer a{color:#777}
+@media(max-width:760px){.container{padding-top:52px}h1{font-size:38px}.lede{font-size:18px}.proof-strip,.case-grid,.two,.postures{grid-template-columns:1fr}.agent-map{grid-template-columns:1fr}.agent-map .arrow{transform:rotate(90deg)}.navlinks{overflow-x:auto;gap:14px}.navlinks a.home{display:none}.case-facts{grid-template-columns:1fr 1fr}.loop{grid-template-columns:1fr}.loop .arrow{transform:rotate(90deg)}.loopbox{min-width:0}.record-row{grid-template-columns:1fr}.specwrap{padding-top:34px}}
+</style></head><body>
+<nav class="fnav" aria-label="Site"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="navlinks"><a href="/">FJP</a><a class="on" href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="/#access">Access</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav><main class="container">
+<section class="hero"><div class="eyebrow">FJP Quickstart</div><h1>Put judgment in front of one agent action.</h1><p class="lede">Start where the risk starts: immediately before a production agent can change something that matters.</p></section>
 
-.step { padding:34px 0; border-top:1px solid var(--border); }
-.stephead { display:flex; gap:14px; align-items:baseline; margin-bottom:14px; }
-.stepnum { font-family:var(--mono); color:var(--green); font-weight:600; font-size:12px; }
-.stephead h2 { margin:0; font-size:21px; }
-.note { color:var(--muted); font-size:14px; }
-</style>
-</head>
-<body>
-<nav class="fnav"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="navlinks"><a href="/">FJP</a><a class="on" href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav>
-<main class="container">
-<section class="hero"><div class="eyebrow">FJP Quickstart</div><h1>Put Flow before the action.</h1><p class="lede">The agent can think with any model. Before it changes something consequential, send the proposed action and relevant context to Flow for judgment.</p></section>
+<section class="section"><h2>What you are connecting to.</h2><p class="section-intro">FJP is the productization of Flow's live judgment loop. For a year, that loop has processed millions of judgments, actions and resolutions: determine what matters, resolve the action, observe the outcome, then score and re-evaluate the original call.</p><div class="loop"><div class="loopbox"><b>Observe</b><span>Context, signals, tool state.</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Judge</b><span>What matters and why?</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Act</b><span>What should happen?</span></div><div class="arrow">→</div><div class="loopbox"><b>Resolve</b><span>What actually happened?</span></div></div><div class="note"><strong>For agents:</strong> the loop sits between proposed action and execution. Your application remains the enforcement point.</div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">01</span><h2>Choose the actions Flow controls</h2></div>
-<p>Do not send every model call through FJP. Put it on the boundary where the agent receives authority to act.</p>
-<ul class="list"><li>send a message or external communication</li><li>move money, issue a refund, set a price or approve a transaction</li><li>modify or delete records</li><li>change production infrastructure or security state</li><li>make a consequential approval, denial or commitment</li></ul>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">01</span><span class="step-title">Choose the action boundary</span></div><p>Pick one action where a wrong call has a meaningful cost. Examples: issue a refund, send an external communication, commit capital, delete a record, deploy code, approve a claim, change access, or execute a transaction.</p><div class="code">agent reasoning
+    ↓
+proposed consequential action
+    ↓
+FJP
+    ↓
+application enforcement
+    ↓
+execution</div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">02</span><h2>Use customer-owned inference</h2></div>
-<p>Production FJP is configured against inference you already pay for: your provider account, cloud account, private model, or inference gateway.</p>
-<div class="callout"><strong>Flow does not include or subsidize third-party model usage.</strong> Your model provider bills you directly. Flow bills separately for its judgment/control service.</div>
-<p class="note">Flow's judgment implementation remains proprietary. Customer-owned inference does not expose Flow's prompts, methods, scoring, calibration, evaluators or orchestration.</p>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">02</span><span class="step-title">Get your Flow key</span></div><p>Production access is currently provisioned directly. Your key begins with <code>fjp_live_</code>.</p><div class="hero-actions"><a class="btn primary" href="mailto:hello@flowinfo.co?subject=FJP%20production%20access">Request access</a></div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">03</span><h2>Get a Flow key</h2></div>
-<p>Production access is configured around the actions your agents take and your inference environment. Once enabled, you receive a key beginning with <code>fjp_live_</code>.</p>
-<div class="hero-actions"><a class="btn primary" href="mailto:hello@flowinfo.co?subject=FJP%20production%20access">Request production access</a></div>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">03</span><span class="step-title">Send the proposed action and its decision context</span></div><p>The resolver needs the information that should govern the action: what the agent wants to do, the relevant state, constraints, authority, evidence and material counter-signals.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \
+  -H "Authorization: Bearer fjp_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "context": "Agent proposes a $12,000 refund. Autonomous authority: $5,000. Manager approval: absent. Customer history: 3 prior refunds in 30 days."
+  }'</div><div class="note"><strong>Do not send more data just because it exists.</strong> Send the context that can materially change the action. FJP's role is to resolve importance, not reward payload size.</div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">04</span><h2>Send the proposed action to <code>judge</code></h2></div>
-<p>Include the proposed action and only the context Flow needs to judge it.</p>
-<div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge   -H "Authorization: Bearer fjp_live_..."   -H "Content-Type: application/json"   -d '{"context":"Proposed action: issue a $12,000 refund. Customer is in good standing. Autonomous refund authority is $5,000."}'</div>
-<p>Each response is a Judgment-Grounded Record with the signal, judgment, action, falsifier and a <code>request_id</code>.</p>
-<div class="code">{
-  "signal": "Customer requests a $12,000 refund",
-  "judgment": {
-    "assessment": "The proposed action exceeds autonomous authority",
-    "confidence": 0.96
-  },
-  "action": {
-    "directive": "ESCALATE for manager approval"
-  },
-  "falsifier": {
-    "condition": "Authorized manager approval is present",
-    "checkable": true
-  },
-  "request_id": "req_..."
-}</div>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">04</span><span class="step-title">Use the returned judgment as the control decision</span></div><p>Every response carries the observable decision chain. The application's enforcement policy decides how that directive maps to execution.</p><div class="record"><div class="record-row"><span class="record-key">signal</span><span class="record-val">What changed or what condition is material</span></div><div class="record-row"><span class="record-key">judgment</span><span class="record-val">Why it matters, with confidence</span></div><div class="record-row"><span class="record-key">action</span><span class="record-val">What should happen next</span></div><div class="record-row"><span class="record-key">falsifier</span><span class="record-val">A concrete, checkable condition that would reverse the call</span></div><div class="record-row"><span class="record-key">request_id</span><span class="record-val">Identifier for the later outcome</span></div></div><div class="postures"><div class="posture go"><b>PROCEED</b><p>Execute when the returned action supports continuation.</p></div><div class="posture hold"><b>HOLD</b><p>Do not execute while a material condition is unresolved.</p></div><div class="posture esc"><b>ESCALATE</b><p>Route to the person or authority required by policy.</p></div></div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">05</span><h2>Enforce the returned action</h2></div>
-<p>Your application remains in control. Map the FJP directive to the behavior your agent is allowed to take.</p>
-<div class="decision-row"><div class="decision proceed"><b>PROCEED</b><p>Allow the tool or action to execute.</p></div><div class="decision hold"><b>HOLD</b><p>Stop execution until the unresolved condition is cleared.</p></div><div class="decision escalate"><b>ESCALATE</b><p>Route to a human or higher-authority workflow.</p></div></div>
-<div class="code">if (judgment.action.directive.startsWith("PROCEED")) {
-  await execute(proposedAction);
-} else if (judgment.action.directive.startsWith("ESCALATE")) {
-  await humanReview(judgment);
-} else {
-  await hold(proposedAction, judgment);
-}</div>
-<p class="note">The example above shows the control pattern, not a required client library.</p>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">05</span><span class="step-title">Report what happened</span></div><p>The outcome is part of the product. When the relevant result becomes observable, associate it with the original <code>request_id</code>.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes \
+  -H "Authorization: Bearer fjp_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{"request_id":"req_...","outcome":"confirmed","notes":"manager approval was required and obtained"}'</div><p class="small">That closes the loop: judgment → action → outcome → resolution. Flow's internal evaluation and calibration methods remain proprietary.</p></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">06</span><h2>Report what happened</h2></div>
-<p>When the relevant outcome becomes observable, send it back using the original <code>request_id</code>.</p>
-<div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/outcomes   -H "Authorization: Bearer fjp_live_..."   -H "Content-Type: application/json"   -d '{"request_id":"req_...","outcome":"manager_approved"}'</div>
-<p class="note">Outcome reporting supports later review and re-evaluation. Flow's internal evaluation and calibration methods remain proprietary.</p>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">06</span><span class="step-title">Connect through MCP when that is easier</span></div><p>If your agent framework supports MCP, point it at the existing resolver endpoint. The FJP tools are exposed through standard MCP tool calls.</p><div class="code">endpoint: https://resolve.flowinfo.co/mcp
+auth:     Authorization: Bearer fjp_live_...</div><p>The existing tools are <code>judge</code>, <code>weigh</code>, and <code>match</code>. The agent can call them the same way it calls other MCP tools.</p></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">07</span><h2>Use MCP when the agent should call Flow directly</h2></div>
-<p>If your agent framework supports MCP, expose FJP as a tool rather than writing custom transport code.</p>
-<div class="code">endpoint: https://resolve.flowinfo.co/mcp
-auth:     Authorization: Bearer fjp_live_...</div>
-<p>The agent can call <code>judge</code>, <code>weigh</code>, and <code>match</code> as standard MCP tools.</p>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">07</span><span class="step-title">Keep model inference on your account</span></div><p>Flow's commercial role is the judgment/control layer, not model resale. Customer model usage should remain on the customer's provider, cloud account, private inference stack or gateway, with those model fees billed directly to the customer.</p><div class="callout"><strong>Your models. Your billing. Flow's judgment.</strong></div></section>
 
-<section class="step"><div class="stephead"><span class="stepnum">OPTIONAL</span><h2>Validate the record with FJP-CONF</h2></div>
-<p>FJP-CONF is the public, vendor-neutral conformance suite. It tests the observable Judgment-Grounded Record, not Flow's internal judgment method.</p>
-<div class="code"><span style="color:#777">$</span> pip install fjp-conformance
-<span style="color:#777">$</span> fjp-conform record.json --level 2</div>
-<div class="hero-actions"><a class="btn secondary" href="/conformance/v0.1/">Read the spec</a><a class="btn secondary" href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></div>
-</section>
+<section class="step"><div class="step-head"><span class="step-num">08</span><span class="step-title">Use FJP-CONF when you need the public contract</span></div><p>FJP-CONF tests whether the observable record is well-formed, grounded, falsifiable and accountable. It does not inspect or reveal Flow's judgment method.</p><div class="code"><span style="color:#777">$</span> pip install fjp-conformance
+<span style="color:#777">$</span> fjp-conform record.json --level 2</div><div class="hero-actions"><a class="btn secondary" href="/conformance/v0.1/">Read the spec</a><a class="btn secondary" href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></div></section>
 
-<div class="footer"><div class="footer-links"><a href="/">FJP</a><a href="/conformance/v0.1/">Spec</a><a href="https://flowinfo.co/">Flow</a><a href="mailto:hello@flowinfo.co">Contact</a></div><span>Your models · Your billing · Flow's judgment</span></div>
+<footer class="footer"><div class="footer-links"><a href="/">FJP</a><a href="/conformance/v0.1/">Spec</a><a href="https://flowinfo.co/">Flow</a><a href="mailto:hello@flowinfo.co">Contact</a></div><span>Judgment → action → outcome → resolution</span></footer>
 </main></body></html>
