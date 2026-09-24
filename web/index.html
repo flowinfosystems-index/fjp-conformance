@@ -40,9 +40,42 @@
   footer { margin-top:40px; padding-top:12px; border-top:1px solid var(--line);
            display:flex; justify-content:space-between; font-size:11px; color:#bbb; flex-wrap:wrap; gap:8px; }
   a { color:var(--ink); }
+
+  /* Site nav (links back to flowinfo.co) */
+  .fnav { border-bottom:1px solid #e5e3df; background:#faf9f7; font-family:'IBM Plex Mono','Menlo','Consolas',monospace; }
+  .fnav-in { max-width:960px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .fnav-brand { display:flex; align-items:baseline; gap:8px; text-decoration:none; }
+  .fnav-brand:hover { text-decoration:none; }
+  .fnav-flow { font-size:17px; font-weight:600; color:#1a1a1a; letter-spacing:.2px; }
+  .fnav-sep { color:#666; font-size:14px; }
+  .fnav-fjp { font-family:'IBM Plex Mono','Menlo','Consolas',monospace; font-size:12px; font-weight:600; letter-spacing:1.5px; color:#1a1a1a; }
+  .fnav-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:14px; }
+  .fnav-links a { color:#666; text-decoration:none; }
+  .fnav-links a:hover { color:#1a1a1a; text-decoration:none; }
+  .fnav-links a.fnav-on { color:#1a1a1a; }
+  .fnav-links a.fnav-home { color:#1a1a1a; }
+  @media (max-width:600px) { .fnav-in { padding:12px 16px; } .fnav-links { gap:14px; font-size:13px; } }
+  .footer-nav { display:flex; gap:16px; flex-wrap:wrap; width:100%; margin-bottom:4px; }
+  .footer-nav a { color:#666; text-decoration:none; }
+  .footer-nav a:hover { color:#1a1a1a; }
+  body { padding-top:0; }
+  .fnav { margin:0 -24px 40px; }
+  footer .footer-nav a { color:#999; }
 </style>
 </head>
 <body>
+<nav class="fnav" aria-label="Site">
+  <div class="fnav-in">
+    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span><span class="fnav-sep">/</span><span class="fnav-fjp">FJP</span></a>
+    <div class="fnav-links">
+      <a href="/">Overview</a>
+      <a href="/conformance/v0.1/" class="fnav-on" aria-current="page">Spec</a>
+      <a href="/quickstart">Quickstart</a>
+      <a href="/#resolver">Get the resolver</a>
+      <a class="fnav-home" href="https://flowinfo.co/">flowinfo.co &rarr;</a>
+    </div>
+  </div>
+</nav>
 <div class="wrap">
 
   <header>
@@ -110,7 +143,15 @@
   private to each implementer; only the externalized record is tested.</p>
 
   <footer>
-    <span>fjp.flowinfo.co · flowinfo.co</span>
+    <div class="footer-nav">
+      <a href="https://flowinfo.co/">Flow</a>
+      <a href="https://flowinfo.co/about">About</a>
+      <a href="https://flowinfo.co/emailbrief">Email Brief</a>
+      <a href="https://flowinfo.co/terms">Terms</a>
+      <a href="https://flowinfo.co/privacy">Privacy</a>
+      <a href="https://flowinfo.co/about#contact">Contact</a>
+    </div>
+    <span><a href="/">fjp.flowinfo.co</a> · <a href="https://flowinfo.co/">flowinfo.co</a></span>
     <span>FJP-CONF v0.1.0 · Draft</span>
   </footer>
 

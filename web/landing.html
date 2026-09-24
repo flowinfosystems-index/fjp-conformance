@@ -726,9 +726,40 @@
     flex-wrap: wrap;
     gap: 8px;
   }
+
+  /* Site nav (links back to flowinfo.co) */
+  .fnav { border-bottom:1px solid #222; background:#0c0c0c; font-family:'Inter',-apple-system,sans-serif; }
+  .fnav-in { max-width:960px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .fnav-brand { display:flex; align-items:baseline; gap:8px; text-decoration:none; }
+  .fnav-brand:hover { text-decoration:none; }
+  .fnav-flow { font-size:17px; font-weight:600; color:#fff; letter-spacing:.2px; }
+  .fnav-sep { color:#999; font-size:14px; }
+  .fnav-fjp { font-family:'IBM Plex Mono','Menlo',monospace; font-size:12px; font-weight:600; letter-spacing:1.5px; color:#22c55e; }
+  .fnav-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:14px; }
+  .fnav-links a { color:#999; text-decoration:none; }
+  .fnav-links a:hover { color:#fff; text-decoration:none; }
+  .fnav-links a.fnav-on { color:#fff; }
+  .fnav-links a.fnav-home { color:#22c55e; }
+  @media (max-width:600px) { .fnav-in { padding:12px 16px; } .fnav-links { gap:14px; font-size:13px; } }
+  .footer-nav { display:flex; gap:16px; flex-wrap:wrap; width:100%; margin-bottom:4px; }
+  .footer-nav a { color:#999; text-decoration:none; }
+  .footer-nav a:hover { color:#fff; }
+  #resolver, #faq { scroll-margin-top:24px; }
 </style>
 </head>
 <body>
+<nav class="fnav" aria-label="Site">
+  <div class="fnav-in">
+    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span><span class="fnav-sep">/</span><span class="fnav-fjp">FJP</span></a>
+    <div class="fnav-links">
+      <a href="/" class="fnav-on" aria-current="page">Overview</a>
+      <a href="/conformance/v0.1/">Spec</a>
+      <a href="/quickstart">Quickstart</a>
+      <a href="/#resolver">Get the resolver</a>
+      <a class="fnav-home" href="https://flowinfo.co/">flowinfo.co &rarr;</a>
+    </div>
+  </div>
+</nav>
 <div class="container">
 
   <!-- Header -->
@@ -982,7 +1013,7 @@
   <!-- =============================== -->
   <!-- SECTION 7: Get the resolver      -->
   <!-- =============================== -->
-  <div class="section">
+  <div class="section" id="resolver">
     <div class="section-label">Get the resolver</div>
     <p>Enter your email and choose a tier. Your API key arrives by email in seconds.</p>
 
@@ -1059,7 +1090,7 @@
   <!-- =============================== -->
   <!-- SECTION 10: FAQ                  -->
   <!-- =============================== -->
-  <div class="section" style="margin-top: 48px;">
+  <div class="section" id="faq" style="margin-top: 48px;">
     <div class="section-label">Frequently asked questions</div>
 
     <div class="faq-item">
@@ -1165,6 +1196,14 @@
   </div>
 
   <div class="footer">
+    <div class="footer-nav">
+      <a href="https://flowinfo.co/">Flow</a>
+      <a href="https://flowinfo.co/about">About</a>
+      <a href="https://flowinfo.co/emailbrief">Email Brief</a>
+      <a href="https://flowinfo.co/terms">Terms</a>
+      <a href="https://flowinfo.co/privacy">Privacy</a>
+      <a href="https://flowinfo.co/about#contact">Contact</a>
+    </div>
     <span>Flow Information Systems &middot; <a href="https://flowinfo.co">flowinfo.co</a></span>
     <span>Apache 2.0 (conformance) &middot; Proprietary (resolver)</span>
   </div>
