@@ -728,29 +728,32 @@
   }
 
   /* Site nav (links back to flowinfo.co) */
-  .fnav { border-bottom:1px solid #222; background:#0c0c0c; font-family:'Inter',-apple-system,sans-serif; }
+  .fnav { position:sticky; top:0; z-index:100; border-bottom:1px solid #222; background:#0c0c0c; font-family:'Inter',-apple-system,sans-serif; }
   .fnav-in { max-width:960px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .fnav-brand { display:flex; align-items:baseline; gap:8px; text-decoration:none; }
   .fnav-brand:hover { text-decoration:none; }
   .fnav-flow { font-size:17px; font-weight:600; color:#fff; letter-spacing:.2px; }
-  .fnav-sep { color:#999; font-size:14px; }
-  .fnav-fjp { font-family:'IBM Plex Mono','Menlo',monospace; font-size:12px; font-weight:600; letter-spacing:1.5px; color:#22c55e; }
   .fnav-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:14px; }
   .fnav-links a { color:#999; text-decoration:none; }
   .fnav-links a:hover { color:#fff; text-decoration:none; }
   .fnav-links a.fnav-on { color:#fff; }
   .fnav-links a.fnav-home { color:#22c55e; }
-  @media (max-width:600px) { .fnav-in { padding:12px 16px; } .fnav-links { gap:14px; font-size:13px; } }
+  @media (max-width:600px) {
+    .fnav-in { padding:10px 16px; flex-wrap:nowrap; gap:14px; }
+    .fnav-links { flex-wrap:nowrap; gap:14px; font-size:13px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
+    .fnav-links::-webkit-scrollbar { display:none; }
+    .fnav-links a.fnav-home { display:none; }
+  }
   .footer-nav { display:flex; gap:16px; flex-wrap:wrap; width:100%; margin-bottom:4px; }
   .footer-nav a { color:#999; text-decoration:none; }
   .footer-nav a:hover { color:#fff; }
-  #resolver, #faq { scroll-margin-top:24px; }
+  #resolver, #faq { scroll-margin-top:80px; }
 </style>
 </head>
 <body>
 <nav class="fnav" aria-label="Site">
   <div class="fnav-in">
-    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span><span class="fnav-sep">/</span><span class="fnav-fjp">FJP</span></a>
+    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span></a>
     <div class="fnav-links">
       <a href="/" class="fnav-on" aria-current="page">Overview</a>
       <a href="/conformance/v0.1/">Spec</a>
@@ -768,7 +771,7 @@
       <div class="header-mark">Flow Judgment Protocol</div>
     </div>
     <h1>Every agent acts. Almost none can explain why.</h1>
-    <p>When an agent gets it wrong, the bill runs $1M to $15M, and nobody finds out until the damage is done. FJP fixes that. An open standard makes any agent's decisions auditable. A fifty-cent resolver call returns the judgment itself: what matters, why, what to do, and what would prove it wrong.</p>
+    <p>When an agent gets a call wrong, nobody finds out until the damage is done. Most misses cost an hour of cleanup. The ones that matter can cost millions. FJP fixes that. An open standard makes any agent's decisions auditable. A fifty-cent resolver call returns the judgment itself: what matters, why, what to do, and what would prove it wrong.</p>
   </div>
 
   <!-- =============================== -->
@@ -868,7 +871,7 @@
   <!-- =============================== -->
   <div class="section">
     <div class="section-label">What's a wrong judgment worth?</div>
-    <p style="margin-bottom: 24px;">Every agent makes judgment calls. The question is whether anyone can tell when those calls are wrong, and what the wrong call costs. FJP costs $0.50 per call. Here's what the alternative costs.</p>
+    <p style="margin-bottom: 24px;">Every agent makes judgment calls. The question is whether anyone can tell when those calls are wrong, and what the wrong call costs. FJP costs $0.50 per call. Three illustrative scenarios from the high-stakes end:</p>
 
     <div class="case">
       <div class="case-header">
@@ -952,7 +955,7 @@
     </div>
 
     <div class="value-summary">
-      <p><strong>The math is the same every time:</strong> the cost of a wrong judgment at the decision layer is $1M to $15M+. The cost of an FJP call is fifty cents. The gap between those numbers is the entire business case.</p>
+      <p><strong>The math scales with the stakes:</strong> most wrong calls are cheap, but the ones that matter can run into the millions, and you rarely know in advance which is which. At fifty cents a call, checking every judgment costs less than missing one.</p>
       <p>And without the falsifier, you never find out the judgment was wrong until the damage is done. With it, someone can check before they act.</p>
     </div>
   </div>
@@ -968,7 +971,7 @@
       <div class="who-card">
         <div class="who-icon">$</div>
         <div class="who-title">Financial research and portfolio agents</div>
-        <div class="who-desc">Agents that monitor markets, triage signals, flag risk, or source deals. A missed signal or a bad recommendation costs millions. Regulators will ask how the agent decided.</div>
+        <div class="who-desc">Agents that monitor markets, triage signals, flag risk, or source deals. A missed signal or a bad recommendation can cost millions. Regulators will ask how the agent decided.</div>
       </div>
       <div class="who-card">
         <div class="who-icon">&gt;_</div>
