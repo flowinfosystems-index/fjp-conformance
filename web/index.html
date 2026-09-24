@@ -1,164 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FJP-CONF v0.1 — Judgment-Grounded Agent Conformance</title>
-<meta name="description" content="Behavioral conformance for agents that act on changing information. Vendor-neutral. Tests observable output, not internal method." />
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FJP-CONF v0.1 — Conformance for Production Agents That Act</title>
+<meta name="description" content="A vendor-neutral behavioral conformance standard for production agents that recommend or take consequential action. Tests observable judgment records, not internal methods.">
 <style>
-  :root { --ink:#1a1a1a; --bg:#faf9f7; --mut:#999; --sub:#444; --line:#e5e3df; --code:#f0eeeb; }
-  * { box-sizing: border-box; }
-  body {
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:'IBM Plex Mono','Menlo','Consolas',monospace;
-    font-size:13px; line-height:1.75; padding:48px 24px;
-  }
-  .wrap { max-width:680px; margin:0 auto; }
-  header { border-bottom:2px solid var(--ink); padding-bottom:16px; margin-bottom:36px; }
-  .row { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
-  h1 { font-size:19px; font-weight:700; margin:0; letter-spacing:.5px; }
-  .tag { font-size:11px; color:var(--mut); }
-  .meta { font-size:11px; color:var(--mut); margin-top:4px; }
-  h2 { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:1px;
-       margin:34px 0 8px; }
-  p { margin:0 0 10px; color:#333; }
-  .sub { color:var(--sub); }
-  ul { margin:6px 0 12px; padding-left:20px; }
-  li { margin:3px 0; color:var(--sub); }
-  em { font-style:italic; }
-  strong { font-weight:700; }
-  .lvl { border-left:2px solid var(--ink); padding-left:16px; margin:12px 0; }
-  .lvl b { display:block; font-size:12px; margin-bottom:2px; }
-  table { width:100%; border-collapse:collapse; margin:10px 0 14px; font-size:12px; }
-  th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { color:var(--mut); font-weight:700; text-transform:uppercase; letter-spacing:.5px; font-size:10px; }
-  code { background:var(--code); padding:1px 5px; border-radius:2px; font-size:12px; }
-  pre { background:var(--code); padding:12px 16px; border-radius:2px; overflow-x:auto;
-        font-size:12px; line-height:1.7; margin:8px 0 14px; }
-  .quote { border-left:2px solid var(--ink); padding-left:16px; margin:14px 0;
-           font-style:italic; font-size:14px; color:#333; }
-  footer { margin-top:40px; padding-top:12px; border-top:1px solid var(--line);
-           display:flex; justify-content:space-between; font-size:11px; color:#bbb; flex-wrap:wrap; gap:8px; }
-  a { color:var(--ink); }
+  :root { --ink:#1a1a1a; --bg:#faf9f7; --mut:#8d8d8d; --sub:#444; --line:#dfddd8; --code:#f0eeeb; --green:#16833f; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Mono','Menlo','Consolas',monospace;font-size:13px;line-height:1.75;padding:0 24px 48px}
+  .fnav{position:sticky;top:0;z-index:100;margin:0 -24px 40px;border-bottom:1px solid var(--line);background:rgba(250,249,247,.97)}
+  .fnav-in{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center}.brand{font-size:17px;font-weight:700;color:var(--ink);text-decoration:none}.links{display:flex;gap:18px;white-space:nowrap}.links a{color:#666;text-decoration:none}.links a.on{color:#111}.wrap{max-width:720px;margin:0 auto} header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:36px}.row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}h1{font-size:20px;margin:0}.tag{font-size:11px;color:var(--mut)}.meta{font-size:11px;color:var(--mut);margin-top:5px}h2{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin:34px 0 8px}p{margin:0 0 10px;color:#333}.lead{font-size:14px;line-height:1.8}.sub{color:var(--sub)}strong{font-weight:700}em{font-style:italic}code{background:var(--code);padding:1px 5px;border-radius:2px;font-size:12px}table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:12px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-size:10px;text-transform:uppercase;letter-spacing:.5px}.lvl{border-left:2px solid var(--ink);padding-left:16px;margin:12px 0}.lvl b{display:block;font-size:12px;margin-bottom:2px}.quote{border-left:2px solid var(--ink);padding-left:16px;margin:14px 0;font-style:italic;font-size:14px;color:#333}.boundary{border:1px solid var(--line);background:#fff;padding:16px 18px;margin:14px 0}.boundary b{display:block;margin-bottom:5px}ul{margin:6px 0 12px;padding-left:20px}li{margin:3px 0;color:var(--sub)}footer{margin-top:40px;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11px;color:#aaa}footer a{color:#666}.footer-nav{display:flex;gap:14px;flex-wrap:wrap;width:100%}@media(max-width:620px){.links{overflow-x:auto;gap:12px}.links a:last-child{display:none}}
+</style></head><body>
+<nav class="fnav"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="links"><a href="/">FJP</a><a class="on" href="/conformance/v0.1/">Spec</a><a href="/quickstart">Quickstart</a><a href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav>
+<div class="wrap"><header><div class="row"><h1>FJP-CONF v0.1</h1><span class="tag">DRAFT · PUBLIC · Published July 14, 2026</span></div><div class="meta">Judgment-Grounded Agent Conformance · fjp.flowinfo.co/conformance/v0.1</div></header>
 
-  /* Site nav (links back to flowinfo.co) */
-  .fnav { position:sticky; top:0; z-index:100; border-bottom:1px solid #e5e3df; background:#faf9f7; font-family:'IBM Plex Mono','Menlo','Consolas',monospace; }
-  .fnav-in { max-width:960px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .fnav-brand { display:flex; align-items:baseline; gap:8px; text-decoration:none; }
-  .fnav-brand:hover { text-decoration:none; }
-  .fnav-flow { font-size:17px; font-weight:600; color:#1a1a1a; letter-spacing:.2px; }
-  .fnav-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:14px; }
-  .fnav-links a { color:#666; text-decoration:none; }
-  .fnav-links a:hover { color:#1a1a1a; text-decoration:none; }
-  .fnav-links a.fnav-on { color:#1a1a1a; }
-  .fnav-links a.fnav-home { color:#1a1a1a; }
-  @media (max-width:600px) {
-    .fnav-in { padding:10px 16px; flex-wrap:nowrap; gap:14px; }
-    .fnav-links { flex-wrap:nowrap; gap:14px; font-size:13px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
-    .fnav-links::-webkit-scrollbar { display:none; }
-    .fnav-links a.fnav-home { display:none; }
-  }
-  .footer-nav { display:flex; gap:16px; flex-wrap:wrap; width:100%; margin-bottom:4px; }
-  .footer-nav a { color:#666; text-decoration:none; }
-  .footer-nav a:hover { color:#1a1a1a; }
-  body { padding-top:0; }
-  .fnav { margin:0 -24px 40px; }
-  footer .footer-nav a { color:#999; }
-  @media (max-width:600px) { .fnav-links { gap:12px; font-size:12px; } .fnav-flow { font-size:16px; } }
-</style>
-</head>
-<body>
-<nav class="fnav" aria-label="Site">
-  <div class="fnav-in">
-    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span></a>
-    <div class="fnav-links">
-      <a href="/">Overview</a>
-      <a href="/conformance/v0.1/" class="fnav-on" aria-current="page">Spec</a>
-      <a href="/quickstart">Quickstart</a>
-      <a href="/#resolver">Get the resolver</a>
-      <a class="fnav-home" href="https://flowinfo.co/">flowinfo.co &rarr;</a>
-    </div>
-  </div>
-</nav>
-<div class="wrap">
+<p class="lead"><strong>Flow Judgment Protocol™ (FJP)</strong> defines a standard process for externalizing the judgment that sits between an agent's observed context and a recommended or executed action. The protocol is designed for production agents with authority to act.</p>
+<p><strong>FJP-CONF</strong> is the public, vendor-neutral behavioral standard for that output. It tests what the agent can show after a judgment call. It does not prescribe or reveal the internal method used to reach the judgment.</p>
 
-  <header>
-    <div class="row">
-      <h1>FJP-CONF v0.1</h1>
-      <span class="tag">DRAFT · PUBLIC · Published July 14, 2026</span>
-    </div>
-    <div class="meta">Judgment-Grounded Agent Conformance · fjp.flowinfo.co/conformance/v0.1</div>
-  </header>
+<h2>Why this exists</h2>
+<p>Once an agent can send, spend, change, approve, execute, delete, deploy, or commit, model output becomes a control problem.</p>
+<p>For every consequential action, three questions must be answerable: <em>what did the agent act on, why did it judge the action warranted, and what condition would have made that judgment wrong?</em></p>
+<p>An agent that cannot answer those questions cannot provide a durable basis for audit, challenge, re-evaluation, or control.</p>
 
-  <p><strong>Flow Judgment Protocol™ (FJP)</strong> defines a standard process
-  for externalizing the judgment that connects observed change to recommended or
-  executed action. It does not prescribe how an implementation detects change,
-  evaluates importance, forms judgments, or selects actions.</p>
+<h2>The control boundary</h2>
+<div class="boundary"><b>Agent → proposed action → judgment/control → action</b>
+The protocol concerns the judgment/control boundary. An implementation may allow the action to proceed, hold it, or escalate it to a human or higher-authority process.</div>
+<p class="sub">FJP-CONF does not require a particular model, framework, vendor, prompt, scoring system, policy engine, or orchestration method.</p>
 
-  <p><strong>FJP-CONF</strong> is the public conformance standard for FJP — a
-  behavioral standard for agents that recommend or take action in response to
-  changing information. It is <strong>vendor-neutral</strong> and tests an agent's
-  <em>observable output</em>, not its internal method. Two agents may reach opposite
-  conclusions and both conform.</p>
+<h2>The Judgment-Grounded Record</h2>
+<p>For every action it recommends or takes, a conforming agent must be able to emit a record with four components:</p>
+<table><tr><th>Component</th><th>Answers</th><th>Required fields</th></tr>
+<tr><td><code>signal</code></td><td>what changed or what context triggered review</td><td>description, sources[], observed_at</td></tr>
+<tr><td><code>judgment</code></td><td>why it matters</td><td>assessment, confidence (0–1), signal_ref</td></tr>
+<tr><td><code>action</code></td><td>what should happen</td><td>directive, judgment_ref</td></tr>
+<tr><td><code>falsifier</code></td><td>what would make the judgment wrong</td><td>condition, checkable, status</td></tr></table>
+<p class="sub">The reference chain — judgment → signal, action → judgment — makes the control decision traceable to the context that prompted it.</p>
 
-  <h2>Motivation</h2>
-  <p>Retrieval-grade systems answer <em>what is true</em>. They do not answer
-  <em>was this worth acting on, and how would we know if it wasn't</em>.</p>
-  <p>When an agent acts, three questions must be answerable afterward: what did it
-  act on, why did it judge that worth acting on, and what would have made that
-  judgment wrong. An agent that cannot answer these cannot be audited, trusted in a
-  decision path, or insured.</p>
+<h2>Conformance levels</h2>
+<div class="lvl"><b>L0 — Structural</b>The agent emits a well-formed record: all four components present, correct types, confidence in [0,1], valid timestamps.</div>
+<div class="lvl"><b>L1 — Grounded</b>The signal is attributable and the reference chain resolves. The action is traceable to the context or source that prompted it.</div>
+<div class="lvl"><b>L2 — Falsifiable</b>The falsifier is a concrete, checkable condition, not a vacuous catch-all. The agent states in advance what would reverse its own call.</div>
+<div class="lvl"><b>L3 — Accountable</b>The agent retains records and exposes an adapter: given a record id, it returns the original record and can re-evaluate the falsifier against what has happened since.</div>
 
-  <h2>The Judgment-Grounded Record</h2>
-  <p>For every action it recommends or takes, a conforming agent must be able to
-  emit a record with four components:</p>
-  <table>
-    <tr><th>Component</th><th>Answers</th><th>Required fields</th></tr>
-    <tr><td><code>signal</code></td><td>what changed</td><td>description, sources[], observed_at</td></tr>
-    <tr><td><code>judgment</code></td><td>why it matters</td><td>assessment, confidence (0–1), signal_ref</td></tr>
-    <tr><td><code>action</code></td><td>what should happen</td><td>directive, judgment_ref</td></tr>
-    <tr><td><code>falsifier</code></td><td>what makes it wrong</td><td>condition, checkable, status</td></tr>
-  </table>
-  <p class="sub">The reference chain — judgment&nbsp;→&nbsp;signal, action&nbsp;→&nbsp;judgment —
-  makes an action traceable to the change that prompted it.</p>
+<h2>Making a claim</h2>
+<p>A claim names a level and version and is reproducible by running the public suite:</p>
+<div class="quote">Conforms to FJP-CONF v0.1, Level 2.</div>
+<p class="sub">The gate is not the vendor's word. It is a runnable check against observable output.</p>
 
-  <h2>Conformance Levels</h2>
-  <div class="lvl"><b>L0 — Structural</b>The agent emits a well-formed record: all four components present, correct types, confidence in [0,1], valid timestamps.</div>
-  <div class="lvl"><b>L1 — Grounded</b>The signal is attributable (non-empty sources) and the reference chain resolves. The action is traceable to a source.</div>
-  <div class="lvl"><b>L2 — Falsifiable</b>The falsifier is a concrete, checkable condition — not a vacuous catch-all. The agent states, in advance, what would reverse its own call.</div>
-  <div class="lvl"><b>L3 — Accountable</b>The agent retains records and exposes an adapter: given a record id, it returns the original record and re-evaluates the falsifier's current status. A past action can be audited against what has happened since.</div>
+<h2>What conformance does not assert</h2>
+<ul><li>Not that a judgment is correct.</li><li>Not that an action is wise.</li><li>Not that the agent is safe in every operating context.</li><li>Only that the judgment has been externalized in a traceable, challengeable and re-evaluable form.</li></ul>
+<p class="sub">A triggered falsifier indicates that the judgment should be reconsidered. A falsifier that has not triggered does not independently establish that the original judgment was correct.</p>
 
-  <h2>Making a Claim</h2>
-  <p>A claim names a level and version and is reproducible by running the public suite:</p>
-  <div class="quote">Conforms to FJP-CONF v0.1, Level 2.</div>
-  <p class="sub">The gate is not the vendor's word. It is a runnable check.</p>
+<h2>Implementation privacy</h2>
+<p>Conformance is deliberately separated from implementation. The public record may be inspected and tested while the mechanism that produced it remains private.</p>
+<div class="boundary"><b>FJP-CONF tests the contract, not the recipe.</b>
+Prompts, models, scoring, calibration, policy-selection logic, evaluators, orchestration, heuristics, proprietary data, and other implementation details are outside the conformance surface.</div>
 
-  <h2>What Conformance Does Not Assert</h2>
-  <ul>
-    <li>Not that a judgment is <em>correct</em>.</li>
-    <li>Not that an action is <em>wise</em>.</li>
-    <li>Only that the decision is externalized in a shape that can be traced, challenged, and audited.</li>
-  </ul>
-  <p class="sub">FJP-CONF does not determine whether a judgment is correct.
-  It determines whether the judgment has been externalized in a traceable,
-  challengeable, and re-evaluable form. A triggered falsifier indicates that
-  the judgment should be reconsidered; a falsifier that has not triggered does
-  not independently establish that the judgment was correct. Method stays
-  private to each implementer; only the externalized record is tested.</p>
-
-  <footer>
-    <div class="footer-nav">
-      <a href="https://flowinfo.co/">Flow</a>
-      <a href="https://flowinfo.co/about">About</a>
-      <a href="https://flowinfo.co/emailbrief">Email Brief</a>
-      <a href="https://flowinfo.co/terms">Terms</a>
-      <a href="https://flowinfo.co/privacy">Privacy</a>
-      <a href="https://flowinfo.co/about#contact">Contact</a>
-    </div>
-    <span><a href="/">fjp.flowinfo.co</a> · <a href="https://flowinfo.co/">flowinfo.co</a></span>
-    <span>FJP-CONF v0.1.0 · Draft</span>
-  </footer>
-
-</div>
-</body>
-</html>
+<footer><div class="footer-nav"><a href="https://flowinfo.co/">Flow</a><a href="/">FJP</a><a href="/quickstart">Quickstart</a><a href="https://flowinfo.co/terms">Terms</a><a href="https://flowinfo.co/privacy">Privacy</a></div><span>FJP-CONF v0.1.0 · Draft</span><span>Public conformance · private implementation</span></footer>
+</div></body></html>

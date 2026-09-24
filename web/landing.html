@@ -3,1215 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FJP | Flow Judgment Protocol</title>
-<meta name="description" content="An open standard and paid resolver for auditable agent decisions. Signal, judgment, action, falsifier.">
+<title>FJP | Judgment and Control for Production AI Agents</title>
+<meta name="description" content="Flow is the judgment and control layer for production AI agents that act. Put FJP between an agent's proposed action and the tool, API, transaction, or system it can change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0c0c0c;
-    --surface: #141414;
-    --border: #222;
-    --border-accent: #333;
-    --text: #d4d4d4;
-    --text-muted: #999;
-    --text-dim: #888;
-    --accent: #22c55e;
-    --accent-dim: rgba(34,197,94,0.12);
-    --amber: #f59e0b;
-    --amber-dim: rgba(245,158,11,0.12);
-    --mono: 'IBM Plex Mono', 'Menlo', monospace;
-    --sans: 'Inter', -apple-system, sans-serif;
+    --bg:#0c0c0c; --surface:#141414; --surface2:#101010; --border:#242424;
+    --text:#d4d4d4; --muted:#9a9a9a; --dim:#707070; --white:#fff;
+    --green:#22c55e; --green-dim:rgba(34,197,94,.10); --amber:#f59e0b;
+    --red:#ef4444; --mono:'IBM Plex Mono','Menlo',monospace;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .fnav { position:sticky; top:0; z-index:100; background:rgba(12,12,12,.96); border-bottom:1px solid var(--border); backdrop-filter:blur(8px); }
+  .fnav-in { max-width:1040px; margin:0 auto; padding:14px 24px; display:flex; justify-content:space-between; align-items:center; gap:18px; }
+  .brand { color:#fff; text-decoration:none; font-weight:650; font-size:17px; letter-spacing:.1px; }
+  .navlinks { display:flex; gap:20px; align-items:center; white-space:nowrap; }
+  .navlinks a { color:var(--muted); text-decoration:none; font-size:14px; }
+  .navlinks a:hover,.navlinks a.on { color:#fff; }
+  .navlinks a.home { color:var(--green); }
+  .container { max-width:840px; margin:0 auto; padding:72px 24px 88px; }
+  .eyebrow { font-family:var(--mono); color:var(--green); font-size:12px; font-weight:600; letter-spacing:1.7px; text-transform:uppercase; margin-bottom:16px; }
+  h1 { color:#fff; font-size:44px; line-height:1.12; letter-spacing:-1.1px; font-weight:650; max-width:800px; }
+  h2 { color:#fff; font-size:24px; line-height:1.3; font-weight:620; margin-bottom:12px; }
+  h3 { color:#fff; font-size:16px; line-height:1.4; font-weight:600; margin-bottom:6px; }
+  p { margin-bottom:12px; }
+  .lede { color:var(--muted); font-size:19px; line-height:1.6; max-width:760px; margin-top:18px; }
+  .hero { margin-bottom:64px; }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+  .btn { display:inline-block; font-family:var(--mono); font-size:13px; font-weight:600; padding:11px 18px; border-radius:5px; text-decoration:none; }
+  .btn.primary { background:var(--green); color:#071008; }
+  .btn.secondary { border:1px solid #3a3a3a; color:#ddd; }
+  .btn:hover { opacity:.88; text-decoration:none; }
+  .section { padding:42px 0; border-top:1px solid var(--border); }
+  .section-intro { color:var(--muted); max-width:720px; margin-bottom:22px; }
+  .flowline { display:grid; grid-template-columns:1fr auto 1fr auto 1.2fr auto 1fr; gap:10px; align-items:stretch; margin:28px 0 8px; }
+  .flowbox { background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:18px 16px; min-height:116px; }
+  .flowbox strong { color:#fff; display:block; margin-bottom:5px; }
+  .flowbox span { color:var(--muted); font-size:13px; line-height:1.45; }
+  .flowbox.flow { border-color:rgba(34,197,94,.5); background:var(--green-dim); }
+  .arrow { color:var(--dim); align-self:center; font-family:var(--mono); }
+  .triad { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:20px; }
+  .card p { color:var(--muted); font-size:14px; margin:0; }
+  .tag { font-family:var(--mono); color:var(--green); font-size:11px; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:10px; }
+  .code { background:var(--surface2); border:1px solid var(--border); border-radius:7px; padding:18px 20px; font-family:var(--mono); font-size:13px; line-height:1.8; overflow-x:auto; white-space:pre; color:#d8d8d8; margin:16px 0; }
+  code { font-family:var(--mono); color:var(--green); background:var(--surface); border:1px solid var(--border); padding:1px 5px; border-radius:3px; font-size:13px; }
+  .decision-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; }
+  .decision { padding:16px 18px; border-radius:6px; border:1px solid var(--border); background:var(--surface); }
+  .decision b { display:block; font-family:var(--mono); letter-spacing:.7px; font-size:13px; margin-bottom:5px; }
+  .decision p { color:var(--muted); font-size:13px; margin:0; }
+  .decision.proceed b { color:var(--green); } .decision.hold b { color:var(--amber); } .decision.escalate b { color:#fff; }
+  .callout { padding:22px 24px; border:1px solid rgba(34,197,94,.25); background:var(--green-dim); border-radius:7px; margin:20px 0; }
+  .callout strong { color:#fff; }
+  .list { list-style:none; display:grid; gap:10px; margin:18px 0; }
+  .list li { color:var(--muted); padding-left:20px; position:relative; }
+  .list li::before { content:'→'; position:absolute; left:0; color:var(--green); font-family:var(--mono); }
+  .boundary { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0; }
+  .boundary .card ul { list-style:none; margin-top:10px; }
+  .boundary .card li { color:var(--muted); font-size:13px; padding:3px 0; }
+  .boundary .card li::before { content:'• '; color:var(--dim); }
+  .small { color:var(--muted); font-size:13px; }
+  .mono { font-family:var(--mono); }
+  .footer { border-top:1px solid var(--border); margin-top:44px; padding-top:22px; color:var(--dim); font-size:12px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+  .footer a { color:var(--muted); text-decoration:none; }
+  .footer-links { display:flex; gap:14px; flex-wrap:wrap; }
+  @media (max-width:760px) {
+    .container { padding-top:52px; }
+    h1 { font-size:36px; }
+    .lede { font-size:17px; }
+    .flowline { grid-template-columns:1fr; }
+    .arrow { transform:rotate(90deg); text-align:center; }
+    .triad,.decision-row,.boundary { grid-template-columns:1fr; }
+    .navlinks { overflow-x:auto; gap:14px; }
+    .navlinks a.home { display:none; }
   }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-
-  /* Header */
-  .header {
-    margin-bottom: 56px;
-  }
-  .header-top {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .header-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-  }
-  .header-mark {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-  .header h1 {
-    font-family: var(--sans);
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.25;
-    color: #fff;
-    margin-bottom: 12px;
-  }
-  .header p {
-    color: var(--text-muted);
-    font-size: 16px;
-    line-height: 1.6;
-    max-width: 580px;
-  }
-
-  /* Plain-language band */
-  .plain {
-    margin-bottom: 56px;
-    padding: 28px 28px 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--accent);
-    border-radius: 6px;
-  }
-  .plain-intro {
-    font-size: 16px;
-    color: var(--text);
-    line-height: 1.65;
-    margin-bottom: 20px;
-    max-width: 600px;
-  }
-  .plain-intro strong { color: #fff; font-weight: 600; }
-  .plain-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .plain-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .plain-q {
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 1.5;
-  }
-  .plain-arrow {
-    color: var(--text-dim);
-    font-family: var(--mono);
-    font-size: 13px;
-    flex-shrink: 0;
-  }
-  .plain-tool {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: var(--bg);
-    border: 1px solid var(--border-accent);
-    padding: 2px 8px;
-    border-radius: 3px;
-    color: var(--accent);
-    flex-shrink: 0;
-  }
-  .plain-close {
-    margin-top: 20px;
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 600px;
-  }
-  .plain-since {
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 600px;
-  }
-  .plain-since strong { color: var(--text); font-weight: 500; }
-
-  /* Sections */
-  .section {
-    margin-bottom: 48px;
-  }
-  .section-label {
-    font-family: var(--sans);
-    font-size: 20px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
-  .section p {
-    margin-bottom: 12px;
-  }
-
-  /* Two products */
-  .two-products {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 16px 0 24px;
-  }
-  @media (max-width: 600px) {
-    .two-products { grid-template-columns: 1fr; }
-  }
-  .product-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 24px;
-  }
-  .product-card.primary {
-    border-color: var(--accent);
-  }
-  .product-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .product-label.free { color: var(--text-muted); }
-  .product-label.paid { color: var(--accent); }
-  .product-card h3 {
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .product-card p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 0;
-  }
-
-  /* Why pay callout */
-  .why-pay {
-    background: var(--accent-dim);
-    border: 1px solid rgba(34,197,94,0.25);
-    border-radius: 6px;
-    padding: 24px;
-    margin: 0 0 24px;
-  }
-  .why-pay-title {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .why-pay p {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 10px;
-  }
-  .why-pay p:last-child {
-    margin-bottom: 0;
-  }
-  .why-pay strong {
-    color: #fff;
-  }
-
-  /* Record */
-  .record {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 20px 24px;
-    margin: 16px 0 24px;
-    font-family: var(--mono);
-    font-size: 13px;
-    line-height: 2;
-  }
-  .record-field {
-    display: flex;
-    gap: 12px;
-  }
-  .record-key {
-    color: var(--accent);
-    flex-shrink: 0;
-    min-width: 80px;
-  }
-  .record-val {
-    color: var(--text-muted);
-  }
-
-  /* Tools */
-  .tools {
-    margin: 12px 0;
-  }
-  .tool {
-    font-family: var(--mono);
-    font-size: 13px;
-    padding: 6px 0;
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-  }
-  .tool-name { color: var(--amber); font-weight: 600; min-width: 50px; }
-  .tool-sep { color: var(--text-dim); }
-  .tool-desc { color: var(--text-muted); }
-
-  /* Levels */
-  .levels {
-    display: grid;
-    gap: 12px;
-    margin: 16px 0;
-  }
-  .level {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    display: flex;
-    gap: 16px;
-    align-items: baseline;
-  }
-  .level-tag {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    flex-shrink: 0;
-    min-width: 24px;
-  }
-  .level-name {
-    font-weight: 600;
-    color: #fff;
-    margin-right: 8px;
-  }
-  .level-desc {
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-
-  /* Cases */
-  .case {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  .case-header {
-    padding: 14px 20px;
-    background: var(--surface);
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    border-bottom: 1px solid var(--border);
-  }
-  .case-scenario {
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-  .case-body {
-    padding: 20px;
-  }
-  .case-situation {
-    margin-bottom: 16px;
-  }
-  .case-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 6px;
-  }
-  .case-situation p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-  .case-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  @media (max-width: 600px) {
-    .case-grid { grid-template-columns: 1fr; }
-  }
-  .case-outcome {
-    padding: 14px 16px;
-    border-radius: 5px;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .case-outcome p { margin: 0; }
-  .case-outcome strong { color: #fff; }
-  .case-outcome.right {
-    background: rgba(34,197,94,0.08);
-    border: 1px solid rgba(34,197,94,0.2);
-    color: var(--text-muted);
-  }
-  .case-outcome.wrong {
-    background: rgba(239,68,68,0.06);
-    border: 1px solid rgba(239,68,68,0.15);
-    color: var(--text-muted);
-  }
-  .case-outcome-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .case-outcome.right .case-outcome-label { color: var(--accent); }
-  .case-outcome.wrong .case-outcome-label { color: #ef4444; }
-  .case-fjp {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 14px 16px;
-  }
-  .case-fjp-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
-  .case-fjp p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0;
-  }
-  .case-fjp strong { color: #fff; }
-  .value-summary {
-    background: var(--accent-dim);
-    border: 1px solid rgba(34,197,94,0.2);
-    border-radius: 6px;
-    padding: 20px 24px;
-    margin-top: 8px;
-  }
-  .value-summary p {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-  .value-summary p:last-child { margin-bottom: 0; }
-  .value-summary strong { color: #fff; }
-
-  /* Who grid */
-  .who-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  @media (max-width: 600px) {
-    .who-grid { grid-template-columns: 1fr; }
-  }
-  .who-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 18px 20px;
-  }
-  .who-icon {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .who-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-  .who-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* Buy box */
-  .buy-box {
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 28px 28px 24px;
-    margin-top: 24px;
-  }
-  .buy-heading {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    color: #111;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .buy-instructions {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 14px;
-  }
-  .email-input {
-    width: 100%;
-    font-family: var(--mono);
-    font-size: 13px;
-    padding: 10px 14px;
-    background: #f5f5f5;
-    border: 1px solid #d0d0d0;
-    border-radius: 4px;
-    color: #111;
-    margin-bottom: 10px;
-    outline: none;
-  }
-  .email-input:focus { border-color: #16a34a; }
-  .email-input::placeholder { color: #666; }
-  .tiers {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 12px 0;
-  }
-  .smoke-note {
-    font-size: 13px;
-    color: #555;
-    margin: 12px 0 8px;
-    line-height: 1.5;
-  }
-  .smoke-btn {
-    cursor: pointer;
-    width: 100%;
-    font-family: var(--mono);
-    font-size: 13px;
-    background: #fff;
-    color: #111;
-    border: 1px solid #16a34a;
-    border-radius: 5px;
-    padding: 12px 16px;
-    appearance: none;
-    -webkit-appearance: none;
-    text-align: center;
-    transition: background 0.15s, color 0.15s;
-  }
-  .smoke-btn strong { color: #16a34a; }
-  .smoke-btn:hover { background: #16a34a; color: #fff; }
-  .smoke-btn:hover strong { color: #fff; }
-  .smoke-divider {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #999;
-    text-align: center;
-    margin: 18px 0 10px;
-  }
-  .tier-btn {
-    cursor: pointer;
-    font-family: var(--mono);
-    font-size: 13px;
-    background: #111;
-    color: #ccc;
-    border: 1px solid #111;
-    border-radius: 5px;
-    padding: 12px 16px;
-    appearance: none;
-    -webkit-appearance: none;
-    text-align: center;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .tier-btn strong {
-    display: block;
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 2px;
-  }
-  .tier-btn:hover {
-    background: #16a34a;
-    border-color: #16a34a;
-  }
-  .tier-btn:hover strong { color: #fff; }
-  .buy-note {
-    font-size: 13px;
-    color: #666;
-    margin-top: 8px;
-  }
-  .buy-error {
-    font-size: 13px;
-    color: #dc2626;
-    margin-top: 6px;
-    min-height: 18px;
-  }
-  .enterprise-link {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: #555;
-    margin-top: 10px;
-    text-decoration: none;
-    border-bottom: 1px solid #bbb;
-    padding-bottom: 1px;
-    transition: color 0.15s, border-color 0.15s;
-  }
-  .enterprise-link:hover {
-    color: #16a34a;
-    border-color: #16a34a;
-    text-decoration: none;
-  }
-
-  /* CLI */
-  .cli {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    margin: 12px 0;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-muted);
-    overflow-x: auto;
-  }
-  .cli .prompt { color: var(--text-dim); }
-  .cli .cmd { color: var(--text); }
-
-  /* Inline code */
-  code {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    color: var(--accent);
-  }
-
-  /* Card */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 24px;
-  }
-  .card-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    color: var(--accent);
-  }
-  .card h3 {
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .card p {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 12px;
-    line-height: 1.6;
-  }
-
-  /* Links */
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .link-list { list-style: none; margin: 8px 0; }
-  .link-list li { padding: 4px 0; font-size: 14px; }
-  .link-list li::before { content: "\2192 "; color: var(--text-dim); }
-
-  /* CTA row */
-  .cta-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-  .cta {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: opacity 0.15s;
-  }
-  .cta:hover { text-decoration: none; opacity: 0.85; }
-  .cta-primary { background: var(--accent); color: #0c0c0c; }
-  .cta-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-accent); }
-
-  /* FAQ */
-  .faq-item {
-    border-bottom: 1px solid var(--border);
-  }
-  .faq-item:last-child {
-    border-bottom: none;
-  }
-  .faq-q {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-    background: none;
-    border: none;
-    color: #fff;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: color 0.15s;
-  }
-  .faq-q:hover { color: var(--accent); }
-  .faq-arrow {
-    font-family: var(--mono);
-    font-size: 16px;
-    color: var(--text-dim);
-    flex-shrink: 0;
-    margin-left: 16px;
-    transition: transform 0.15s;
-  }
-  .faq-q.open .faq-arrow {
-    transform: rotate(45deg);
-  }
-  .faq-a {
-    display: none;
-    padding: 0 0 16px;
-  }
-  .faq-a.open {
-    display: block;
-  }
-  .faq-a p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin: 0;
-  }
-  .faq-a a { color: var(--accent); }
-
-  /* Footer */
-  .footer {
-    margin-top: 56px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--text-dim);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  /* Site nav (links back to flowinfo.co) */
-  .fnav { position:sticky; top:0; z-index:100; border-bottom:1px solid #222; background:#0c0c0c; font-family:'Inter',-apple-system,sans-serif; }
-  .fnav-in { max-width:960px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .fnav-brand { display:flex; align-items:baseline; gap:8px; text-decoration:none; }
-  .fnav-brand:hover { text-decoration:none; }
-  .fnav-flow { font-size:17px; font-weight:600; color:#fff; letter-spacing:.2px; }
-  .fnav-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-size:14px; }
-  .fnav-links a { color:#999; text-decoration:none; }
-  .fnav-links a:hover { color:#fff; text-decoration:none; }
-  .fnav-links a.fnav-on { color:#fff; }
-  .fnav-links a.fnav-home { color:#22c55e; }
-  @media (max-width:600px) {
-    .fnav-in { padding:10px 16px; flex-wrap:nowrap; gap:14px; }
-    .fnav-links { flex-wrap:nowrap; gap:14px; font-size:13px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
-    .fnav-links::-webkit-scrollbar { display:none; }
-    .fnav-links a.fnav-home { display:none; }
-  }
-  .footer-nav { display:flex; gap:16px; flex-wrap:wrap; width:100%; margin-bottom:4px; }
-  .footer-nav a { color:#999; text-decoration:none; }
-  .footer-nav a:hover { color:#fff; }
-  #resolver, #faq { scroll-margin-top:80px; }
-
-  /* Why use FJP */
-  .why-list { list-style:none; margin:4px 0 24px; display:flex; flex-direction:column; gap:12px; }
-  .why-list li { display:flex; gap:16px; align-items:baseline; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:16px 20px; font-size:15px; line-height:1.6; color:var(--text-muted); }
-  .why-list strong { color:#fff; font-weight:600; }
-  .why-num { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--accent); flex-shrink:0; }
-  @media (max-width:600px) { .why-list li { padding:14px 16px; gap:12px; font-size:14px; } }
 </style>
 </head>
 <body>
-<nav class="fnav" aria-label="Site">
-  <div class="fnav-in">
-    <a class="fnav-brand" href="https://flowinfo.co/" aria-label="Flow home"><span class="fnav-flow">Flow</span></a>
-    <div class="fnav-links">
-      <a href="/" class="fnav-on" aria-current="page">Overview</a>
-      <a href="/conformance/v0.1/">Spec</a>
-      <a href="/quickstart">Quickstart</a>
-      <a href="/#resolver">Get the resolver</a>
-      <a class="fnav-home" href="https://flowinfo.co/">flowinfo.co &rarr;</a>
-    </div>
-  </div>
-</nav>
-<div class="container">
+<nav class="fnav" aria-label="Site"><div class="fnav-in">
+<a class="brand" href="https://flowinfo.co/">Flow</a>
+<div class="navlinks">
+<a class="on" href="/">FJP</a><a href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="#access">Access</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a>
+</div></div></nav>
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-top">
-      <div class="header-mark">Flow Judgment Protocol</div>
-    </div>
-    <h1>Why use FJP?</h1>
-    <ol class="why-list">
-      <li>
-        <span class="why-num">01</span>
-        <div><strong>Catch the costly call before it lands.</strong> Every judgment comes with a falsifier: the specific condition that would prove it wrong. Someone can check it in seconds, before the agent acts, instead of finding out after the damage is done.</div>
-      </li>
-      <li>
-        <span class="why-num">02</span>
-        <div><strong>Answer "why did the agent do that?"</strong> Every decision leaves a record of the signal, the judgment, the action and the falsifier. When a client, board or regulator asks how the agent decided, you have the answer on file.</div>
-      </li>
-      <li>
-        <span class="why-num">03</span>
-        <div><strong>Skip a year of building your own.</strong> Any team can get a model to return the right format. Judgment you can trust takes checking many calls against what actually happened, and Flow&rsquo;s judgment layer has done that on real decisions for almost a year. Building your own means starting from zero, with a team to maintain it. The resolver works the day you get access.</div>
-      </li>
-    </ol>
-    <p>Most wrong calls are cheap. The ones that matter can cost millions, and you rarely know in advance which is which. FJP is an open standard that makes any agent's decisions auditable, plus a paid resolver that returns the judgment itself.</p>
-  </div>
+<main class="container">
+<section class="hero">
+<div class="eyebrow">Flow Judgment Protocol</div>
+<h1>The judgment and control layer for production AI agents that act.</h1>
+<p class="lede">Before an agent sends, spends, changes, approves, executes, or commits, Flow determines whether the action is grounded and what should happen next.</p>
+<div class="hero-actions"><a class="btn primary" href="/quickstart">Developer quickstart</a><a class="btn secondary" href="#access">Request production access</a></div>
+</section>
 
-  <!-- =============================== -->
-  <!-- SECTION 0: In plain terms        -->
-  <!-- =============================== -->
-  <div class="plain">
-    <p class="plain-intro">Every system can find information. Very few can tell you what actually <strong>matters</strong>. Today every app and every agent makes that call on its own, and they don't agree. FJP gives them one place to ask, and one consistent answer back.</p>
-    <div class="plain-rows">
-      <div class="plain-row">
-        <span class="plain-q">Does this matter?</span>
-        <span class="plain-arrow">&rarr;</span>
-        <span class="plain-tool">judge</span>
-      </div>
-      <div class="plain-row">
-        <span class="plain-q">How much, compared to everything else?</span>
-        <span class="plain-arrow">&rarr;</span>
-        <span class="plain-tool">weigh</span>
-      </div>
-      <div class="plain-row">
-        <span class="plain-q">Which option fits best?</span>
-        <span class="plain-arrow">&rarr;</span>
-        <span class="plain-tool">match</span>
-      </div>
-    </div>
-    <p class="plain-close">Two parts: an open standard anyone can check their own system against, free to use, and a paid service that does the work. The rest of this page is the detail.</p>
-    <p class="plain-since">The judgment layer behind Flow's resolver has run inside our application for <strong>almost a year</strong>, serving a private cohort of founders, executives, and investors managing multiple billions in assets and leading companies that have defined technology from the web to AI.</p>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 1: Two products          -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Two products. One standard, one service.</div>
-
-    <div class="two-products">
-      <div class="product-card">
-        <div class="product-label free">FJP-CONF &middot; Free &middot; Apache 2.0</div>
-        <h3>The standard</h3>
-        <p>An open-source conformance suite. It validates that your agent's output is a well-formed Judgment-Grounded Record: signal, judgment, action, falsifier. It tests the shape of the decision, not the quality. Your agent does its own judgment. CONF checks the record.</p>
-      </div>
-      <div class="product-card primary">
-        <div class="product-label paid">FJP Resolver &middot; Paid</div>
-        <h3>The judgment</h3>
-        <p>A live judgment API. Signal in, Judgment-Grounded Record out. Three tools: <code>judge</code>, <code>weigh</code>, and <code>match</code>. Each returns calibrated judgment with confidence, reasoning, recommended action, and a falsifier.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 2: Why pay               -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Why pay for judgment?</div>
-
-    <p>Any LLM can return the right JSON shape. Any developer can pass CONF. The shape isn't the hard part.</p>
-
-    <p>The hard part is producing disciplined judgment, not merely returning the correct JSON structure.</p>
-
-    <div class="why-pay">
-      <div class="why-pay-title">Judgment infrastructure</div>
-      <p>The Flow Resolver produces Judgment-Grounded Records through Flow's proprietary judgment system.</p>
-      <p><strong>The implementation, models, scoring methods, calibration processes, orchestration, and underlying data remain proprietary.</strong></p>
-      <p>FJP-CONF tests only the resulting record. It does not inspect or prescribe how the judgment was produced.</p>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 3: The record            -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">The Judgment-Grounded Record</div>
-    <p>Every FJP response, whether you build your own or call the resolver, carries four components:</p>
-    <div class="record">
-      <div class="record-field"><span class="record-key">signal</span><span class="record-val">what changed, with sources</span></div>
-      <div class="record-field"><span class="record-key">judgment</span><span class="record-val">why it matters, referencing the signal</span></div>
-      <div class="record-field"><span class="record-key">action</span><span class="record-val">what should happen, referencing the judgment</span></div>
-      <div class="record-field"><span class="record-key">falsifier</span><span class="record-val">what would make this wrong, checkable</span></div>
-    </div>
-    <p style="color: var(--text-muted); font-size: 14px;">The references form a chain. The falsifier makes the decision checkable after the fact. An agent that emits this record can be audited. One that doesn't, can't.</p>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 4: Three tools           -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Three tools</div>
-    <p style="margin-bottom: 16px;">Each call returns a complete Judgment-Grounded Record.</p>
-    <div class="tools">
-      <div class="tool"><span class="tool-name">judge</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Act on this, wait, or skip? With reasoning and a falsifier.</span></div>
-      <div class="tool"><span class="tool-name">weigh</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Decisive, material, or peripheral? Ranked with justification.</span></div>
-      <div class="tool"><span class="tool-name">match</span><span class="tool-sep">&rarr;</span><span class="tool-desc">Does this fit that? With a relevance score and why.</span></div>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 5: Value cases           -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">What's a wrong judgment worth?</div>
-    <p style="margin-bottom: 24px;">Every agent makes judgment calls. The question is whether anyone can tell when those calls are wrong, and what the wrong call costs. Three illustrative scenarios from the high-stakes end:</p>
-
-    <div class="case">
-      <div class="case-header">
-        <span class="tool-name">judge</span>
-        <span class="case-scenario">Portfolio agent monitors SEC filings for insider activity</span>
-      </div>
-      <div class="case-body">
-        <div class="case-situation">
-          <div class="case-label">The signal</div>
-          <p>CFO of a portfolio company sold 40% of holdings during a quiet period. The agent needs to decide: escalate to the portfolio manager now, or file it as routine.</p>
-        </div>
-        <div class="case-grid">
-          <div class="case-outcome right">
-            <div class="case-outcome-label">Right call (escalate)</div>
-            <p>PM reviews position, hedges before the earnings miss. Stock drops 18% the following week. The hedge saved <strong>$1.8M on a $10M position</strong>.</p>
-          </div>
-          <div class="case-outcome wrong">
-            <div class="case-outcome-label">Wrong call (file as routine)</div>
-            <p>No hedge. The 18% drop hits the full position. <strong>$1.8M loss</strong> that was avoidable. No record of why the agent classified it as routine. No way to fix the logic.</p>
-          </div>
-        </div>
-        <div class="case-fjp">
-          <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>ESCALATE</code> with high confidence and a falsifier: "unless this sale is part of a pre-announced 10b5-1 plan." The falsifier is checkable in 30 seconds. The PM acts. <strong>Value created: $1.8M in avoided losses.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="case">
-      <div class="case-header">
-        <span class="tool-name">weigh</span>
-        <span class="case-scenario">Research agent triages 200 overnight signals for an analyst team</span>
-      </div>
-      <div class="case-body">
-        <div class="case-situation">
-          <div class="case-label">The signal</div>
-          <p>A well-funded competitor announced entry into the company's core market. It's one of 200 signals. The agent must rank it: decisive, material, or peripheral.</p>
-        </div>
-        <div class="case-grid">
-          <div class="case-outcome right">
-            <div class="case-outcome-label">Right call (decisive)</div>
-            <p>Analyst sees it first thing. Company accelerates product roadmap, locks two key customers before the competitor launches. <strong>$4M in protected ARR</strong>.</p>
-          </div>
-          <div class="case-outcome wrong">
-            <div class="case-outcome-label">Wrong call (peripheral)</div>
-            <p>Signal buried on page 3. Team discovers it two weeks later from a customer call. Two renewals already in competitive bake-offs. <strong>$4M in ARR at risk</strong>, six months of firefighting.</p>
-          </div>
-        </div>
-        <div class="case-fjp">
-          <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>decisive</code> with the falsifier: "unless the competitor is targeting a different segment or geography." That's verifiable from their press release. <strong>All 200 signals triaged before the analysts sit down. Replaces 4+ hours of manual review every day.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="case">
-      <div class="case-header">
-        <span class="tool-name">match</span>
-        <span class="case-scenario">Deal-sourcing agent evaluates inbound opportunities against fund thesis</span>
-      </div>
-      <div class="case-body">
-        <div class="case-situation">
-          <div class="case-label">The signal</div>
-          <p>Inbound: Series B, vertical SaaS for logistics, $30M ARR, 120% net retention. The fund's thesis is infrastructure software, $10-50M ARR, capital-efficient growth. The agent needs to decide: pass to the IC or skip.</p>
-        </div>
-        <div class="case-grid">
-          <div class="case-outcome right">
-            <div class="case-outcome-label">Right call (strong match)</div>
-            <p>IC reviews, recognizes the horizontal platform beneath the vertical packaging. Leads the round. <strong>Company 3x's in 18 months. $15M in fund returns on a $5M check.</strong></p>
-          </div>
-          <div class="case-outcome wrong">
-            <div class="case-outcome-label">Wrong call (weak match, skipped)</div>
-            <p>Agent classifies it as "vertical, not infrastructure" and skips. Competitor fund leads. <strong>$15M in missed returns</strong>. Partners find out a year later.</p>
-          </div>
-        </div>
-        <div class="case-fjp">
-          <div class="case-fjp-label">With FJP</div>
-          <p>The resolver returns <code>strong</code> relevance with the falsifier: "unless the product is a point solution with no platform extensibility." That's answerable from one technical call. The deal gets surfaced. <strong>Cost of missing it: $15M.</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="value-summary">
-      <p><strong>The math scales with the stakes:</strong> most wrong calls are cheap, but the ones that matter can run into the millions, and you rarely know in advance which is which. Checking every judgment costs far less than missing the one that matters.</p>
-      <p>And without the falsifier, you never find out the judgment was wrong until the damage is done. With it, someone can check before they act.</p>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 6: Who it's for          -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Who FJP is for</div>
-    <p style="margin-bottom: 20px;">Any agent that makes a judgment call with consequences. If the wrong call costs money, customers, or compliance, the agent needs a record that explains why it acted.</p>
-
-    <div class="who-grid">
-      <div class="who-card">
-        <div class="who-icon">$</div>
-        <div class="who-title">Financial research and portfolio agents</div>
-        <div class="who-desc">Agents that monitor markets, triage signals, flag risk, or source deals. A missed signal or a bad recommendation can cost millions. Regulators will ask how the agent decided.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">&gt;_</div>
-        <div class="who-title">Agent framework and orchestration builders</div>
-        <div class="who-desc">Teams building the tools other developers use to create agents. Their enterprise customers need auditable decision records. FJP-CONF gives them a standard to point to and the resolver gives them a judgment layer to embed.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">!</div>
-        <div class="who-title">Security and threat detection agents</div>
-        <div class="who-desc">Agents that classify threats, escalate incidents, or quarantine systems. A false negative is a breach. A false positive shuts down production. Both need an auditable record of why the agent called it that way.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">&#9878;</div>
-        <div class="who-title">Legal and compliance agents</div>
-        <div class="who-desc">Agents that review contracts, monitor regulatory changes, or flag violations. The entire value is in the judgment. If the judgment can't be examined after the fact, the agent creates liability instead of reducing it.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">&#8593;</div>
-        <div class="who-title">Sales and revenue agents</div>
-        <div class="who-desc">Agents that score leads, qualify deals, set pricing, or route opportunities. Every misjudgment is lost revenue or wasted sales time. The falsifier tells the team what signal would change the score.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">+</div>
-        <div class="who-title">Healthcare and clinical decision agents</div>
-        <div class="who-desc">Agents that triage patients, flag drug interactions, or prioritize cases. Wrong judgment has patient safety consequences. Audit trails aren't optional, they're regulated.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">&#9881;</div>
-        <div class="who-title">Supply chain and logistics agents</div>
-        <div class="who-desc">Agents that route shipments, forecast demand, or manage inventory. A bad call ripples through the entire chain. The falsifier catches it before the truck is loaded.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">&#9632;</div>
-        <div class="who-title">Enterprise AI platform teams</div>
-        <div class="who-desc">Internal teams deploying agents across departments. Procurement, legal, and the CISO all ask the same question: when the agent is wrong, how will we know? FJP is the answer they can verify.</div>
-      </div>
-    </div>
-
-    <p style="margin-top: 16px; color: var(--text-muted); font-size: 14px;">The common thread: the agent's judgment has consequences, and someone other than the builder will eventually ask how it decided. FJP makes that question answerable.</p>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 7: Get the resolver      -->
-  <!-- =============================== -->
-  <div class="section" id="resolver">
-    <div class="section-label">Get the resolver</div>
-    <p>Resolver access is by invitation. Tell us what your agents decide and we&rsquo;ll set you up.</p>
-
-    <div class="buy-box">
-      <div class="buy-heading">Contact us</div>
-      <p class="buy-instructions">MCP-native. Drops into any agent stack.</p>
-      <a href="mailto:hello@flowinfo.co?subject=FJP%20resolver%20access" class="smoke-btn" style="display:block;text-decoration:none;"><strong>hello@flowinfo.co</strong> &middot; request access</a>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 8: Conformance (free)    -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Conformance suite (free)</div>
-    <div class="card">
-      <div class="card-label">FJP-CONF &middot; Apache 2.0</div>
-      <h3>Test your agent's output</h3>
-      <p>FJP-CONF validates that your agent emits well-formed Judgment-Grounded Records. Stdlib-only Python, no dependencies. Use it whether you build your own judgment or call the resolver.</p>
-      <div class="cli">
-        <span class="prompt">$</span> <span class="cmd">pip install fjp-conformance</span><br>
-        <span class="prompt">$</span> <span class="cmd">fjp-conform record.json --level 2</span>
-      </div>
-      <p style="margin-bottom: 16px;">Four conformance levels:</p>
-      <div class="levels">
-        <div class="level"><span class="level-tag">L0</span><div><span class="level-name">Structural</span><span class="level-desc">Well-formed record, all four components present.</span></div></div>
-        <div class="level"><span class="level-tag">L1</span><div><span class="level-name">Grounded</span><span class="level-desc">Signal is attributable, reference chain resolves.</span></div></div>
-        <div class="level"><span class="level-tag">L2</span><div><span class="level-name">Falsifiable</span><span class="level-desc">Falsifier is concrete and checkable, not a catch-all.</span></div></div>
-        <div class="level"><span class="level-tag">L3</span><div><span class="level-name">Accountable</span><span class="level-desc">Records retained, re-evaluable against what actually happened.</span></div></div>
-      </div>
-      <ul class="link-list">
-        <li><a href="https://fjp.flowinfo.co/conformance/v0.1">Spec v0.1</a></li>
-        <li><a href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></li>
-        <li><a href="https://pypi.org/project/fjp-conformance/">PyPI</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 9: Quick start           -->
-  <!-- =============================== -->
-  <div class="section">
-    <div class="section-label">Quick start</div>
-    <p>Check your agent's conformance:</p>
-    <div class="cli">
-      <span class="prompt">$</span> <span class="cmd">pip install fjp-conformance</span><br>
-      <span class="prompt">$</span> <span class="cmd">fjp-conform your_record.json --level 2</span>
-    </div>
-    <p>Call the resolver:</p>
-    <div class="cli">
-      <span class="prompt">$</span> <span class="cmd">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \</span><br>
-      &nbsp;&nbsp;<span class="cmd">-H "Authorization: Bearer fjp_live_..." \</span><br>
-      &nbsp;&nbsp;<span class="cmd">-H "Content-Type: application/json" \</span><br>
-      &nbsp;&nbsp;<span class="cmd">-d '{"context": "your signal here"}'</span>
-    </div>
-  </div>
-
-  <div class="cta-row">
-    <a href="/quickstart" class="cta cta-primary">Developer quickstart</a>
-    <a href="https://github.com/flowinfosystems-index/fjp-conformance" class="cta cta-secondary">View on GitHub</a>
-    <a href="https://fjp.flowinfo.co/conformance/v0.1" class="cta cta-secondary">Read the spec</a>
-  </div>
-
-  <!-- =============================== -->
-  <!-- SECTION 10: FAQ                  -->
-  <!-- =============================== -->
-  <div class="section" id="faq" style="margin-top: 48px;">
-    <div class="section-label">Frequently asked questions</div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Can I use FJP-CONF without the resolver?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>Yes. CONF is free, open-source, and fully independent. Build your own judgment layer and validate its output against the spec. The resolver is a separate paid service for teams that want calibrated judgment on demand.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>What does the resolver see from my calls?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>The resolver processes the context you submit and returns a Judgment-Grounded Record. It sees your input and the output it produces. It does not see your internal systems, your users, or anything beyond what you include in the API call.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Does my data train the system?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>No. Your input context is not used as training data and is never shared with other customers.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>What model powers the resolver?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>The resolver is not defined by a single model. Its implementation may use different models, methods, and orchestration over time, all of which remain proprietary. The public contract is the Judgment-Grounded Record returned by the service.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>What's the latency?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>Typical judge and weigh calls return in 2 to 5 seconds. Match calls depend on the number of contexts evaluated. These are judgment calls, not lookups. The latency reflects real reasoning, not infrastructure lag.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Is there an SLA?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>Not at current scale. The resolver runs on dedicated infrastructure and has been reliable in daily production use. Formal SLAs are available for enterprise volume agreements. <a href="mailto:hello@flowinfo.co?subject=FJP%20SLA">Reach out</a> to discuss.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Can I self-host the resolver?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>No. The Flow Resolver is offered as a managed service, and its implementation remains proprietary. FJP-CONF is open-source if you want to build your own judgment system and validate its output against the public standard.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span>Is the MCP endpoint SSE or Streamable HTTP?</span>
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-a">
-        <p>Streamable HTTP (stateless). POST JSON-RPC messages to <code>https://resolve.flowinfo.co/mcp</code> with your API key as a bearer token. Standard MCP lifecycle: initialize, tools/list, tools/call. No SSE stream, no session state.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    <div class="footer-nav">
-      <a href="https://flowinfo.co/">Flow</a>
-      <a href="https://flowinfo.co/about">About</a>
-      <a href="https://flowinfo.co/emailbrief">Email Brief</a>
-      <a href="https://flowinfo.co/terms">Terms</a>
-      <a href="https://flowinfo.co/privacy">Privacy</a>
-      <a href="https://flowinfo.co/about#contact">Contact</a>
-    </div>
-    <span>Flow Information Systems &middot; <a href="https://flowinfo.co">flowinfo.co</a></span>
-    <span>Apache 2.0 (conformance) &middot; Proprietary (resolver)</span>
-  </div>
-
+<section class="section">
+<h2>Put Flow before the action.</h2>
+<p class="section-intro">Models can generate plans and tool calls. The risk begins when those outputs can change the world. FJP sits at that boundary.</p>
+<div class="flowline">
+  <div class="flowbox"><strong>Agent</strong><span>Reasons, plans, chooses a tool or proposes an action.</span></div>
+  <div class="arrow">→</div>
+  <div class="flowbox"><strong>Proposed action</strong><span>Send, pay, update, delete, approve, deploy, execute.</span></div>
+  <div class="arrow">→</div>
+  <div class="flowbox flow"><strong>Flow / FJP</strong><span>Applies proprietary judgment before the action is allowed through.</span></div>
+  <div class="arrow">→</div>
+  <div class="flowbox"><strong>Action</strong><span>The application proceeds, holds, or escalates.</span></div>
 </div>
+<div class="decision-row">
+  <div class="decision proceed"><b>PROCEED</b><p>The action is sufficiently grounded to continue.</p></div>
+  <div class="decision hold"><b>HOLD</b><p>Do not execute yet. A material condition is unresolved.</p></div>
+  <div class="decision escalate"><b>ESCALATE</b><p>Human or higher-authority review is required.</p></div>
+</div>
+</section>
 
-<script>
-function toggleFaq(btn) {
-  var answer = btn.nextElementSibling;
-  var isOpen = btn.classList.contains('open');
-  btn.classList.toggle('open');
-  answer.classList.toggle('open');
-}
+<section class="section">
+<h2>What the developer gets back.</h2>
+<p class="section-intro">Every FJP judgment externalizes the basis for the control decision, not Flow's internal method.</p>
+<div class="code">{
+  "signal": "Customer requests a $12,000 refund",
+  "judgment": {
+    "assessment": "Refund exceeds autonomous authority",
+    "confidence": 0.96
+  },
+  "action": {
+    "directive": "ESCALATE for manager approval"
+  },
+  "falsifier": {
+    "condition": "Authorized manager approval is present",
+    "checkable": true
+  },
+  "request_id": "req_..."
+}</div>
+<p class="small">Your application decides how to enforce the returned directive. FJP provides the judgment, evidence chain, confidence, recommended action, and a condition that can overturn the call.</p>
+</section>
 
-</script>
-</body>
-</html>
+<section class="section">
+<h2>Your models. Your billing. Flow's judgment.</h2>
+<p class="section-intro">Flow is not an LLM reseller. Production customers use customer-owned inference: their provider account, cloud account, or inference gateway pays the model bill directly.</p>
+<div class="boundary">
+  <div class="card">
+    <div class="tag">Customer owns</div><h3>Inference and application</h3>
+    <ul><li>OpenAI, Anthropic, Google, Bedrock, Azure, local or private models</li><li>Provider billing and token spend</li><li>Agent code, tools, policies and business systems</li></ul>
+  </div>
+  <div class="card">
+    <div class="tag">Flow owns</div><h3>Judgment and control</h3>
+    <ul><li>Proprietary FJP implementation</li><li>Judgment methods, calibration and orchestration</li><li>Control response and Judgment-Grounded Record</li></ul>
+  </div>
+</div>
+<div class="callout"><strong>No model subsidy.</strong> Third-party model usage is not included in Flow pricing and is billed by the customer's provider. Flow charges for its proprietary judgment/control service.</div>
+</section>
+
+<section class="section">
+<h2>Closed intelligence. Open contract.</h2>
+<p class="section-intro">FJP-CONF makes the output inspectable without giving away the machinery that produced it.</p>
+<div class="triad">
+  <div class="card"><div class="tag">Public</div><h3>FJP-CONF</h3><p>Vendor-neutral conformance for the observable record: signal, judgment, action, falsifier.</p></div>
+  <div class="card"><div class="tag">Proprietary</div><h3>Flow judgment engine</h3><p>Prompts, scoring, calibration, evaluators, orchestration, heuristics, methods and internal data remain private.</p></div>
+  <div class="card"><div class="tag">Operational</div><h3>ExperTrace</h3><p>The record of what the agent proposed, what Flow judged, what action followed, and what happened afterward.</p></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Built for consequential agent actions.</h2>
+<p class="section-intro">FJP is not for every model call. It is for the point where software gets authority.</p>
+<ul class="list">
+<li>Financial transactions, refunds, pricing changes and approvals</li>
+<li>External customer, partner or public communications</li>
+<li>Production deployments, configuration changes and security actions</li>
+<li>Record modification, deletion, access grants and workflow commitments</li>
+<li>Compliance, legal, underwriting and other approval paths</li>
+<li>Any agent action where a wrong call creates material cost, liability or trust risk</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>One control point. Multiple ways to integrate.</h2>
+<p class="section-intro">Use the REST endpoint directly or expose FJP as an MCP tool inside an agent framework.</p>
+<div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge   -H "Authorization: Bearer fjp_live_..."   -H "Content-Type: application/json"   -d '{"context":"Proposed action: issue a $12,000 refund. Autonomous authority: $5,000."}'</div>
+<div class="triad">
+  <div class="card"><div class="tag">Primary</div><h3><code>judge</code></h3><p>Should the agent act, wait, skip, or escalate? Returns reasoning, confidence, action and falsifier.</p></div>
+  <div class="card"><div class="tag">Supporting</div><h3><code>weigh</code></h3><p>Ranks competing signals or considerations when the agent needs to know what matters most.</p></div>
+  <div class="card"><div class="tag">Supporting</div><h3><code>match</code></h3><p>Tests fit against a stated context, policy, pattern or decision frame.</p></div>
+</div>
+</section>
+
+<section class="section" id="access">
+<h2>Production access</h2>
+<p class="section-intro">Tell us what your agents can do, what actions need control, and how you run inference. We will configure the FJP boundary around those actions.</p>
+<div class="callout"><strong>MCP-native. REST API. Customer-funded inference. Proprietary Flow judgment.</strong></div>
+<div class="hero-actions"><a class="btn primary" href="mailto:hello@flowinfo.co?subject=FJP%20production%20access">Request access</a><a class="btn secondary" href="/quickstart">Read the quickstart</a></div>
+</section>
+
+<div class="footer">
+<div class="footer-links"><a href="https://flowinfo.co/">Flow</a><a href="https://flowinfo.co/about">About</a><a href="https://flowinfo.co/terms">Terms</a><a href="https://flowinfo.co/privacy">Privacy</a><a href="mailto:hello@flowinfo.co">Contact</a></div>
+<span>FJP-CONF: public standard · Flow resolver: proprietary</span>
+</div>
+</main>
+</body></html>
