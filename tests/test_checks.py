@@ -100,3 +100,14 @@ def test_l3_adapter():
 
     res = checks.check_l3(A(), rec["record_id"])
     assert all(r.passed for r in res)
+
+
+def test_citation_parenthetical_does_not_make_falsifier_concrete():
+    # "(per X)" is attribution, not a quantity; it must not bypass the L2 filter.
+    assert _is_vacuous("Conditions may change. (per FJP signal architecture)")
+    assert _is_vacuous("Things may shift (per Reuters)")
+
+
+def test_real_per_quantity_still_concrete():
+    assert not _is_vacuous("Churn rises above 2 per month")
+    assert not _is_vacuous("Cost per unit falls below the Q3 contract price")

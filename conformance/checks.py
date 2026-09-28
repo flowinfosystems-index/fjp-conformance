@@ -7,6 +7,7 @@ if every check at that level (and below) passes. Stdlib only.
 from __future__ import annotations
 
 import datetime as _dt
+import re
 from typing import List, NamedTuple
 
 from . import schema
@@ -123,8 +124,15 @@ def check_l1(record: dict) -> List[Result]:
 # L2 — falsifiable
 # ----------------------------------------------------------------------------- #
 
+# Source-citation parentheticals such as "(per Reuters)" or "(per FJP signal
+# architecture)" attribute a claim; they do not make it checkable. Strip them
+# before the concreteness test so a citation's "per " cannot satisfy the
+# "per " quantity marker (e.g. "Conditions may change. (per X)" is still vacuous).
+_CITATION_PAREN = re.compile(r"\(\s*per\s[^)]*\)", re.IGNORECASE)
+
+
 def _is_vacuous(condition: str) -> bool:
-    c = condition.lower()
+    c = _CITATION_PAREN.sub(" ", condition).lower()
     if any(bad in c for bad in schema.VACUITY_BLOCKLIST):
         return True
     has_marker = any(m in c for m in schema.CONCRETENESS_MARKERS)
