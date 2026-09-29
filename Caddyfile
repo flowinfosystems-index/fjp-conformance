@@ -5,6 +5,7 @@
 #   /success             → post-purchase thank you page
 #   /conformance/v0.1/   → conformance spec page
 #   /quickstart          → developer quickstart page
+#   /abe                 → Abe (FJP Gate) developer page; /gate redirects here
 
 {
 	auto_https off
@@ -24,6 +25,16 @@
 
 	@quickstart path /quickstart /quickstart/
 	rewrite @quickstart /quickstart.html
+
+	@abe path /abe /abe/
+	rewrite @abe /abe.html
+
+	@gate path /gate /gate/
+	redir @gate /abe 301
+
+	# Spec lives in the abe repo; keep a stable URL for it.
+	@abe_spec path /abe/spec /abe/spec/ /gate/spec /gate/spec/
+	redir @abe_spec https://github.com/flowinfosystems-index/abe/blob/main/SPEC.md 302
 
 	file_server
 
