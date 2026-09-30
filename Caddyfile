@@ -6,6 +6,7 @@
 #   /conformance/v0.1/   → conformance spec page
 #   /quickstart          → developer quickstart page
 #   /abe                 → Abe (FJP Gate) developer page; /gate redirects here
+#   /credits             → buy credit packs + lost-key reset
 
 {
 	auto_https off
@@ -25,6 +26,9 @@
 
 	@quickstart path /quickstart /quickstart/
 	rewrite @quickstart /quickstart.html
+
+	@credits path /credits /credits/
+	rewrite @credits /credits.html
 
 	@abe path /abe /abe/
 	rewrite @abe /abe.html

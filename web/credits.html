@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quickstart | FJP</title><meta name="description" content="Put Flow Judgment Protocol in front of one consequential agent action, enforce the judgment, and report the outcome to close the resolution loop."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet"><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flow Credits | FJP</title><meta name="description" content="Buy Flow judgment credits, get your FJP API key, or reset a lost key. From $0.05 per judgment; only escalations use credits."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet"><style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0b0b0b;--surface:#131313;--surface2:#101010;--border:#252525;--border2:#343434;--text:#d7d7d7;--muted:#999;--dim:#707070;--white:#fff;--green:#22c55e;--green2:#16a34a;--green-dim:rgba(34,197,94,.10);--amber:#f59e0b;--red:#ef4444;--mono:'IBM Plex Mono','Menlo','Consolas',monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
@@ -20,47 +20,87 @@ a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
 .specwrap{max-width:760px;margin:0 auto;padding:52px 24px 80px}.specwrap header{border-bottom:2px solid #ddd;padding-bottom:16px;margin-bottom:34px}.specwrap h1{font-family:var(--mono);font-size:21px;letter-spacing:.2px;color:#111}.specpage{background:#faf9f7;color:#222}.specpage .fnav{background:#faf9f7;border-color:#e3e1dc}.specpage .brand,.specpage .navlinks a.on{color:#111}.specpage .navlinks a{color:#777}.specpage .navlinks a:hover{color:#111}.specpage h2{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#888;margin:30px 0 8px}.specpage p,.specpage li{color:#333}.specpage code{background:#efede9;border-color:#e2dfd8;color:#111}.spec-meta{font-size:11px;color:#888;font-family:var(--mono)}.spec-table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:12px}.spec-table th,.spec-table td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid #e5e2dc}.spec-table th{text-transform:uppercase;letter-spacing:.5px;color:#888;font-size:10px}.lvl{border-left:2px solid #222;padding-left:15px;margin:12px 0;color:#444}.lvl b{display:block;color:#222}.spec-callout{background:#f1efe9;border:1px solid #e1ddd4;border-radius:4px;padding:16px;margin:16px 0;font-size:13px}.specpage .footer{border-color:#e5e2dc;color:#aaa}.specpage .footer a{color:#777}
 .worked{background:var(--surface);border:1px solid rgba(245,158,11,.35);border-radius:8px;padding:22px;margin:20px 0}.worked .label{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}.worked h3{font-size:18px;color:#fff;margin-bottom:10px}.worked p{font-size:14px;color:var(--muted);margin-bottom:10px}.worked .chain{font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--text);background:#0f0f0f;border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin:14px 0}.worked strong{color:#fff}
 @media(max-width:760px){.container{padding-top:52px}h1{font-size:38px}.lede{font-size:18px}.proof-strip,.case-grid,.two,.postures{grid-template-columns:1fr}.agent-map{grid-template-columns:1fr}.agent-map .arrow{transform:rotate(90deg)}.navlinks{overflow-x:auto;gap:14px}.navlinks a.home{display:none}.case-facts{grid-template-columns:1fr 1fr}.loop{grid-template-columns:1fr}.loop .arrow{transform:rotate(90deg)}.loopbox{min-width:0}.record-row{grid-template-columns:1fr}.specwrap{padding-top:34px}}
+
+.dec{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.decbox{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px}.decbox b{font-family:var(--mono);display:block;margin-bottom:6px;font-size:15px}.decbox p{font-size:13px;color:var(--muted);margin:0}.decbox.act b{color:var(--green)}.decbox.block b{color:var(--red)}.decbox.esc b{color:var(--amber)}
+.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}.tbl th,.tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top}.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:500}.tbl td{color:var(--muted)}.tbl td:first-child{color:#fff;white-space:nowrap}
+.two>.card,.dec>.decbox{min-width:0}
+@media(max-width:760px){.dec{grid-template-columns:1fr}.tbl{font-size:13px}.tbl td:first-child{white-space:normal}}
+.packs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.pack{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.pack:hover{border-color:var(--border2)}.pack[aria-pressed="true"]{border-color:rgba(34,197,94,.7);background:var(--green-dim)}
+.pack .nm{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--green)}
+.pack .pr{font-family:var(--mono);font-size:26px;color:#fff;font-weight:600;line-height:1.1}
+.pack .cr{font-size:13px;color:#ddd}.pack .pj{font-size:12px;color:var(--muted)}
+.form{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.form input{flex:1 1 260px;min-width:0;background:var(--surface2);border:1px solid var(--border2);border-radius:5px;padding:11px 12px;color:#fff;font:14px var(--sans)}
+.form input:focus{outline:2px solid rgba(34,197,94,.5);outline-offset:1px}
+button.btn{border:0;cursor:pointer}button.btn.secondary{background:transparent;border:1px solid var(--border2)}button.btn[disabled]{opacity:.55;cursor:wait}
+.msg{font-size:14px;margin-top:6px;min-height:22px}.msg.ok{color:var(--green)}.msg.err{color:#f87171}
+@media(max-width:760px){.packs{grid-template-columns:1fr 1fr}}
 </style></head><body>
-<nav class="fnav" aria-label="Site"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="navlinks"><a href="/">FJP</a><a href="/abe">Abe</a><a class="on" href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="/credits">Credits</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav><main class="container">
-<section class="hero"><div class="eyebrow">FJP Quickstart</div><h1>Put judgment in front of one agent action.</h1><p class="lede">Start where the risk starts: immediately before a production agent can change something that matters.</p></section>
+<nav class="fnav" aria-label="Site"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="navlinks"><a href="/">FJP</a><a href="/abe">Abe</a><a href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a class="on" href="/credits">Credits</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav><main class="container">
+<section class="hero"><div class="eyebrow">Flow judgment credits</div><h1>Get a Flow key. Add credits.</h1><p class="lede">One credit is one Flow judgment. With Abe in front of your agent, only the actions it escalates reach Flow, so most actions cost nothing.</p></section>
 
-<section class="section"><h2>What you are connecting to.</h2><p class="section-intro">FJP is the productization of Flow's live judgment loop. For a year, that loop has processed millions of judgments, actions and resolutions: determine what matters, resolve the action, observe the outcome, then score and re-evaluate the original call.</p><div class="loop"><div class="loopbox"><b>Observe</b><span>Context, signals, tool state.</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Judge</b><span>What matters and why?</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Act</b><span>What should happen?</span></div><div class="arrow">→</div><div class="loopbox"><b>Resolve</b><span>What actually happened?</span></div></div><div class="note"><strong>For agents:</strong> the loop sits between proposed action and execution. Your application remains the enforcement point.</div></section>
+<section class="section" id="buy"><h2>1. Pick a pack</h2>
+<div class="packs" role="group" aria-label="Credit packs">
+<button type="button" class="pack" data-tier="smoke" aria-pressed="false"><span class="nm">Try it</span><span class="pr">$1</span><span class="cr">20 judgments</span><span class="pj">$0.05 each</span></button>
+<button type="button" class="pack" data-tier="starter" aria-pressed="true"><span class="nm">Starter</span><span class="pr">$25</span><span class="cr">500 judgments</span><span class="pj">$0.05 each</span></button>
+<button type="button" class="pack" data-tier="scale" aria-pressed="false"><span class="nm">Scale</span><span class="pr">$250</span><span class="cr">6,250 judgments</span><span class="pj">$0.04 each</span></button>
+<button type="button" class="pack" data-tier="volume" aria-pressed="false"><span class="nm">Volume</span><span class="pr">$1,000</span><span class="cr">33,333 judgments</span><span class="pj">$0.03 each</span></button>
+</div>
+<h2 style="margin-top:28px">2. Your email</h2>
+<p class="section-intro">New email: we create your account and email your API key after payment. Existing email: credits are added to the key you already have.</p>
+<form class="form" id="buyForm" novalidate><label for="buyEmail" class="small" style="position:absolute;left:-9999px">Email</label><input id="buyEmail" type="email" autocomplete="email" placeholder="you@company.com" required><button class="btn primary" type="submit" id="buyBtn">Continue to payment</button></form>
+<div class="msg" id="buyMsg" role="status" aria-live="polite"></div>
+<p class="small">Secure checkout by Stripe. Credits don't expire. Typical cost with Abe screening: about $5 per 1,000 agent actions.</p>
+</section>
 
-<section class="section"><h2>What the full cycle looks like.</h2><p class="section-intro">FJP is not another tool that performs the task. It resolves whether the proposed action is justified by the information that matters.</p><div class="worked"><div class="label">Illustrative example</div><h3>Executive assistant agent: hotel booking</h3><p>An agent finds a Chicago hotel that is 30% cheaper, available and within policy, but non-refundable. It is ready to book.</p><p>Before committing the money, it asks Flow whether to act. Flow determines that three surrounding signals materially change the decision: approaching hotel labor disruption, an unexpected leadership change at the customer that increases rescheduling risk, and a major medical conference that would make a later rebooking more expensive.</p><div class="chain">AGENT: book non-refundable<br>↓<br>FJP: ACT, BUT CHANGE THE BOOKING<br>↓<br>book refundable · +$140<br>↓<br>customer moves meeting four days later<br>↓<br>cancel with no loss · ~$1,100 avoided<br>↓<br>outcome resolves the original judgment</div><p><strong>The agent knew how to book. Flow determined what mattered before it acted.</strong></p><p class="small">Illustrative example, not a historical customer outcome. Flow's internal methods for producing the judgment remain proprietary.</p></div></section>
+<section class="section" id="lost-key"><h2>Lost your key?</h2><p class="section-intro">Enter the email you bought with. We'll email a one-time link to reset it. Your current key keeps working until you confirm, and your credits stay on the account.</p>
+<form class="form" id="resetForm" novalidate><label for="resetEmail" class="small" style="position:absolute;left:-9999px">Email</label><input id="resetEmail" type="email" autocomplete="email" placeholder="you@company.com" required><button class="btn secondary" type="submit" id="resetBtn">Email me a reset link</button></form>
+<div class="msg" id="resetMsg" role="status" aria-live="polite"></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">01</span><span class="step-title">Choose the action boundary</span></div><p>Pick one action where a wrong call has a meaningful cost. Examples: issue a refund, send an external communication, commit capital, delete a record, deploy code, approve a claim, change access, or execute a transaction.</p><div class="code">agent reasoning
-    ↓
-proposed consequential action
-    ↓
-FJP
-    ↓
-application enforcement
-    ↓
-execution</div></section>
+<section class="section"><h2>Enterprise</h2><p class="section-intro">Annual contracts from $25k: volume pricing, SLA, 7-year record retention, audit export, SSO and private model routing.</p><div class="hero-actions"><a class="btn secondary" href="mailto:hello@flowinfo.co?subject=FJP%20enterprise">Talk to us</a></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">02</span><span class="step-title">Get your Flow key</span></div><p>Buy a credit pack at <a href="/credits">fjp.flowinfo.co/credits</a>. Your key, beginning with <code>fjp_live_</code>, is emailed after payment. One credit is one judgment, from $0.05.</p><div class="hero-actions"><a class="btn primary" href="/credits">Get a key</a><a class="btn secondary" href="/credits#lost-key">Lost your key?</a></div></section>
-
-<section class="step"><div class="step-head"><span class="step-num">03</span><span class="step-title">Send the proposed action and its decision context</span></div><p>The resolver needs the information that should govern the action: what the agent wants to do, the relevant state, constraints, authority, evidence and material counter-signals.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \
-  -H "Authorization: Bearer fjp_live_..." \
-  -H "Content-Type: application/json" \
-  -d '{
-    "context": "Agent proposes a $12,000 refund. Autonomous authority: $5,000. Manager approval: absent. Customer history: 3 prior refunds in 30 days."
-  }'</div><div class="note"><strong>Do not send more data just because it exists.</strong> Send the context that can materially change the action. FJP's role is to resolve importance, not reward payload size.</div></section>
-
-<section class="step"><div class="step-head"><span class="step-num">04</span><span class="step-title">Use the returned judgment as the control decision</span></div><p>Every response carries the observable decision chain. The application's enforcement policy decides how that directive maps to execution.</p><div class="record"><div class="record-row"><span class="record-key">signal</span><span class="record-val">What changed or what condition is material</span></div><div class="record-row"><span class="record-key">judgment</span><span class="record-val">Why it matters, with confidence</span></div><div class="record-row"><span class="record-key">action</span><span class="record-val">What should happen next</span></div><div class="record-row"><span class="record-key">falsifier</span><span class="record-val">A concrete, checkable condition that would reverse the call</span></div><div class="record-row"><span class="record-key">request_id</span><span class="record-val">Identifier for the later outcome</span></div></div><div class="postures"><div class="posture go"><b>PROCEED</b><p>Execute when the returned action supports continuation.</p></div><div class="posture hold"><b>HOLD</b><p>Do not execute while a material condition is unresolved.</p></div><div class="posture esc"><b>ESCALATE</b><p>Route to the person or authority required by policy.</p></div></div></section>
-
-<section class="step"><div class="step-head"><span class="step-num">05</span><span class="step-title">Report what happened</span></div><p>The outcome is part of the product. When the relevant result becomes observable, associate it with the original <code>request_id</code>. <code>outcome</code> is <code>CORRECT</code>, <code>WRONG</code> or <code>PARTIAL</code>. Reporting is free.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/outcome \
-  -H "Authorization: Bearer fjp_live_..." \
-  -H "Content-Type: application/json" \
-  -d '{"request_id":"&lt;request_id from the judge response&gt;","outcome":"CORRECT","notes":"manager approval was required and obtained"}'</div><p class="small">That closes the loop: judgment → action → outcome → resolution. Flow's internal evaluation and calibration methods remain proprietary.</p></section>
-
-<section class="step"><div class="step-head"><span class="step-num">06</span><span class="step-title">Connect through MCP when that is easier</span></div><p>If your agent framework supports MCP, point it at the existing resolver endpoint. The FJP tools are exposed through standard MCP tool calls.</p><div class="code">endpoint: https://resolve.flowinfo.co/mcp
-auth:     Authorization: Bearer fjp_live_...</div><p>The existing tools are <code>judge</code>, <code>weigh</code>, and <code>match</code>. The agent can call them the same way it calls other MCP tools.</p></section>
-
-<section class="step"><div class="step-head"><span class="step-num">07</span><span class="step-title">Keep model inference on your account</span></div><p>Flow's commercial role is the judgment/control layer, not model resale. Customer model usage should remain on the customer's provider, cloud account, private inference stack or gateway, with those model fees billed directly to the customer.</p><div class="callout"><strong>Your models. Your billing. Flow's judgment.</strong></div></section>
-
-<section class="step"><div class="step-head"><span class="step-num">08</span><span class="step-title">Use FJP-CONF when you need the public contract</span></div><p>FJP-CONF tests whether the observable record is well-formed, grounded, falsifiable and accountable. It does not inspect or reveal Flow's judgment method.</p><div class="code"><span style="color:#777">$</span> pip install fjp-conformance
-<span style="color:#777">$</span> fjp-conform record.json --level 2</div><div class="hero-actions"><a class="btn secondary" href="/conformance/v0.1/">Read the spec</a><a class="btn secondary" href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></div></section>
-
-<footer class="footer"><div class="footer-links"><a href="/">FJP</a><a href="/conformance/v0.1/">Spec</a><a href="https://flowinfo.co/">Flow</a><a href="mailto:hello@flowinfo.co">Contact</a></div><span>Judgment → action → outcome → resolution</span></footer>
-</main></body></html>
+<footer class="footer"><div class="footer-links"><a href="/">FJP</a><a href="/abe">Abe</a><a href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="mailto:hello@flowinfo.co">Contact</a></div><span>Payments by Stripe</span></footer>
+</main>
+<script>
+(function(){
+  var API = "https://resolve.flowinfo.co/api/v1";
+  var tier = "starter";
+  var packs = document.querySelectorAll(".pack");
+  packs.forEach(function(p){ p.addEventListener("click", function(){
+    tier = p.getAttribute("data-tier");
+    packs.forEach(function(q){ q.setAttribute("aria-pressed", q === p ? "true" : "false"); });
+  }); });
+  function valid(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function say(el, text, ok){ el.textContent = text; el.className = "msg " + (ok ? "ok" : "err"); }
+  function post(path, body){
+    return fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { status: r.status, body: j }; }); });
+  }
+  document.getElementById("buyForm").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var email = document.getElementById("buyEmail").value.trim(), msg = document.getElementById("buyMsg"), btn = document.getElementById("buyBtn");
+    if (!valid(email)) { say(msg, "Enter a valid email address.", false); return; }
+    btn.disabled = true; say(msg, "Opening secure checkout...", true);
+    post("/checkout/session", { email: email, tier: tier }).then(function(r){
+      if (r.status === 200 && r.body.checkout_url && r.body.checkout_url.indexOf("https://checkout.stripe.com/") === 0) { window.location.href = r.body.checkout_url; return; }
+      btn.disabled = false;
+      say(msg, r.status === 429 ? "Too many attempts. Please try again in an hour." : "Checkout isn't available right now. Email hello@flowinfo.co and we'll help.", false);
+    }).catch(function(){ btn.disabled = false; say(msg, "Couldn't reach checkout. Check your connection and try again.", false); });
+  });
+  document.getElementById("resetForm").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var email = document.getElementById("resetEmail").value.trim(), msg = document.getElementById("resetMsg"), btn = document.getElementById("resetBtn");
+    if (!valid(email)) { say(msg, "Enter a valid email address.", false); return; }
+    btn.disabled = true;
+    post("/keys/reset", { email: email }).then(function(r){
+      btn.disabled = false;
+      if (r.status === 200) say(msg, r.body.message || "If an account exists for that email, a reset link is on its way.", true);
+      else say(msg, r.status === 429 ? "Too many requests. Please try again in an hour." : "Couldn't send the link right now. Email hello@flowinfo.co.", false);
+    }).catch(function(){ btn.disabled = false; say(msg, "Couldn't reach the server. Check your connection and try again.", false); });
+  });
+  if (location.hash === "#lost-key") { var i = document.getElementById("resetEmail"); if (i) i.focus(); }
+})();
+</script>
+</body></html>

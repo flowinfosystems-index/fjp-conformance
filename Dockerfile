@@ -14,6 +14,7 @@ COPY web/quickstart.html /srv/quickstart.html
 
 # Abe (FJP Gate) developer page
 COPY web/abe.html /srv/abe.html
+COPY web/credits.html /srv/credits.html
 
 # Spec page at canonical path
 COPY web/index.html /srv/conformance/v0.1/index.html
