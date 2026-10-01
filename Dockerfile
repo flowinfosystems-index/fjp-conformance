@@ -16,6 +16,11 @@ COPY web/quickstart.html /srv/quickstart.html
 COPY web/abe.html /srv/abe.html
 COPY web/credits.html /srv/credits.html
 
+# Crawler and LLM discovery files
+COPY web/robots.txt /srv/robots.txt
+COPY web/llms.txt /srv/llms.txt
+COPY web/sitemap.xml /srv/sitemap.xml
+
 # Spec page at canonical path
 COPY web/index.html /srv/conformance/v0.1/index.html
 

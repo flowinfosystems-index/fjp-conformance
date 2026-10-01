@@ -7,6 +7,7 @@
 #   /quickstart          → developer quickstart page
 #   /abe                 → Abe (FJP Gate) developer page; /gate redirects here
 #   /credits             → buy credit packs + lost-key reset
+#   /robots.txt, /llms.txt, /sitemap.xml → crawler and LLM discovery
 
 {
 	auto_https off
@@ -39,6 +40,9 @@
 	# Spec lives in the abe repo; keep a stable URL for it.
 	@abe_spec path /abe/spec /abe/spec/ /gate/spec /gate/spec/
 	redir @abe_spec https://github.com/flowinfosystems-index/abe/blob/main/SPEC.md 302
+
+	@llms path /llms.txt
+	header @llms Content-Type "text/plain; charset=utf-8"
 
 	file_server
 

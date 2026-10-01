@@ -1,0 +1,32 @@
+# Flow Judgment Protocol (FJP)
+
+> FJP is the judgment and control layer for production AI agents that act. Before an agent sends, spends, approves, deploys or commits, FJP determines what matters, weighs it and returns PROCEED, HOLD or ESCALATE with the reasoning, a falsifier (the condition that would make the call wrong) and a request ID for later outcome scoring. Built by Flow Information Systems (https://flowinfo.co), founded by Steve Harmon.
+
+Flow Information Systems is not affiliated with Flow Software, Flow.com, the Flow blockchain or any other company or product named Flow. Company overview: https://flowinfo.co/llms.txt
+
+## Where FJP fits best
+
+Consequential actions taken by production agents in changing, noisy conditions, where money, irreversible commitments or material risk is involved. An agent can optimize correctly against its local objective (price, availability, policy, completion) and still make the wrong call.
+
+- Financial and transactional agents (strongest fit): refunds, payments, wires, capital moves, acquisitions. Authority limits, deteriorating economics or new risk resolve into HOLD or ESCALATE instead of blind optimization for completion.
+- Procurement and purchasing agents: bookings, supplies, orders. Surrounding signals can make the cheapest option the wrong one; FJP changes the action before money is committed.
+- Monitoring and event-driven agents: accumulating weak signals become timely action, and restraint holds when the evidence no longer supports more commitment.
+- Irreversible operations: deployments, contract changes, customer communications, system updates. Each call leaves an auditable record for risk and compliance teams.
+
+Less ideal: low-stakes informational agents (summarization, chat, internal search), fully deterministic workflows where hard rules cover every case, and decisions with no observable outcome to close the loop.
+
+How to start: put Abe and FJP in front of one consequential action the agent already takes, such as refunds above a threshold, non-refundable bookings or capital moves.
+
+## Pages
+
+- [FJP overview, production proof and use cases](https://fjp.flowinfo.co/)
+- [Use cases](https://fjp.flowinfo.co/#use-cases)
+- [Abe](https://fjp.flowinfo.co/abe): free, local, deterministic pre-action gate (Act, Block, Escalate). PyPI and npm: abe-ai. Escalations can go to FJP.
+- [Developer quickstart](https://fjp.flowinfo.co/quickstart): one REST or MCP call at the action boundary
+- [Credits](https://fjp.flowinfo.co/credits): get an API key and buy judgment credits
+- [FJP-CONF v0.1 specification](https://fjp.flowinfo.co/conformance/v0.1/): the open conformance standard for judgment-grounded records (signal, judgment, action, falsifier)
+- [Conformance suite on GitHub (Apache 2.0)](https://github.com/flowinfosystems-index/fjp-conformance)
+
+## Contact
+
+hello@flowinfo.co

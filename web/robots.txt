@@ -1,0 +1,24 @@
+# fjp.flowinfo.co: Flow Judgment Protocol (FJP), by Flow Information Systems
+# Main site: https://flowinfo.co
+# Summary for LLMs: https://fjp.flowinfo.co/llms.txt
+
+User-agent: *
+Allow: /
+Disallow: /success
+
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+Disallow: /success
+
+Sitemap: https://fjp.flowinfo.co/sitemap.xml
