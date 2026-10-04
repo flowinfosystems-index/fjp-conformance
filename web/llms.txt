@@ -23,7 +23,8 @@ How to start: put Abe and FJP in front of one consequential action the agent alr
 - [Use cases](https://fjp.flowinfo.co/#use-cases)
 - [Abe](https://fjp.flowinfo.co/abe): free, local, deterministic pre-action gate (Act, Block, Escalate). PyPI and npm: abe-ai. Escalations can go to FJP.
 - [Developer quickstart](https://fjp.flowinfo.co/quickstart): one REST or MCP call at the action boundary
-- [Credits](https://fjp.flowinfo.co/credits): get an API key and buy judgment credits
+- [Credits](https://fjp.flowinfo.co/credits): self-serve API keys and judgment credits. One credit is one judgment: $1 for 20, $25 for 500, $250 for 6,250, $1,000 for 33,333. Credits do not expire; lost keys reset by email. Enterprise from $25,000 per year.
+- [ExperTrace](https://flowinfo.co/expertrace): report outcomes against the request ID (CORRECT, WRONG or PARTIAL, free) and ExperTrace scores each judgment against what actually happened
 - [FJP-CONF v0.1 specification](https://fjp.flowinfo.co/conformance/v0.1/): the open conformance standard for judgment-grounded records (signal, judgment, action, falsifier)
 - [Conformance suite on GitHub (Apache 2.0)](https://github.com/flowinfosystems-index/fjp-conformance)
 
