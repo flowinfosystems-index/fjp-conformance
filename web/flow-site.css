@@ -297,3 +297,8 @@
   .fs-card-link, .fs-btn { transition: none; }
   .fs-card-link:hover { transform: none; }
 }
+
+/* Mascots (Abe, Judd) */
+.fs-mascot-sm { width: 88px; height: auto; flex: none; }
+.fs-mascot-xs { width: 56px; height: auto; flex: none; }
+@media (max-width: 860px) { .fs-mascot-sm { width: 64px; } }

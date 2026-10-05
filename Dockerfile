@@ -19,6 +19,7 @@ COPY web/credits.html /srv/credits.html
 # Shared site stylesheet (identical to flowinfo.co src/app/flow-site.css) and logo
 COPY web/flow-site.css /srv/flow-site.css
 COPY web/flow-mark.png /srv/flow-mark.png
+COPY web/abe-mascot.png /srv/abe-mascot.png
 
 # Crawler and LLM discovery files
 COPY web/robots.txt /srv/robots.txt
