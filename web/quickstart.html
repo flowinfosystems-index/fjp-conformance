@@ -1,66 +1,116 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quickstart | FJP</title><meta name="description" content="Put Flow Judgment Protocol in front of one consequential agent action, enforce the judgment, and report the outcome to close the resolution loop."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;650&display=swap" rel="stylesheet"><style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0b0b0b;--surface:#131313;--surface2:#101010;--border:#252525;--border2:#343434;--text:#d7d7d7;--muted:#999;--dim:#707070;--white:#fff;--green:#22c55e;--green2:#16a34a;--green-dim:rgba(34,197,94,.10);--amber:#f59e0b;--red:#ef4444;--mono:'IBM Plex Mono','Menlo','Consolas',monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
-.fnav{position:sticky;top:0;z-index:100;background:rgba(11,11,11,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
-.fnav-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{color:#fff;text-decoration:none;font-weight:650;font-size:17px}.navlinks{display:flex;gap:20px;align-items:center;white-space:nowrap}.navlinks a{color:var(--muted);text-decoration:none;font-size:14px}.navlinks a:hover,.navlinks a.on{color:#fff}.navlinks a.home{color:var(--green)}
-.container{max-width:900px;margin:0 auto;padding:72px 24px 92px}.hero{margin-bottom:64px}.eyebrow{font-family:var(--mono);color:var(--green);font-size:12px;font-weight:600;letter-spacing:1.7px;text-transform:uppercase;margin-bottom:16px}h1{color:#fff;font-size:48px;line-height:1.08;letter-spacing:-1.35px;font-weight:650;max-width:860px}h2{color:#fff;font-size:26px;line-height:1.28;font-weight:620;margin-bottom:12px}h3{color:#fff;font-size:17px;line-height:1.4;font-weight:600;margin-bottom:7px}.lede{color:var(--muted);font-size:20px;line-height:1.55;max-width:800px;margin-top:18px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;padding:11px 18px;border-radius:5px;text-decoration:none}.btn.primary{background:var(--green);color:#071008}.btn.secondary{border:1px solid var(--border2);color:#ddd}.btn:hover{opacity:.88;text-decoration:none}
-.section{padding:46px 0;border-top:1px solid var(--border)}.section-intro{color:var(--muted);font-size:16px;max-width:780px;margin-bottom:22px}.small{color:var(--muted);font-size:13px}.mono{font-family:var(--mono)}.strong{color:#fff;font-weight:600}
-.proof-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 14px}.metric{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px}.metric .n{font-family:var(--mono);font-size:23px;line-height:1.15;color:#fff;font-weight:600;margin-bottom:7px}.metric .l{font-size:13px;color:var(--muted);line-height:1.5}
-.loop{display:grid;grid-template-columns:repeat(7,auto);gap:9px;align-items:center;margin:26px 0;overflow-x:auto;padding-bottom:5px}.loopbox{min-width:122px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:16px 14px}.loopbox b{display:block;color:#fff;font-size:13px;margin-bottom:3px}.loopbox span{display:block;color:var(--muted);font-size:12px;line-height:1.4}.loopbox.hot{border-color:rgba(34,197,94,.5);background:var(--green-dim)}.arrow{font-family:var(--mono);color:var(--dim);text-align:center}.loop-return{font-family:var(--mono);font-size:12px;color:var(--green);margin-top:8px}
-.callout{padding:22px 24px;border:1px solid rgba(34,197,94,.27);background:var(--green-dim);border-radius:8px;margin:20px 0}.callout strong{color:#fff}.quote{font-size:20px;line-height:1.55;color:#fff;margin:8px 0 4px;font-weight:500}
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}.case{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}.case-head{padding:20px 22px;border-bottom:1px solid var(--border)}.case-tag{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);margin-bottom:8px}.case-body{padding:22px}.case-body p{color:var(--muted);font-size:14px;margin-bottom:13px}.case-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.fact{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px}.fact b{display:block;color:#fff;font-family:var(--mono);font-size:16px;margin-bottom:2px}.fact span{font-size:11px;color:var(--muted);line-height:1.4;display:block}.case-verdict{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}.case-verdict b{font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:.8px}.case-verdict p{margin-top:5px;margin-bottom:0;color:#ddd}
-.agent-map{display:grid;grid-template-columns:1fr auto 1.1fr auto 1fr;gap:10px;align-items:stretch;margin:20px 0}.agentbox{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:18px}.agentbox.hot{background:var(--green-dim);border-color:rgba(34,197,94,.45)}.agentbox b{display:block;color:#fff;margin-bottom:5px}.agentbox span{color:var(--muted);font-size:13px;line-height:1.5}.postures{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.posture{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:16px}.posture b{font-family:var(--mono);display:block;margin-bottom:5px}.posture p{font-size:13px;color:var(--muted);margin:0}.posture.go b{color:var(--green)}.posture.hold b{color:var(--amber)}.posture.esc b{color:#fff}
-.code{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.8;overflow-x:auto;white-space:pre;color:#d8d8d8;margin:16px 0}code{font-family:var(--mono);color:var(--green);background:var(--surface);border:1px solid var(--border);padding:1px 5px;border-radius:3px;font-size:13px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px}.card p{font-size:14px;color:var(--muted);margin:0}.tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--green);margin-bottom:9px}.clean{list-style:none;display:grid;gap:9px;margin:16px 0}.clean li{color:var(--muted);padding-left:19px;position:relative}.clean li::before{content:'→';position:absolute;left:0;color:var(--green);font-family:var(--mono)}
-.steps{counter-reset:step}.step{padding:34px 0;border-top:1px solid var(--border)}.step-head{display:flex;gap:14px;align-items:baseline;margin-bottom:14px}.step-num{font-family:var(--mono);font-size:12px;color:var(--green);min-width:28px}.step-title{font-size:21px;color:#fff;font-weight:600}.note{background:var(--green-dim);border:1px solid rgba(34,197,94,.25);border-radius:7px;padding:16px 18px;margin:16px 0;color:#ddd;font-size:14px}.note strong{color:#fff}
-.record{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:18px 20px;margin:16px 0;font-family:var(--mono);font-size:12px}.record-row{display:grid;grid-template-columns:115px 1fr;gap:12px;padding:4px 0}.record-key{color:var(--green)}.record-val{color:var(--muted)}
-.footer{border-top:1px solid var(--border);margin-top:48px;padding-top:22px;color:var(--dim);font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.footer a{color:var(--muted);text-decoration:none}.footer-links{display:flex;gap:14px;flex-wrap:wrap}
-.specwrap{max-width:760px;margin:0 auto;padding:52px 24px 80px}.specwrap header{border-bottom:2px solid #ddd;padding-bottom:16px;margin-bottom:34px}.specwrap h1{font-family:var(--mono);font-size:21px;letter-spacing:.2px;color:#111}.specpage{background:#faf9f7;color:#222}.specpage .fnav{background:#faf9f7;border-color:#e3e1dc}.specpage .brand,.specpage .navlinks a.on{color:#111}.specpage .navlinks a{color:#777}.specpage .navlinks a:hover{color:#111}.specpage h2{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#888;margin:30px 0 8px}.specpage p,.specpage li{color:#333}.specpage code{background:#efede9;border-color:#e2dfd8;color:#111}.spec-meta{font-size:11px;color:#888;font-family:var(--mono)}.spec-table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:12px}.spec-table th,.spec-table td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid #e5e2dc}.spec-table th{text-transform:uppercase;letter-spacing:.5px;color:#888;font-size:10px}.lvl{border-left:2px solid #222;padding-left:15px;margin:12px 0;color:#444}.lvl b{display:block;color:#222}.spec-callout{background:#f1efe9;border:1px solid #e1ddd4;border-radius:4px;padding:16px;margin:16px 0;font-size:13px}.specpage .footer{border-color:#e5e2dc;color:#aaa}.specpage .footer a{color:#777}
-.worked{background:var(--surface);border:1px solid rgba(245,158,11,.35);border-radius:8px;padding:22px;margin:20px 0}.worked .label{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}.worked h3{font-size:18px;color:#fff;margin-bottom:10px}.worked p{font-size:14px;color:var(--muted);margin-bottom:10px}.worked .chain{font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--text);background:#0f0f0f;border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin:14px 0}.worked strong{color:#fff}
-@media(max-width:760px){.container{padding-top:52px}h1{font-size:38px}.lede{font-size:18px}.proof-strip,.case-grid,.two,.postures{grid-template-columns:1fr}.agent-map{grid-template-columns:1fr}.agent-map .arrow{transform:rotate(90deg)}.navlinks{overflow-x:auto;gap:14px}.navlinks a.home{display:none}.case-facts{grid-template-columns:1fr 1fr}.loop{grid-template-columns:1fr}.loop .arrow{transform:rotate(90deg)}.loopbox{min-width:0}.record-row{grid-template-columns:1fr}.specwrap{padding-top:34px}}
-</style></head><body>
-<nav class="fnav" aria-label="Site"><div class="fnav-in"><a class="brand" href="https://flowinfo.co/">Flow</a><div class="navlinks"><a href="/">FJP</a><a href="/abe">Abe</a><a class="on" href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="/credits">Credits</a><a class="home" href="https://flowinfo.co/">flowinfo.co →</a></div></div></nav><main class="container">
-<section class="hero"><div class="eyebrow">FJP Quickstart</div><h1>Put judgment in front of one agent action.</h1><p class="lede">Start where the risk starts: immediately before a production agent can change something that matters.</p></section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow Resolver quickstart | Judgment when Abe escalates</title>
+<meta name="description" content="Flow Resolver is the paid judgment API at resolve.flowinfo.co. It decides whether a person is needed, what context they get, and the recommended action. From $0.03 per judgment; $1 for 20.">
+<link rel="canonical" href="https://fjp.flowinfo.co/quickstart">
+<meta property="og:type" content="website"><meta property="og:title" content="Flow Resolver quickstart | Judgment when Abe escalates"><meta property="og:description" content="Flow Resolver is the paid judgment API at resolve.flowinfo.co. It decides whether a person is needed, what context they get, and the recommended action. From $0.03 per judgment; $1 for 20."><meta property="og:url" content="https://fjp.flowinfo.co/quickstart"><meta property="og:site_name" content="Flow Information Systems"><meta property="og:image" content="https://flowinfo.co/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://flowinfo.co/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/flow-site.css">
+</head>
+<body class="fs-root">
+<div class="fs-page">
+<header class="fs-header">
+<a class="fs-skip" href="#main">Skip to content</a>
+<div class="fs-wrap fs-header-row">
+<a href="/" class="fs-brand" aria-label="FJP home"><img src="/flow-mark.png" alt="" width="52" height="30"><span>Flow</span><small>FJP</small></a>
+<nav class="fs-nav" aria-label="Primary"><a href="/abe">Abe</a><a href="/quickstart" aria-current="page">Flow Resolver</a><a href="/#conformance">FJP-CONF</a><a href="/conformance/v0.1/">Spec</a><a href="/credits">Credits</a><a href="https://flowinfo.co">flowinfo.co</a></nav>
+<div class="fs-header-cta"><a href="/abe" class="fs-btn fs-btn-sm fs-btn-primary">Install Abe, free</a></div>
+</div>
+</header>
+<main id="main">
 
-<section class="section"><h2>What you are connecting to.</h2><p class="section-intro">FJP is the productization of Flow's live judgment loop. For a year, that loop has processed millions of judgments, actions and resolutions: determine what matters, resolve the action, observe the outcome, then score and re-evaluate the original call.</p><div class="loop"><div class="loopbox"><b>Observe</b><span>Context, signals, tool state.</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Judge</b><span>What matters and why?</span></div><div class="arrow">→</div><div class="loopbox hot"><b>Act</b><span>What should happen?</span></div><div class="arrow">→</div><div class="loopbox"><b>Resolve</b><span>What actually happened?</span></div></div><div class="note"><strong>For agents:</strong> the loop sits between proposed action and execution. Your application remains the enforcement point.</div></section>
+<section class="fs-hero">
+<div class="fs-wrap">
+<p class="fs-eyebrow">Flow Resolver &middot; quickstart</p>
+<h1 class="fs-h1">Judgment for the actions Abe escalates.</h1>
+<p class="fs-lede">Flow Resolver is the paid judgment API at resolve.flowinfo.co. It decides whether a person is needed, what context that person should get, and what the recommended action is.</p>
+<div class="fs-actions"><a class="fs-btn fs-btn-primary" href="/credits">Get a key: $1 for 20 judgments</a><a class="fs-btn fs-btn-secondary" href="/abe">Start with Abe</a></div>
+<div class="fs-callout" style="margin-top:32px;max-width:820px"><strong>Flow Resolver is not FJP.</strong> Flow Resolver performs judgment, powered by the proprietary Flow Judgment Engine. FJP is the open record that judgment is written into. You can produce FJP records without Flow; Flow Resolver is one way to put high-quality judgment inside them.</div>
+</div>
+</section>
 
-<section class="section"><h2>What the full cycle looks like.</h2><p class="section-intro">FJP is not another tool that performs the task. It resolves whether the proposed action is justified by the information that matters.</p><div class="worked"><div class="label">Illustrative example</div><h3>Executive assistant agent: hotel booking</h3><p>An agent finds a Chicago hotel that is 30% cheaper, available and within policy, but non-refundable. It is ready to book.</p><p>Before committing the money, it asks Flow whether to act. Flow determines that three surrounding signals materially change the decision: approaching hotel labor disruption, an unexpected leadership change at the customer that increases rescheduling risk, and a major medical conference that would make a later rebooking more expensive.</p><div class="chain">AGENT: book non-refundable<br>↓<br>FJP: ACT, BUT CHANGE THE BOOKING<br>↓<br>book refundable · +$140<br>↓<br>customer moves meeting four days later<br>↓<br>cancel with no loss · ~$1,100 avoided<br>↓<br>outcome resolves the original judgment</div><p><strong>The agent knew how to book. Flow determined what mattered before it acted.</strong></p><p class="small">Illustrative example, not a historical customer outcome. Flow's internal methods for producing the judgment remain proprietary.</p></div></section>
-
-<section class="step"><div class="step-head"><span class="step-num">01</span><span class="step-title">Choose the action boundary</span></div><p>Pick one action where a wrong call has a meaningful cost. Examples: issue a refund, send an external communication, commit capital, delete a record, deploy code, approve a claim, change access, or execute a transaction.</p><div class="code">agent reasoning
-    ↓
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">01</span><h2 class="fs-h2">Start with Abe</h2></div><p class="fs-sub">Most agent actions never need paid judgment. Put Abe in front of the action first; it acts on or blocks the obvious cases locally and sends only escalations here.</p>
+<pre class="fs-code" tabindex="0" style="margin-top:16px">agent reasoning
+    &darr;
 proposed consequential action
-    ↓
-FJP
-    ↓
-application enforcement
-    ↓
-execution</div></section>
+    &darr;
+Abe: ACT / BLOCK locally, or ESCALATE
+    &darr;
+Flow Resolver (escalations only)
+    &darr;
+your application enforces the result</pre></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">02</span><span class="step-title">Get your Flow key</span></div><p>Buy a credit pack at <a href="/credits">fjp.flowinfo.co/credits</a>. Your key, beginning with <code>fjp_live_</code>, is emailed after payment. One credit is one judgment, from $0.05.</p><div class="hero-actions"><a class="btn primary" href="/credits">Get a key</a><a class="btn secondary" href="/credits#lost-key">Lost your key?</a></div></section>
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">02</span><h2 class="fs-h2">Get your Flow key</h2></div><p class="fs-sub">Buy a credit pack at <a href="/credits">fjp.flowinfo.co/credits</a>. Your key, beginning with <code>fjp_live_</code>, is emailed right after payment. One credit is one judgment, $0.03 to $0.05 each. The $1 pack gives you 20.</p>
+<div class="fs-actions" style="margin-top:16px"><a class="fs-btn fs-btn-primary" href="/credits">Get a key</a><a class="fs-btn fs-btn-secondary" href="/credits#lost-key">Lost your key?</a></div></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">03</span><span class="step-title">Send the proposed action and its decision context</span></div><p>The resolver needs the information that should govern the action: what the agent wants to do, the relevant state, constraints, authority, evidence and material counter-signals.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">03</span><h2 class="fs-h2">Send the proposed action and its decision context</h2></div><p class="fs-sub" style="margin-bottom:16px">Send what should govern the action: what the agent wants to do, the relevant state, constraints, authority, evidence and material counter-signals.</p>
+<pre class="fs-code" tabindex="0">curl -X POST https://resolve.flowinfo.co/api/v1/tools/judge \
   -H "Authorization: Bearer fjp_live_..." \
   -H "Content-Type: application/json" \
   -d '{
     "context": "Agent proposes a $12,000 refund. Autonomous authority: $5,000. Manager approval: absent. Customer history: 3 prior refunds in 30 days."
-  }'</div><div class="note"><strong>Do not send more data just because it exists.</strong> Send the context that can materially change the action. FJP's role is to resolve importance, not reward payload size.</div></section>
+  }'</pre>
+<p class="fs-small" style="margin-top:12px">Do not send more data just because it exists. Send the context that can materially change the action.</p></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">04</span><span class="step-title">Use the returned judgment as the control decision</span></div><p>Every response carries the observable decision chain. The application's enforcement policy decides how that directive maps to execution.</p><div class="record"><div class="record-row"><span class="record-key">signal</span><span class="record-val">What changed or what condition is material</span></div><div class="record-row"><span class="record-key">judgment</span><span class="record-val">Why it matters, with confidence</span></div><div class="record-row"><span class="record-key">action</span><span class="record-val">What should happen next</span></div><div class="record-row"><span class="record-key">falsifier</span><span class="record-val">A concrete, checkable condition that would reverse the call</span></div><div class="record-row"><span class="record-key">request_id</span><span class="record-val">Identifier for the later outcome</span></div></div><div class="postures"><div class="posture go"><b>PROCEED</b><p>Execute when the returned action supports continuation.</p></div><div class="posture hold"><b>HOLD</b><p>Do not execute while a material condition is unresolved.</p></div><div class="posture esc"><b>ESCALATE</b><p>Route to the person or authority required by policy.</p></div></div></section>
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">04</span><h2 class="fs-h2">Use the returned judgment as the control decision</h2></div><div class="fs-table-wrap" tabindex="0"><table class="fs-table"><tbody>
+<tr><td><code>signal</code></td><td>What changed or what condition is material</td></tr>
+<tr><td><code>judgment</code></td><td>Why it matters, with confidence</td></tr>
+<tr><td><code>action</code></td><td>What should happen next, including whether a person is needed</td></tr>
+<tr><td><code>falsifier</code></td><td>A concrete, checkable condition that would reverse the call</td></tr>
+<tr><td><code>request_id</code></td><td>Identifier for the later outcome</td></tr>
+</tbody></table></div>
+<div class="fs-grid fs-grid-3" style="margin-top:18px">
+<div class="fs-card"><span class="fs-chip fs-chip-go" style="align-self:flex-start">PROCEED</span><p>Execute when the returned action supports continuation.</p></div>
+<div class="fs-card"><span class="fs-chip fs-chip-esc" style="align-self:flex-start">HOLD</span><p>Do not execute while a material condition is unresolved.</p></div>
+<div class="fs-card"><span class="fs-chip fs-chip-ink" style="align-self:flex-start">ESCALATE</span><p>Route to the person or authority required by policy, with the context Flow Resolver supplies.</p></div>
+</div>
+<p class="fs-small" style="margin-top:12px">Every judgment is returned as an FJP record. Your application stays the enforcement point.</p></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">05</span><span class="step-title">Report what happened</span></div><p>The outcome is part of the product. When the relevant result becomes observable, associate it with the original <code>request_id</code>. <code>outcome</code> is <code>CORRECT</code>, <code>WRONG</code> or <code>PARTIAL</code>. Reporting is free. Resolved outcomes are scored by <a href="https://flowinfo.co/expertrace">ExperTrace</a>, so production decisions become real-world evals.</p><div class="code">curl -X POST https://resolve.flowinfo.co/api/v1/outcome \
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">05</span><h2 class="fs-h2">Report what happened</h2></div><p class="fs-sub" style="margin-bottom:16px">When the result is observable, report it against the original <code>request_id</code>: CORRECT, WRONG or PARTIAL. Reporting is free. <a href="https://flowinfo.co/expertrace">ExperTrace</a> scores the outcome, so production decisions become real-world evals.</p>
+<pre class="fs-code" tabindex="0">curl -X POST https://resolve.flowinfo.co/api/v1/outcome \
   -H "Authorization: Bearer fjp_live_..." \
   -H "Content-Type: application/json" \
-  -d '{"request_id":"&lt;request_id from the judge response&gt;","outcome":"CORRECT","notes":"manager approval was required and obtained"}'</div><p class="small">That closes the loop: judgment → action → outcome → resolution. Flow's internal evaluation and calibration methods remain proprietary.</p></section>
+  -d '{"request_id":"&lt;request_id from the judge response&gt;","outcome":"CORRECT","notes":"manager approval was required and obtained"}'</pre></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">06</span><span class="step-title">Connect through MCP when that is easier</span></div><p>If your agent framework supports MCP, point it at the existing resolver endpoint. The FJP tools are exposed through standard MCP tool calls.</p><div class="code">endpoint: https://resolve.flowinfo.co/mcp
-auth:     Authorization: Bearer fjp_live_...</div><p>The existing tools are <code>judge</code>, <code>weigh</code>, and <code>match</code>. The agent can call them the same way it calls other MCP tools.</p></section>
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">06</span><h2 class="fs-h2">Connect through MCP when that is easier</h2></div><pre class="fs-code" tabindex="0">endpoint: https://resolve.flowinfo.co/mcp
+auth:     Authorization: Bearer fjp_live_...</pre>
+<p class="fs-small" style="margin-top:12px">The tools are <code>judge</code>, <code>weigh</code> and <code>match</code>. Your agent calls them like any other MCP tool.</p></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">07</span><span class="step-title">Know what you pay for</span></div><p>One credit is one Flow judgment, all-in. The inference behind each judgment is included, with no separate model bill. Outcome reports are free. With Abe in front, ACT and BLOCK decisions run locally and cost nothing; only escalations use credits.</p><p>Your agent's own models stay on your provider, cloud account or gateway, billed to you as they are today. Flow does not resell model access.</p><div class="callout"><strong>Your models. Your billing. Flow's judgment, per credit.</strong></div></section>
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">07</span><h2 class="fs-h2">Know what you pay for</h2></div><p class="fs-sub">One credit is one Flow judgment, all-in. The inference behind each judgment is included, with no separate model bill. Outcome reports are free. With Abe in front, ACT and BLOCK run locally and cost nothing; only escalations use credits.</p>
+<div class="fs-callout" style="margin-top:16px"><strong>Your models. Your billing. Flow&#39;s judgment, per credit.</strong> Your agent&#39;s own models stay on your provider, cloud account or gateway. Flow does not resell model access.</div></div></section>
 
-<section class="step"><div class="step-head"><span class="step-num">08</span><span class="step-title">Use FJP-CONF when you need the public contract</span></div><p>FJP-CONF tests whether the observable record is well-formed, grounded, falsifiable and accountable. It does not inspect or reveal Flow's judgment method.</p><div class="code"><span style="color:#777">$</span> pip install fjp-conformance
-<span style="color:#777">$</span> fjp-conform record.json --level 2</div><div class="hero-actions"><a class="btn secondary" href="/conformance/v0.1/">Read the spec</a><a class="btn secondary" href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></div></section>
+<section class="fs-section fs-section-sand"><div class="fs-wrap">
+<div class="fs-section-head"><p class="fs-eyebrow">What a Flow Resolver judgment looks like</p><h2 class="fs-h2">The agent knew how to book. Flow decided what mattered.</h2></div>
+<div class="fs-dialog">
+<div class="fs-dialog-row"><span class="fs-dialog-who">AGENT</span><p>Book a non-refundable hotel in Chicago, Oct 13 to 16, for a customer meeting. 30% cheaper, available, within policy. Act?</p></div>
+<div class="fs-dialog-row"><span class="fs-dialog-who">SIGNALS</span><p>Hotel labor talks have broken down. The customer announced a leadership change that raises rescheduling risk. A major conference overlaps the dates, so rebooking later costs more.</p></div>
+<div class="fs-dialog-row"><span class="fs-dialog-who">RESOLVER</span><p><span class="fs-chip fs-chip-alt">ACT, BUT CHANGE THE BOOKING</span> Book the refundable rate for $140 more.</p></div>
+<div class="fs-dialog-row"><span class="fs-dialog-who">FALSIFIER</span><p>If the customer confirms the date within 72 hours and the disruption signals clear, re-resolve and consider the non-refundable rate.</p></div>
+<div class="fs-dialog-row"><span class="fs-dialog-who">OUTCOME</span><p>The meeting moves to November. The refundable room is cancelled at no cost. About $1,100 of loss avoided.</p></div>
+</div>
+<p class="fs-note" style="margin-top:12px">Illustrative example, not a historical customer outcome. Flow&#39;s internal methods remain proprietary.</p>
+</div></section>
 
-<footer class="footer"><div class="footer-links"><a href="https://flowinfo.co/">Flow</a><a href="/">FJP</a><a href="/abe">Abe</a><a href="/quickstart">Quickstart</a><a href="/conformance/v0.1/">Spec</a><a href="/credits">Credits</a><a href="https://flowinfo.co/expertrace">ExperTrace</a><a href="https://flowinfo.co/terms">Terms</a><a href="https://flowinfo.co/privacy">Privacy</a><a href="mailto:hello@flowinfo.co">Contact</a></div><span>Judgment → action → outcome → resolution</span></footer>
-</main></body></html>
+<section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">08</span><h2 class="fs-h2">Validate any record with FJP-CONF</h2></div><p class="fs-sub" style="margin-bottom:16px">FJP-CONF tests whether a record is well-formed, grounded, falsifiable and accountable. It does not inspect or reveal how the judgment was made.</p>
+<pre class="fs-code" tabindex="0">$ pip install fjp-conformance
+$ fjp-conform record.json --level 2</pre>
+<div class="fs-actions" style="margin-top:16px"><a class="fs-btn fs-btn-secondary" href="/conformance/v0.1/">Read the spec</a><a class="fs-btn fs-btn-secondary" href="https://github.com/flowinfosystems-index/fjp-conformance">GitHub</a></div></div></section>
+</main>
+<footer class="fs-footer">
+<div class="fs-wrap">
+<div class="fs-footer-grid">
+<div><a href="https://flowinfo.co" class="fs-brand" aria-label="Flow home"><img src="/flow-mark.png" alt="" width="52" height="30"><span>Flow</span></a>
+<p class="fs-footer-line" style="margin-top:14px">Judgment before action. For people and for the agents that act for them.</p></div>
+<div><h2>For people</h2><ul><li><a href="https://flowinfo.co/industries">Industry Signals</a></li><li><a href="https://flowinfo.co/flow-action">Flow Action</a></li></ul></div><div><h2>For agents</h2><ul><li><a href="/abe">Abe</a></li><li><a href="https://flowinfo.co/judd">Judd</a></li><li><a href="/quickstart">Flow Resolver</a></li><li><a href="https://flowinfo.co/expertrace">ExperTrace</a></li><li><a href="/credits">Credits</a></li></ul></div><div><h2>Open standard</h2><ul><li><a href="/">FJP</a></li><li><a href="/conformance/v0.1/">FJP spec</a></li><li><a href="https://github.com/flowinfosystems-index/fjp-conformance">FJP-CONF on GitHub</a></li><li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7193358">Research paper</a></li></ul></div><div><h2>Company</h2><ul><li><a href="https://flowinfo.co/about">About</a></li><li><a href="mailto:hello@flowinfo.co">Contact</a></li><li><a href="https://flowinfo.co/terms">Terms</a></li><li><a href="https://flowinfo.co/privacy">Privacy</a></li></ul></div>
+</div>
+<div class="fs-footer-base"><span>&copy; 2026 Flow Information Systems&trade;. FJP&trade;, FJP-CONF&trade;, Abe&trade; and Judgment-Grounded Record&trade; are trademarks of Flow Information Systems.</span><span>Flow owns the judgment. FJP standardizes the record.</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

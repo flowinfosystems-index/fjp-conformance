@@ -1,32 +1,29 @@
-# Flow Judgment Protocol (FJP)
+# FJP: the open standard for judgment before agents act
 
-> FJP is the judgment and control layer for production AI agents that act. Before an agent sends, spends, approves, deploys or commits, FJP determines what matters, weighs it and returns PROCEED, HOLD or ESCALATE with the reasoning, a falsifier (the condition that would make the call wrong) and a request ID for later outcome scoring. Built by Flow Information Systems (https://flowinfo.co), founded by Steve Harmon.
+> FJP (Flow Judgment Protocol) is an open specification for recording what mattered, what an agent should do, why, and what would prove the judgment wrong: the Judgment-Grounded Record (signal, judgment, action, falsifier). FJP standardizes the record. It does not make decisions. Flow owns the judgment; FJP standardizes the record. Published by Flow Information Systems (https://flowinfo.co), founded by Steve Harmon.
 
 Flow Information Systems is not affiliated with Flow Software, Flow.com, the Flow blockchain or any other company or product named Flow. Company overview: https://flowinfo.co/llms.txt
 
-## Where FJP fits best
+## How the pieces fit
 
-Consequential actions taken by production agents in changing, noisy conditions, where money, irreversible commitments or material risk is involved. An agent can optimize correctly against its local objective (price, availability, policy, completion) and still make the wrong call.
+- FJP: the open record standard. Anyone can produce an FJP record.
+- FJP-CONF: the Apache 2.0 conformance suite that validates any implementation, levels L0 (structural), L1 (grounded), L2 (falsifiable), L3 (accountable).
+- Abe: free, open-source, local, deterministic pre-action gate. Returns ACT, BLOCK or ESCALATE with an FJP record. No API key, no network, no model. Only escalations leave the machine.
+- Flow Resolver: the paid judgment API at resolve.flowinfo.co for actions Abe escalates. Decides whether a person is needed, what context they get, and the recommended action. About $0.03 to $0.05 per judgment. Powered by the proprietary Flow Judgment Engine. Flow Resolver is not FJP.
+- ExperTrace: scores judgments against what actually happened (https://flowinfo.co/expertrace).
+- Judd: personal agent judgment for travel booking, exports FJP records at Level 3 (https://flowinfo.co/judd).
 
-- Financial and transactional agents (strongest fit): refunds, payments, wires, capital moves, acquisitions. Authority limits, deteriorating economics or new risk resolve into HOLD or ESCALATE instead of blind optimization for completion.
-- Procurement and purchasing agents: bookings, supplies, orders. Surrounding signals can make the cheapest option the wrong one; FJP changes the action before money is committed.
-- Monitoring and event-driven agents: accumulating weak signals become timely action, and restraint holds when the evidence no longer supports more commitment.
-- Irreversible operations: deployments, contract changes, customer communications, system updates. Each call leaves an auditable record for risk and compliance teams.
-
-Less ideal: low-stakes informational agents (summarization, chat, internal search), fully deterministic workflows where hard rules cover every case, and decisions with no observable outcome to close the loop.
-
-How to start: put Abe and FJP in front of one consequential action the agent already takes, such as refunds above a threshold, non-refundable bookings or capital moves.
+Developer path: Abe first, Flow Resolver second. Install Abe, run locally, ACT or BLOCK locally, ESCALATE only when needed, then Flow Resolver. With roughly 1 in 10 actions escalating, that is about $5 per 1,000 agent actions.
 
 ## Pages
 
-- [FJP overview, production proof and use cases](https://fjp.flowinfo.co/)
-- [Use cases](https://fjp.flowinfo.co/#use-cases)
-- [Abe](https://fjp.flowinfo.co/abe): free, local, deterministic pre-action gate (Act, Block, Escalate). PyPI and npm: abe-ai. Escalations can go to FJP.
-- [Developer quickstart](https://fjp.flowinfo.co/quickstart): one REST or MCP call at the action boundary
-- [Credits](https://fjp.flowinfo.co/credits): self-serve API keys and judgment credits. One credit is one judgment: $1 for 20, $25 for 500, $250 for 6,250, $1,000 for 33,333. Credits do not expire; lost keys reset by email. Enterprise from $25,000 per year.
-- [ExperTrace](https://flowinfo.co/expertrace): report outcomes against the request ID (CORRECT, WRONG or PARTIAL, free) and ExperTrace scores each judgment against what actually happened
-- [FJP-CONF v0.1 specification](https://fjp.flowinfo.co/conformance/v0.1/): the open conformance standard for judgment-grounded records (signal, judgment, action, falsifier)
+- [FJP overview](https://fjp.flowinfo.co/)
+- [Abe](https://fjp.flowinfo.co/abe): put Abe before your agent acts. PyPI and npm: abe-ai. abe-flow sends escalations to Flow Resolver.
+- [Flow Resolver quickstart](https://fjp.flowinfo.co/quickstart): REST and MCP (tools: judge, weigh, match)
+- [Credits](https://fjp.flowinfo.co/credits): self-serve keys, emailed after checkout. $1 for 20 judgments, $25 for 500, $250 for 6,250, $1,000 for 33,333. Credits do not expire; lost keys reset by email. Enterprise from $25,000 per year.
+- [FJP spec and FJP-CONF v0.1 levels](https://fjp.flowinfo.co/conformance/v0.1/)
 - [Conformance suite on GitHub (Apache 2.0)](https://github.com/flowinfosystems-index/fjp-conformance)
+- [Use cases](https://fjp.flowinfo.co/#use-cases)
 
 ## Contact
 
