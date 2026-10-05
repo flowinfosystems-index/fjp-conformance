@@ -2,7 +2,7 @@
 
 All notable changes to FJP-CONF are recorded here.
 
-## [Unreleased]
+## [0.1.2] — 2026-10-04
 
 ### Fixed
 - L2 vacuity heuristic: source-citation parentheticals such as `(per X)` are
