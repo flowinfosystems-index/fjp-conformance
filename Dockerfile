@@ -20,6 +20,8 @@ COPY web/credits.html /srv/credits.html
 COPY web/flow-site.css /srv/flow-site.css
 COPY web/flow-mark.png /srv/flow-mark.png
 COPY web/abe-mascot.png /srv/abe-mascot.png
+# 3D mascot art: animated + static (reduced-motion) WebP
+COPY web/mascots/ /srv/mascots/
 
 # Crawler and LLM discovery files
 COPY web/robots.txt /srv/robots.txt

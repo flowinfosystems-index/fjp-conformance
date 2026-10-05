@@ -299,6 +299,9 @@
 }
 
 /* Mascots (Abe, Judd) */
+/* Animated mascots: the size class goes on the <picture>; the <img> fills it */
+.fs-mascot-pic { display: block; }
+.fs-mascot-pic > img { display: block; width: 100%; height: auto; }
 .fs-mascot-sm { width: 88px; height: auto; flex: none; }
 .fs-mascot-xs { width: 56px; height: auto; flex: none; }
 @media (max-width: 860px) { .fs-mascot-sm { width: 64px; } }
