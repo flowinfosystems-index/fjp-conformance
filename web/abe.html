@@ -101,7 +101,7 @@ const r = await abe.check({
 
 if (r.decision === "ACT") execute();</pre></div>
 </div>
-<p class="fs-small" style="margin-top:14px">Any other language: <code>abe serve</code> runs a local HTTP sidecar on 127.0.0.1 (<code>POST /v1/check</code>), also available as a Docker image. MCP agents: <code>abe mcp</code> exposes <code>fjp_check_action</code>.</p></div></section>
+<p class="fs-small" style="margin-top:14px">Any other language: <code>abe serve</code> runs a local HTTP sidecar on 127.0.0.1 (<code>POST /v1/check</code>), also available as a Docker image. MCP agents: <code>abe mcp</code> exposes <code>fjp_check_action</code>; add <code>--resolver flow</code> to send escalations to <a href="#escalate">Flow</a>.</p></div></section>
 
 <section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">03</span><h2 class="fs-h2">Write the policy you already have in your head</h2></div><pre class="fs-code" tabindex="0">version: "0.1"
 defaults: { unmatched: ESCALATE }          <span class="c"># fail closed</span>
@@ -147,6 +147,12 @@ VALID  jgr.json  (hash verified, signature verified; FJP-CONF v0.1 L0-L2)</pre><
 from abe_flow import FlowResolver
 abe = Abe("abe-policy.yaml",
             resolver=FlowResolver(api_key=os.environ["FLOW_API_KEY"]))</pre>
+<p class="fs-small" style="margin-top:14px">MCP, CLI or sidecar: add <code>--resolver flow</code> and set <code>FLOW_API_KEY</code>. No code.</p>
+<pre class="fs-code" tabindex="0"><span class="c">$</span> pip install "abe-ai[mcp,flow]"
+
+{"mcpServers": {"abe": {"command": "abe",
+  "args": ["mcp", "--policy", "/abs/abe-policy.yaml", "--resolver", "flow"],
+  "env": {"FLOW_API_KEY": "fjp_live_..."}}}}</pre>
 <div class="fs-table-wrap" tabindex="0" style="margin-top:18px"><table class="fs-table"><thead><tr><th scope="col">Abe says</th><th scope="col">Flow Resolver</th><th scope="col">Result</th></tr></thead><tbody>
 <tr><td>ACT / BLOCK</td><td>not called</td><td>Unchanged. A resolver can never loosen a BLOCK.</td></tr>
 <tr><td>ESCALATE: human approval</td><td>not called</td><td>Stays with the human.</td></tr>
