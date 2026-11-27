@@ -101,6 +101,17 @@ const r = await abe.check({
 
 if (r.decision === "ACT") execute();</pre></div>
 </div>
+<span class="fs-code-label" style="margin-top:22px">AGENT FRAMEWORKS &middot; ONE LINE</span><pre class="fs-code" tabindex="0"><span class="c"># Claude Agent SDK          pip install "abe-ai[claude]"</span>
+ClaudeAgentOptions(hooks=abe_hooks(abe))
+
+<span class="c"># LangChain / LangGraph     pip install "abe-ai[langchain]"</span>
+create_agent(model, tools, middleware=[AbeMiddleware(abe)])
+
+<span class="c"># OpenAI Agents SDK         pip install "abe-ai[openai-agents]"</span>
+Agent(name="ops", tools=gate_tools(abe, tools))
+
+<span class="c"># Any Python function</span>
+@guard(abe, action_type="purchase")</pre>
 <p class="fs-small" style="margin-top:14px">Any other language: <code>abe serve</code> runs a local HTTP sidecar on 127.0.0.1 (<code>POST /v1/check</code>), also available as a Docker image. MCP agents: <code>abe mcp</code> exposes <code>fjp_check_action</code>; add <code>--resolver flow</code> (Python) to send escalations to <a href="#escalate">Flow</a>.</p></div></section>
 
 <section class="fs-section"><div class="fs-wrap"><div class="fs-section-head"><span class="fs-step-num">03</span><h2 class="fs-h2">Write the policy you already have in your head</h2></div><pre class="fs-code" tabindex="0">version: "0.1"
@@ -174,7 +185,7 @@ performance: p50 0.34 ms  p95 0.44 ms</pre>
 <div class="fs-footer-grid">
 <div><a href="https://flowinfo.co" class="fs-brand" aria-label="Flow home"><img src="/flow-mark.png" alt="" width="52" height="30"><span>Flow</span></a>
 <p class="fs-footer-line" style="margin-top:14px">Judgment before action. For people and for the agents that act for them.</p></div>
-<div><h2>For people</h2><ul><li><a href="https://flowinfo.co/industries">Industry Signals</a></li><li><a href="https://flowinfo.co/flow-action">Flow Action</a></li></ul></div><div><h2>For agents</h2><ul><li><a href="/abe">Abe</a></li><li><a href="https://flowinfo.co/judd">Judd</a></li><li><a href="/quickstart">Flow Resolver</a></li><li><a href="https://flowinfo.co/expertrace">ExperTrace</a></li><li><a href="/credits">Credits</a></li></ul></div><div><h2>Open standard</h2><ul><li><a href="/">FJP</a></li><li><a href="/conformance/v0.1/">FJP spec</a></li><li><a href="https://github.com/flowinfosystems-index/fjp-conformance">FJP-CONF on GitHub</a></li><li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7193358">Research paper</a></li></ul></div><div><h2>Company</h2><ul><li><a href="https://flowinfo.co/about">About</a></li><li><a href="mailto:hello@flowinfo.co">Contact</a></li><li><a href="https://flowinfo.co/terms">Terms</a></li><li><a href="https://flowinfo.co/privacy">Privacy</a></li></ul></div>
+<div><h2>For agents</h2><ul><li><a href="/abe">Abe</a></li><li><a href="https://flowinfo.co/judd">Judd</a></li><li><a href="/quickstart">Flow Resolver</a></li><li><a href="https://flowinfo.co/expertrace">ExperTrace</a></li><li><a href="/credits">Credits</a></li></ul></div><div><h2>For people</h2><ul><li><a href="https://flowinfo.co/industries">Industry Signals</a></li><li><a href="https://flowinfo.co/flow-action">Flow Strategic Action Briefs</a></li></ul></div><div><h2>Open standard</h2><ul><li><a href="/">FJP</a></li><li><a href="/conformance/v0.1/">FJP spec</a></li><li><a href="https://github.com/flowinfosystems-index/fjp-conformance">FJP-CONF on GitHub</a></li><li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7193358">Research paper</a></li></ul></div><div><h2>Company</h2><ul><li><a href="https://flowinfo.co/about">About</a></li><li><a href="mailto:hello@flowinfo.co">Contact</a></li><li><a href="https://flowinfo.co/terms">Terms</a></li><li><a href="https://flowinfo.co/privacy">Privacy</a></li></ul></div>
 </div>
 <div class="fs-footer-base"><span>&copy; 2026 Flow Information Systems&trade;. FJP&trade;, FJP-CONF&trade;, Abe&trade; and Judgment-Grounded Record&trade; are trademarks of Flow Information Systems.</span><span>Flow owns the judgment. FJP standardizes the record.</span></div>
 </div>
