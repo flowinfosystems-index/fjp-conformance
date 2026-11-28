@@ -52,7 +52,7 @@
 <div class="fs-ba">
 <div class="fs-ba-col"><span class="fs-tag">Without a gate</span><ul class="fs-ba-list"><li>Every action either runs unchecked or goes to a model for a yes or no</li><li>You pay for judgment on calls a rule could make</li><li>No record of why the agent acted</li></ul></div>
 <span class="fs-ba-arrow" aria-hidden="true">&rarr;</span>
-<div class="fs-ba-col fs-ba-after"><span class="fs-tag fs-tag-teal">With Abe</span><ul class="fs-ba-list"><li>Obvious calls decided on your machine in under 1 ms, free</li><li>Only escalations reach Flow: about $5 per 1,000 actions if 1 in 10 escalates</li><li>A tamper-evident record of every decision, FJP-CONF Level 3</li></ul></div>
+<div class="fs-ba-col fs-ba-after"><span class="fs-tag fs-tag-teal">With Abe</span><ul class="fs-ba-list"><li>Obvious calls decided on your machine in under 1 ms, free</li><li>Escalations go where you choose: a person, your own approval flow or service, or Flow</li><li>A tamper-evident record of every decision, FJP-CONF Level 3</li></ul></div>
 </div>
 </div>
 </section>
@@ -151,8 +151,8 @@ judgment_required:
 VALID  jgr.json  (hash verified, signature verified; FJP-CONF v0.1 L0-L2)</pre></div></section>
 
 <section class="fs-section fs-section-card" id="escalate"><div class="fs-wrap">
-<div class="fs-section-head"><span class="fs-step-num">05</span><h2 class="fs-h2">When Abe escalates, escalate to Flow.</h2>
-<p class="fs-sub">Rules handle the obvious. When Abe says ESCALATE, hand that one action to Flow Resolver. ACT and BLOCK never leave your machine. Only escalations are sent, redacted, and only they cost anything: about $0.03 to $0.05 each.</p></div>
+<div class="fs-section-head"><span class="fs-step-num">05</span><h2 class="fs-h2">When Abe escalates, you choose who decides.</h2>
+<p class="fs-sub">Rules handle the obvious. When Abe says ESCALATE, hand that one action to whoever should decide: a person, your existing approval process, your own resolver, or Flow Resolver. Flow is optional. ACT and BLOCK never leave your machine. If you use Flow, only the escalations you send go to it, redacted, at about $0.03 to $0.05 each.</p></div>
 <pre class="fs-code" tabindex="0"><span class="c">$</span> pip install abe-flow
 
 from abe_flow import FlowResolver
@@ -170,7 +170,7 @@ abe = Abe("abe-policy.yaml",
 <tr><td>ESCALATE: anything else</td><td>judge</td><td>REACH &rarr; ACT &middot; SKIP &rarr; BLOCK &middot; WAIT / RESEARCH_FIRST &rarr; ESCALATE, with Flow&#39;s reason and falsifier linked to Abe&#39;s record.</td></tr>
 <tr><td>Flow unreachable</td><td></td><td>Stays ESCALATE. Abe never fails because Flow is down.</td></tr>
 </tbody></table></div>
-<div class="fs-callout" style="margin-top:20px"><strong>Abe acts, blocks or escalates. Flow Resolver judges the escalations.</strong> Abe is useful without Flow. With roughly 1 in 10 actions escalating, Flow costs about $5 per 1,000 agent actions.</div>
+<div class="fs-callout" style="margin-top:20px"><strong>Abe acts, blocks or escalates. You decide who handles the escalations.</strong> Abe is complete without Flow. Plug in any resolver, such as a human approval queue or your own service, or use Flow Resolver and pay about $0.03 to $0.05 per judgment, only for the escalations you send. How many actions escalate depends on your policy.</div>
 <div class="fs-actions" style="margin-top:20px"><a class="fs-btn fs-btn-primary" href="/credits">Get a key: $1 for 20 judgments</a><a class="fs-btn fs-btn-secondary" href="/quickstart">Flow Resolver quickstart</a></div>
 </div></section>
 
