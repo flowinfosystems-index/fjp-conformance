@@ -8,12 +8,12 @@ Flow Information Systems is not affiliated with Flow Software, Flow.com, the Flo
 
 - FJP: the open record standard. Anyone can produce an FJP record.
 - FJP-CONF: the Apache 2.0 conformance suite that validates any implementation, levels L0 (structural), L1 (grounded), L2 (falsifiable), L3 (accountable).
-- Abe: free, open-source, local, deterministic pre-action gate. Returns ACT, BLOCK or ESCALATE with an FJP record. No API key, no network, no model. Only escalations leave the machine.
+- Abe: free, open-source, local, deterministic pre-action gate. Returns ACT, BLOCK or ESCALATE with an FJP record. No API key, no network, no model. Nothing leaves the machine unless you send an escalation somewhere.
 - Flow Resolver: the paid judgment API at resolve.flowinfo.co for actions Abe escalates. Decides whether a person is needed, what context they get, and the recommended action. About $0.03 to $0.05 per judgment. Powered by the proprietary Flow Judgment Engine. Flow Resolver is not FJP.
 - ExperTrace: scores judgments against what actually happened (https://flowinfo.co/expertrace).
-- Judd: personal agent judgment for travel booking, exports FJP records at Level 3 (https://flowinfo.co/judd).
+- Judd: free buyer advocate for personal agents (travel, purchases, subscriptions, restaurants), exports FJP records at Level 3 (https://flowinfo.co/judd).
 
-Developer path: Abe first, Flow Resolver second. Install Abe, run locally, ACT or BLOCK locally, ESCALATE only when needed, then Flow Resolver. With roughly 1 in 10 actions escalating, that is about $5 per 1,000 agent actions.
+Developer path: install Abe and run it locally; it decides ACT or BLOCK on your machine and returns ESCALATE when rules cannot decide. Escalations go wherever you choose: a person, your own approval process or resolver, or, optionally, Flow Resolver at about $0.03 to $0.05 per judgment for the escalations you send. How many actions escalate depends on your policy.
 
 ## Pages
 
